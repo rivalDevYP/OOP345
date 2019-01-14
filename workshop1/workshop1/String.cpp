@@ -9,13 +9,28 @@
 #include "String.h"
 namespace sict
 {
-	String::String(const char * incomingStr)
+	extern int INITIAL;
+	String::String(const char *incomingStr)
 	{
-
+		if (incomingStr == nullptr)
+		{
+			str == '\0';
+		}
+		else
+		{
+			strncpy(str, incomingStr, 3);
+		}
 	}
 
 	void String::display(std::ostream & obj) const
 	{
+		obj << str;
+	}
 
+
+	std::ostream & operator<<(std::ostream & os, const String & incomingObj)
+	{
+		int itemNum = INITIAL;
+		os << itemNum << ": " << incomingObj << std::endl;
 	}
 }

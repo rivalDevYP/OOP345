@@ -15,12 +15,12 @@ namespace sict
 {
 	class String
 	{
-		char *str[3];
+		char *str;
 	public:
 		String(const char* incomingStr);
 		void display(std::ostream& obj) const;
 	};
-	
+	std::ostream& operator << (std::ostream& os, const String& s);
 }
 
 #endif //SICT_PROCESS_H

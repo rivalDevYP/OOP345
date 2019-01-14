@@ -1,3 +1,10 @@
+/*
+	program: w1.cpp
+	programmer: Yathavan, Parameshwaran
+	course: OOP345
+	date: 2019-01-14
+*/
+
 #include <iostream>
 #include <cstring>
 #include "process.h"

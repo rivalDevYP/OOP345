@@ -14,11 +14,11 @@ namespace sict
 	{
 		if (incomingStr == nullptr)
 		{
-			str = '\0';
+			str[0] = '\0';
 		}
 		else
 		{
-			strncpy(str, incomingStr, 3);
+			strncpy(str, incomingStr, sizeOfString);
 		}
 	}
 

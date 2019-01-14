@@ -11,11 +11,13 @@
 #include <iostream>
 #include <cstring>
 
+
 namespace sict
 {
+	const int sizeOfString = 3;
 	class String
-	{
-		char *str;
+	{		
+		char str[sizeOfString];
 	public:
 		String(const char* incomingStr);
 		void display(std::ostream& obj) const;

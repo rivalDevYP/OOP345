@@ -4,7 +4,7 @@
 	course: OOP345
 	date: 2019-01-14
 */
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "String.h"
 namespace sict
@@ -14,7 +14,7 @@ namespace sict
 	{
 		if (incomingStr == nullptr)
 		{
-			str == '\0';
+			str = '\0';
 		}
 		else
 		{

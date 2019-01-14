@@ -5,6 +5,7 @@
 	date: 2019-01-14
 */
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
 #include "process.h"
@@ -21,13 +22,13 @@ int main(int argc, char* argv[])
 	{
 		for (int i = 1; i < argc; ++i)
 		{
-			std::cout << argv[i] << " "
+			std::cout << argv[i] << " ";
 		}
 		std::cout << std::endl;
 	}
 	for (int i = 1; i < argc; ++i)
 	{
-		sict::process(&argv[i]);
+		sict::process(argv[i]);
 	}
 	return 0;	
 }

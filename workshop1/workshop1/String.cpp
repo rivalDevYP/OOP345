@@ -32,5 +32,6 @@ namespace sict
 	{
 		int itemNum = INITIAL;
 		os << itemNum << ": " << incomingObj << std::endl;
+		return os;
 	}
 }

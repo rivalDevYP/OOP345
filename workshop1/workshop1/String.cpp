@@ -32,7 +32,8 @@ namespace sict
 	std::ostream & operator<<(std::ostream & os, const String & incomingObj) //ostream helper
 	{
 		int itemNum = INITIAL;
-		os << itemNum << ": " << incomingObj << std::endl; // TODO there is an error over here
+		//os << itemNum << ": " << incomingObj << std::endl; // TODO there is an error over here
+		os << itemNum << ": " << 
 		return os;
 	}
 }

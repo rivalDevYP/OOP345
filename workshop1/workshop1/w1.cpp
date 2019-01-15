@@ -13,22 +13,22 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc <= 1)
+	if (argc <= 1) //if num of args equal/less 1
 	{
-		std::cout << "***Insufficient number of arguments***" << std::endl;
-		return 1;
+		std::cout << "***Insufficient number of arguments***" << std::endl; //print message
+		return 1; //exit with error code
 	}
-	else
+	else //if num of args not 1 or less
 	{
-		for (int i = 1; i < argc; ++i)
+		for (int i = 1; i < argc; ++i) //increment while keeping less than num of args
 		{
-			std::cout << argv[i] << " ";
+			std::cout << argv[i] << " "; //print arg with a space
 		}
-		std::cout << std::endl;
+		std::cout << std::endl; //print new line
 	}
-	for (int i = 1; i < argc; ++i)
+	for (int i = 1; i < argc; ++i) //increment while keeping less than num of args
 	{
-		sict::process(argv[i]);
+		sict::process(argv[i]); //calls process func
 	}
 	return 0;	
 }

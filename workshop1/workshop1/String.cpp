@@ -19,16 +19,20 @@ namespace sict
 		}
 		else //if not empty
 		{
-			strncpy(str, incomingStr, sizeOfString); //copy over the string to our local var
+			strncpy(str, incomingStr, 3); //copy over the string to our local var  //no termination
+			/*for (int index = 0; index < sizeOfString; index++)
+			{
+				str[index] = incomingStr[index];
+			}*/
 		}
 	}
 
 	void String::display(std::ostream & obj) const //display member function
 	{
-		int itemNum = INITIAL;
-		obj << itemNum << ": " << this->str << std::endl;
+		static int itemNum = INITIAL;
+		obj << itemNum << ": " << this->str;
+		itemNum++;
 	}
-
 
 	std::ostream & operator<<(std::ostream & os, const String & refToStringObj) //ostream helper
 	{

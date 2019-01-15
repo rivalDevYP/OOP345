@@ -17,7 +17,7 @@ namespace sict
 	const int sizeOfString = 3;
 	class String
 	{		
-		char str[sizeOfString];
+		char str[sizeOfString+1];
 	public:
 		String(const char* incomingStr);
 		void display(std::ostream& obj) const;

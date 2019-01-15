@@ -19,6 +19,7 @@ namespace sict
 		char* str;
 	public:
 		String(const char* incomingStr);
+		//~String();
 		void display(std::ostream& obj) const;
 	};
 	std::ostream& operator << (std::ostream& os, const String& refToStringObj);

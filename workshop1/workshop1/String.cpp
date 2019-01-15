@@ -19,11 +19,16 @@ namespace sict
 		}
 		else //if not empty
 		{
-			str = new char[3];
-			strncpy(str, incomingStr, 3);
-			str[3] = '\0';
+			str = new char[3]; //allocating dynamic memory
+			strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
+			str[3/*sizeof(str)*/] = '\0'; //setting the last block of memory of str as nullbyte
 		}
 	}
+
+	//String::~String()
+	//{
+	//	delete[]str; //deallocating previously allocated dynamic memory
+	//}
 
 	void String::display(std::ostream & obj) const //display member function
 	{

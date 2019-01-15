@@ -19,7 +19,8 @@ namespace sict
 		}
 		else //if not empty
 		{
-			strncpy(str, incomingStr, sizeOfString);
+			str = new char[3];
+			strncpy(str, incomingStr, 3);
 		}
 	}
 

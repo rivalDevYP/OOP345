@@ -22,7 +22,7 @@ namespace sict
 		String(const char* incomingStr);
 		void display(std::ostream& obj) const;
 	};
-	std::ostream& operator << (std::ostream& os, const String& s);
+	std::ostream& operator << (std::ostream& os, const String& refToStringObj);
 }
 
 #endif //SICT_PROCESS_H

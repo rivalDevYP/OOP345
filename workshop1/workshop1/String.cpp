@@ -25,15 +25,14 @@ namespace sict
 
 	void String::display(std::ostream & obj) const //display member function
 	{
-		obj << str; //calls ostream helper
+		int itemNum = INITIAL;
+		obj << itemNum << ": " << this->str << std::endl;
 	}
 
 
-	std::ostream & operator<<(std::ostream & os, const String & incomingObj) //ostream helper
+	std::ostream & operator<<(std::ostream & os, const String & refToStringObj) //ostream helper
 	{
-		int itemNum = INITIAL;
-		//os << itemNum << ": " << incomingObj << std::endl; // TODO there is an error over here
-		os << itemNum << ": " << 
+		refToStringObj.display(os);
 		return os;
 	}
 }

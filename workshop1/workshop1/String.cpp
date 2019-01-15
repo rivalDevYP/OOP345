@@ -21,14 +21,16 @@ namespace sict
 		{
 			str = new char[3];
 			strncpy(str, incomingStr, 3);
+			str[3] = '\0';
 		}
 	}
 
 	void String::display(std::ostream & obj) const //display member function
 	{
 		static int itemNum = INITIAL;
-		obj << itemNum << ": " << this->str;
 		itemNum++;
+		obj << itemNum << ": " << this->str;
+		
 	}
 
 	std::ostream & operator<<(std::ostream & os, const String & refToStringObj) //ostream helper

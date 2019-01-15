@@ -19,11 +19,7 @@ namespace sict
 		}
 		else //if not empty
 		{
-			strncpy(str, incomingStr, 3); //copy over the string to our local var  //no termination
-			/*for (int index = 0; index < sizeOfString; index++)
-			{
-				str[index] = incomingStr[index];
-			}*/
+			strncpy(str, incomingStr, sizeOfString);
 		}
 	}
 

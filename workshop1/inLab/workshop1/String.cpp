@@ -25,7 +25,7 @@ namespace sict
 		}
 	}
 
-	//String::~String()
+	//String::~String() //is this destructor required?
 	//{
 	//	delete[]str; //deallocating previously allocated dynamic memory
 	//}

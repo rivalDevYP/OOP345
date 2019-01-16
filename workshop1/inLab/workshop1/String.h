@@ -19,7 +19,7 @@ namespace sict
 		char* str;
 	public:
 		String(const char* incomingStr);
-		//~String();
+		//~String(); //is this destructor required?
 		void display(std::ostream& obj) const;
 	};
 	std::ostream& operator << (std::ostream& os, const String& refToStringObj);

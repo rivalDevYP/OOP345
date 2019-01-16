@@ -1,0 +1,24 @@
+SPECIFICATIONS – AT HOME
+************************
+
+For this part of the workshop, upgrade your String class to manage a C-style null-terminated string of any length. Do not change your other modules.
+
+Reflection
+**********
+Study your final solution, reread the related parts of the course notes, and make sure that you have understood the concepts covered by this workshop. This should take no less than 30 minutes of your time. Explain in your own words what you have learned in completing this workshop. Include in your explanation but do not limit it to the following points (40%):
+
+	• the difference between internal and external linkage using examples from your code
+	• the execution effect of the code in the process() function that creates the String object which is inserted into standard output (which member function(s) does this code call)
+	• the changes that you made in upgrading your String class.
+	
+Include all corrections to the Quiz you have received (30%).
+
+At-Home Submission (70%)
+************************
+To test and demonstrate execution of your program use the same data as shown in the output example above.
+Upload your source code to your matrix account. Compile and run your code using the latest version of the gcc compiler and make sure that everything works properly.
+
+Then, run the following command from your account: (replace profname.proflastname with your professor’s Seneca userid)
+~profname.proflastname/submit 345XX_w1_home<ENTER>
+
+and follow the instructions. Replace XX with the section letter(s) specified by your instructor.

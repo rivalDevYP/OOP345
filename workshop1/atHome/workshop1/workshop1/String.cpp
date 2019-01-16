@@ -3,6 +3,7 @@
 	programmer: Yathavan, Parameshwaran
 	course: OOP345
 	date: 2019-01-14
+	purpose: "to take user input, and print the first 3 characters of each word user inputs"
 */
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>

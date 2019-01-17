@@ -20,11 +20,13 @@ namespace sict
 		}
 		else //if not empty
 		{
-			str = new char[3]; //allocating dynamic memory
-			strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
-			str[3/*sizeof(str)*/] = '\0'; //setting the last block of memory of str as nullbyte
+			str = new char[strlen(incomingStr)+1]; //allocating dynamic memory to the size of incomingStr length plus one for nullbyte
+			//std::strncpy(str, incomingStr, (strlen(incomingStr)+1));//copying first 3 characters from incomingStr to str
+			std::strncpy(str, incomingStr, (strlen(incomingStr)+1));
 		}
 	}
+
+	
 
 	//String::~String() //is this destructor required?
 	//{

@@ -11,14 +11,20 @@
 #include "process.h"
 #include "String.h"
 
+namespace sict
+{
+	int INITIAL = 2;
+}
+
 int main(int argc, char* argv[])
 {
+		
 	if (argc <= 1) //if num of args equal/less 1
 	{
 		std::cout << "***Insufficient number of arguments***" << std::endl; //print message
 		return 1; //exit with error code
 	}
-	else //if num of args not 1 or less
+	else //if num of args not less that or equal to 1
 	{
 		for (int i = 1; i < argc; ++i) //increment while keeping less than num of args
 		{

@@ -21,7 +21,7 @@ namespace sict
 		{
 			str = new char[3]; //allocating dynamic memory
 			strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
-			str[3/*sizeof(str)*/] = '\0'; //setting the last block of memory of str as nullbyte
+			str[3] = '\0'; //setting the last block of memory of str as nullbyte
 		}
 	}
 

@@ -16,7 +16,8 @@ namespace sict
 {
 	class String
 	{		
-		char* str;
+		const int MAX = 3;
+		char str[3+1];
 	public:
 		String(const char* incomingStr);
 		//~String(); //is this destructor required?

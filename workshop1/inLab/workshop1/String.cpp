@@ -7,10 +7,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "String.h"
+extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
 namespace sict
 {
-	extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
-
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string
 	{
 		if (incomingStr == nullptr) //if the incoming string is empty
@@ -19,7 +18,7 @@ namespace sict
 		}
 		else //if not empty
 		{
-			str = new char[3]; //allocating dynamic memory
+			//str = new char[3]; //allocating dynamic memory
 			strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
 			str[3] = '\0'; //setting the last block of memory of str as nullbyte
 		}

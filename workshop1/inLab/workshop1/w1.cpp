@@ -11,10 +11,7 @@
 #include "process.h"
 #include "String.h"
 
-namespace sict
-{
-	int INITIAL = 2;
-}
+int INITIAL = 2;
 
 int main(int argc, char* argv[])
 {

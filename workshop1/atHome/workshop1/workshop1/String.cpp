@@ -17,7 +17,7 @@ namespace sict
 {
 	String::String()
 	{
-		str[0] = '\0';
+		str[0] = '\0'; //setting to a safe empty state at the creation of a new object
 	}
 
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string

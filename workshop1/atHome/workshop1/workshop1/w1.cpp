@@ -6,10 +6,13 @@
 */
 
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <cstring>
 #include "process.h"
 #include "String.h"
+
+int INITIAL = 2;
 
 int main(int argc, char* argv[])
 {
@@ -31,5 +34,6 @@ int main(int argc, char* argv[])
 	{
 		sict::process(argv[i]); //calls process func
 	}
+	
 	return 0;	
 }

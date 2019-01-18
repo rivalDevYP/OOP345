@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include "String.h"
-#include "String.h"
 
 namespace sict 
 {

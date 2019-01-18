@@ -5,13 +5,16 @@
 	date: 2019-01-14
 	purpose: "to take user input, and print the first 3 characters of each word user inputs"
 */
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <cstring>
 #include "String.h"
+
+extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
+
 namespace sict
 {
-	extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
-
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string
 	{
 		if (incomingStr[0] == '\0') //if the incoming string is empty
@@ -25,8 +28,6 @@ namespace sict
 			std::strncpy(str, incomingStr, (strlen(incomingStr)+1));
 		}
 	}
-
-	
 
 	//String::~String() //is this destructor required?
 	//{

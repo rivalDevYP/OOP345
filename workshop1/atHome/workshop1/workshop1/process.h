@@ -5,7 +5,6 @@
 #define SICT_PROCESS_H
 namespace sict 
 {
-	int INITIAL = 2;
 	void process(const char*);
 }
 

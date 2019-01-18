@@ -20,7 +20,8 @@ int main(int argc, char* argv[])
 	}
 	else //if num of args not 1 or less
 	{
-		for (int i = 1; i < argc; ++i) //increment while keeping less than num of args
+		std::cout << "Command Line : ";
+		for (int i = 0; i < argc; ++i) //increment while keeping less than num of args
 		{
 			std::cout << argv[i] << " "; //print arg with a space
 		}

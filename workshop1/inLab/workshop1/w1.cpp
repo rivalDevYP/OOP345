@@ -11,7 +11,7 @@
 #include "process.h"
 #include "String.h"
 
-int INITIAL = 2;
+int INITIAL = 3;
 
 int main(int argc, char* argv[])
 {

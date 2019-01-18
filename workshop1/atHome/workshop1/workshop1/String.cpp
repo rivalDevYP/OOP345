@@ -14,7 +14,7 @@ namespace sict
 
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string
 	{
-		if (incomingStr == nullptr) //if the incoming string is empty
+		if (incomingStr[0] == '\0') //if the incoming string is empty
 		{
 			str[0] = '\0'; //initialize to safe empty state
 		}
@@ -35,15 +35,14 @@ namespace sict
 
 	void String::display(std::ostream & obj) const //display member function
 	{
-		static int itemNum = INITIAL;
-		itemNum++;
-		obj << itemNum << ": " << this->str;
-		
+		obj << this->str;
 	}
 
 	std::ostream & operator<<(std::ostream & os, const String & refToStringObj) //ostream helper
 	{
+		static int itemNum = INITIAL;
 		refToStringObj.display(os);
+		itemNum++;	
 		return os;
 	}
 }

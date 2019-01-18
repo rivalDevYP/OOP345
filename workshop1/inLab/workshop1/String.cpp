@@ -1,11 +1,13 @@
 /*
-	program: String.cpp
-	programmer: Yathavan, Parameshwaran
-	course: OOP345
-	date: 2019-01-14
+program: String.cpp
+programmer: Yathavan, Parameshwaran
+course: OOP345
+date: 2019-01-14
 */
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <cstring>
 #include "String.h"
 
 extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
@@ -14,15 +16,22 @@ namespace sict
 {
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string
 	{
-		if (incomingStr == nullptr) //if the incoming string is empty
+		if (incomingStr != nullptr) //checking existance of incomingStr
 		{
-			str[0] = '\0'; //initialize to safe empty state
+			if (incomingStr[0] == '\0') //if the incoming string is empty
+			{
+				str[0] = '\0'; //initialize to safe empty state
+			}
+			else //if not empty
+			{
+				//str = new char[3]; //allocating dynamic memory
+				std::strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
+				str[3] = '\0'; //setting the last block of memory of str as nullbyte
+			}
 		}
-		else //if not empty
+		else
 		{
-			//str = new char[3]; //allocating dynamic memory
-			strncpy(str, incomingStr, 3); //copying first 3 characters from incomingStr to str
-			str[3] = '\0'; //setting the last block of memory of str as nullbyte
+			str[0] = '\0';
 		}
 	}
 
@@ -33,14 +42,18 @@ namespace sict
 
 	void String::display(std::ostream & obj) const //display member function
 	{
-		static int itemNum = INITIAL;
-		itemNum++;
-		obj << itemNum << ": " << this->str;
-		
+		//static int itemNum = INITIAL;
+		//itemNum++;
+		//INITIAL++;
+		obj << this->str;
+
 	}
 
 	std::ostream & operator<<(std::ostream & os, const String & refToStringObj) //ostream helper
 	{
+		static int itemNum = INITIAL;
+		std::cout << itemNum << ": ";
+		itemNum++;
 		refToStringObj.display(os);
 		return os;
 	}

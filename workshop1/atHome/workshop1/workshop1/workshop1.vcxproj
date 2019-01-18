@@ -147,9 +147,6 @@
     <ClInclude Include="process.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="atHome_Instructions.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

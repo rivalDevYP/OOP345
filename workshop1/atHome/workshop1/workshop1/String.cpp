@@ -1,9 +1,9 @@
 /*
-	program: String.cpp
-	programmer: Yathavan, Parameshwaran
-	course: OOP345
-	date: 2019-01-14
-	purpose: "to take user input, and print the first 3 characters of each word user inputs"
+program: String.cpp
+programmer: Yathavan, Parameshwaran
+course: OOP345
+date: 2019-01-14
+purpose: "to take user input, and print the first 3 characters of each word user inputs"
 */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -15,6 +15,11 @@ extern int INITIAL; //external linkage (reaching out to another member function 
 
 namespace sict
 {
+	String::String()
+	{
+		str[0] = '\0';
+	}
+
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string
 	{
 		if (incomingStr[0] == '\0') //if the incoming string is empty
@@ -23,9 +28,9 @@ namespace sict
 		}
 		else //if not empty
 		{
-			str = new char[strlen(incomingStr)+1]; //allocating dynamic memory to the size of incomingStr length plus one for nullbyte
+			str = new char[strlen(incomingStr) + 1]; //allocating dynamic memory to the size of incomingStr length plus one for nullbyte
 			//std::strncpy(str, incomingStr, (strlen(incomingStr)+1));//copying first 3 characters from incomingStr to str
-			std::strncpy(str, incomingStr, (strlen(incomingStr)+1));
+			std::strncpy(str, incomingStr, (strlen(incomingStr) + 1));
 		}
 	}
 
@@ -43,7 +48,7 @@ namespace sict
 	{
 		static int itemNum = INITIAL;
 		refToStringObj.display(os);
-		itemNum++;	
+		itemNum++;
 		return os;
 	}
 }

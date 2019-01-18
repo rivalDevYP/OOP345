@@ -6,9 +6,9 @@
 #include <iostream>
 #include "String.h"
 
-namespace sict 
+namespace sict
 {
-	void process(const char* str) 
+	void process(const char* str)
 	{
 		String a = String(str);
 		std::cout << a << std::endl;

@@ -34,6 +34,6 @@ int main(int argc, char* argv[])
 	{
 		sict::process(argv[i]); //calls process func
 	}
-	
-	return 0;	
+
+	return 0;
 }

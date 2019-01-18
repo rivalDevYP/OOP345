@@ -1,6 +1,6 @@
 # OOP345
 
-<h5> To strangers or anyone with intent to copy this code for their personal academic success: </h5>
+<h5> To strangers or anyone with intent to copy this code for their personal academic success or to show off that they are really a nerd (you're not): </h5>
 </br>
 <p1>This is Yathavan Parameshwaran's repository for OOP345 workshops and assignments. All files in here are </p1><strong>not allowed</strong><p1> to be copied, cloned, or otherwise downloaded without the explicit permission of Yathavan Parameshwaran. </p1> <p2>(Besides, half the code in here might be filled with bugs and stuff, do you really want to copy this and risk failing?)</p2>
 </br></br>

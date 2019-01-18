@@ -7,7 +7,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "String.h"
+
 extern int INITIAL; //external linkage (reaching out to another member function in another translation unit)
+
 namespace sict
 {
 	String::String(const char *incomingStr) //recieves an unmodifiable reference to a c-style string

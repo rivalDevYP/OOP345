@@ -14,10 +14,9 @@
 namespace sict
 {
 	class String
-	{
+	{		
 		char* str;
 	public:
-		String();
 		String(const char* incomingStr);
 		//~String(); //is this destructor required?
 		void display(std::ostream& obj) const;

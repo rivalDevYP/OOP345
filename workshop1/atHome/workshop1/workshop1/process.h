@@ -3,7 +3,7 @@
 
 #ifndef SICT_PROCESS_H
 #define SICT_PROCESS_H
-namespace sict
+namespace sict 
 {
 	void process(const char*);
 }

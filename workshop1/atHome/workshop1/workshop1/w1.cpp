@@ -30,10 +30,10 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl; //print new line
 	}
-	for (int i = 1; i < argc; ++i) //increment while keeping less than num of args
+	for (int i = 1; i < argc; ++i) //start at one to avoid the first argument (first argument == executable to run the program) increment while keeping less than num of args
 	{
 		sict::process(argv[i]); //calls process func
 	}
-
-	return 0;
+	
+	return 0;	
 }

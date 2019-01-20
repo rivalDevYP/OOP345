@@ -24,10 +24,9 @@ namespace sict
 			}
 			else //if not empty
 			{
-				str = new char[std::strlen(incomingStr)+1];
+				str = new char[strlen(incomingStr)+1];
 				//std::strncpy(str, incomingStr, (std::strlen(incomingstr)+1); //copying characters from incomingStr to str
-				s
-				
+				std::strncpy(str, incomingStr, (strlen(incomingstr)+1));	
 			}
 		}
 		else

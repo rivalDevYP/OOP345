@@ -30,7 +30,8 @@ namespace sict
 		{
 			str = new char[strlen(incomingStr) + 1]; //allocating dynamic memory to the size of incomingStr length plus one for nullbyte
 			//std::strncpy(str, incomingStr, (strlen(incomingStr)+1));//copying first 3 characters from incomingStr to str
-			std::strncpy(str, incomingStr, (strlen(incomingStr) + 1));
+			std::strncpy(str, incomingStr, (strlen(incomingStr) + 1)); //copying over the contents from incomingstr to str to the size/count (strlen(incomingStr)+1)
+
 		}
 	}
 

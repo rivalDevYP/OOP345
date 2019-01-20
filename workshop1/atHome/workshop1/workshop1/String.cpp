@@ -26,7 +26,7 @@ namespace sict
 			{
 				str = new char[strlen(incomingStr)+1];
 				//std::strncpy(str, incomingStr, (std::strlen(incomingstr)+1); //copying characters from incomingStr to str
-				std::strncpy(str, incomingStr, (strlen(incomingstr)+1));	
+				
 			}
 		}
 		else

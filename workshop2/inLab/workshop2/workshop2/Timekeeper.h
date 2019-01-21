@@ -22,7 +22,6 @@ namespace sict
 		std::chrono::steady_clock::time_point durationTimePiece;
 		int numOfRecords;
 		static int objectCreationCount;
-
 	public:
 		Timekeeper();
 		void start() const;

@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Timekeeper.cpp" />
+    <ClCompile Include="w2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Timekeeper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gutenberg_shakespeare" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{FE2FE789-C8C5-4AE5-B983-B505D39B3776}</ProjectGuid>

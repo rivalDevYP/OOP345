@@ -15,5 +15,26 @@ using namespace std;
 
 namespace sict
 {
+	Timekeeper::Timekeeper()
+	{
 
+	}
+
+	void Timekeeper::start() const
+	{
+	}
+
+	void Timekeeper::stop() const
+	{
+	}
+
+	void Timekeeper::recordEvent() const
+	{
+	}
+
+	void Timekeeper::report() const
+	{
+	}
+
+	
 }

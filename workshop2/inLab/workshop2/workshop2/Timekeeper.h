@@ -17,9 +17,18 @@ namespace sict
 		const int max = 10;
 		char* message;
 		char* timeUnits;
-		
-	public:
+		std::chrono::steady_clock::time_point startTimePiece;
+		std::chrono::steady_clock::time_point endTimePiece;
+		std::chrono::steady_clock::time_point durationTimePiece;
+		int numOfRecords;
+		static int objectCreationCount;
 
+	public:
+		Timekeeper();
+		void start() const;
+		void stop() const;
+		void recordEvent() const;
+		void report() const;
 	};
 }
 

@@ -20,18 +20,18 @@ namespace sict
 		{
 			if (incomingStr[0] == '\0') //if the incoming string is empty
 			{
-				str[0] = '\0'; //initialize to safe empty state
+				str = nullptr;
 			}
 			else //if not empty
 			{
 				str = new char[strlen(incomingStr)+1];
 				//std::strncpy(str, incomingStr, (std::strlen(incomingstr)+1); //copying characters from incomingStr to str
-				
+				std::strncpy(str, incomingStr,(strlen(incomingStr)+1));
 			}
 		}
 		else
 		{
-			str[0] = '\0';
+			str = nullptr;
 		}
 	}
 

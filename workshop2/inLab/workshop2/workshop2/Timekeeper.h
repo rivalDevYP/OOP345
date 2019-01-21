@@ -15,7 +15,9 @@ namespace sict
 	class Timekeeper
 	{
 		const int max = 10;
-
+		char* message;
+		char* timeUnits;
+		
 	public:
 
 	};

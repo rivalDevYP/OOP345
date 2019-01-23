@@ -15,26 +15,40 @@ using namespace std;
 
 namespace sict
 {
+	Timekeeper::record::record()
+	{
+		this->message = nullptr;
+		this->timeUnits = nullptr;
+	}
+
 	Timekeeper::Timekeeper()
 	{
+		
+		
 
 	}
 
 	void Timekeeper::start() const
 	{
+
 	}
 
 	void Timekeeper::stop() const
 	{
+
 	}
 
 	void Timekeeper::recordEvent() const
 	{
+
 	}
 
-	void Timekeeper::report() const
+	void Timekeeper::report(std::ostream& ostrObj) const
 	{
+		
 	}
 
 	
+	
+
 }

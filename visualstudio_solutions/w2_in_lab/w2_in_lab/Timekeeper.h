@@ -9,6 +9,7 @@
 #define SICT_TIMEKEEPER_H
 
 #include <iostream>
+#include <chrono>
 
 namespace sict
 {

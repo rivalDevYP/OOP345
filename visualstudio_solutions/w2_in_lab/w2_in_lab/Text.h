@@ -14,9 +14,14 @@ namespace sict
 {
 	class Text
 	{
-
+		std::string* strArray;
 	public:
 		Text();
+		Text(const char* incomingStr);
+		Text(const Text& incomingTextObj);
+		Text& operator=(const Text& incomingObj);
+		~Text();
+		size_t size() const;
 	};
 }
 #endif //SICT_TEXT_H

@@ -15,5 +15,25 @@ using namespace std;
 
 namespace sict
 {
-
+	Text::Text()
+	{
+		strArray = nullptr;
+	}
+	Text::Text(const char * incomingStr)
+	{
+	}
+	Text::Text(const Text & incomingTextObj)
+	{
+	}
+	Text & Text::operator=(const Text & incomingObj)
+	{
+		// TODO: insert return statement here
+	}
+	Text::~Text()
+	{
+	}
+	size_t Text::size() const
+	{
+		return size_t();
+	}
 }

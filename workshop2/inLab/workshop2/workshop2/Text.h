@@ -16,7 +16,7 @@ namespace sict
 	{
 
 	public:
-
+		Text();
 	};
 }
 #endif //SICT_TEXT_H

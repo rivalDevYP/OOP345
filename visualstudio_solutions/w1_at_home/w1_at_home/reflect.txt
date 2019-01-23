@@ -1,0 +1,99 @@
+OOP345 Workshop 1 Reflection
+
+The concepts I have learned in this workshop:
+
+Class Variables
+	- prefaced with static
+	- shared amongst all instances of classes
+	- the data is shared amongst all instances of a class, dependant on types (if any) when used with templates 
+	- excellent when used to keep count of how many objects, you can define the static variable within a constructor, and increment it every time a new object gets created (i.e. constructor gets called at creation of object)
+
+Class Functions
+	- also prefaced with static
+	- used to access static variables in a class
+	- independant amongst its respective class
+
+Namespaces
+	- to expose everything within a namespace: using namespace XXX;
+	- to expose a single element within a namespace: using namespaceName::thingYouWantToExpose;
+	- to use class elements within namespaces whenever you need them: namespace::className::thingYouWantTouse;
+	- namespaces are used to organize code
+	- when working on large projects, it is highly recommended to use namespaces to prioritize your variables aren't confused among other similarly named variables and to preserve and maintain the integrity of your code
+
+External & Internal linkage
+	- used to share variables and methods amongst translation units
+	- let's say int abc = 3; is defined in a.cpp. b.cpp wants to access it. to access abc in another translation unit, you simple add "extern" in front of your declaration in b.cpp, and you use it as you wish. 
+
+	//a.cpp
+	int main () { int abc = 3;}
+
+	//b.cpp
+	int main() { extern int abc; std::cout << abc << std::endl;} //will print 3...
+
+Compilation
+	- modularizing code is a good thing
+	- declare and define your class in your header file
+	- and implement those classes within your .cpp file
+	- improves debugging time and keeps your code organized
+	- pre-processor creates seperate translation unit by inserting header files and expanding macros, from each translation unit, compiler creates seperate binary file, then from the binary files from translation units and the binary files from libraries used in the code, the linker makes a file called a "relocatable", this is usually what you execute to start the application
+
+Class & Objects
+	- objects are instances of classes
+	- classes define the blueprint for the object
+	- objects are used to hold, and manipulate data
+
+Types
+	- fundamental 	-> works directly with the hardware
+	- built-in	-> reflect hardware capabilities directly
+	- user-defined
+		- concrete -> definition/representation known
+		- abstract -> definition/representation not known
+Scope
+	- local -> within a function, like main()
+	- class -> begins from { to }; of a class
+	- namespace -> everything between the parenthesis of a namespace definition is part of the namespace scope
+	- global scope -> pretty much everything above and everything else
+
+Linkage ("<->" means "connects")
+	- external -> a scope within a module <-> another scope within a different module	use keyword "extern"
+	- internal -> a scope within a module <-> a scope within the SAME module		use keyword "static" <- (static is a class variable, refer to class variable section above) ^^^
+
+
+
+
+QUIZ CORRECTIONS
+
+	1 (1) The prefix _L_ identifies a constant as a wide character type (wchar_t):
+
+	2 (1) Write the code that initializes the variable x to the value 6 using universal form:
+													int x_{6}____;
+
+	3 (1) A pointer of any type including generic type can be dereferenced (choose one of)
+													True _____ False __X____
+
+	4 (1) A reference to an object that is less permanent, possibly temporary, is called an _______ reference
+															(choose one of)
+															lvalue __X__ rvalue _______
+
+	5 (2) The following program inserts the elements of array a into the standard output stream one element per line. Complete the coding using a range-based for
+
+		#include &lt;iostream&gt;
+		int main() {
+		int a[] = {1,2,3,4,5};
+		for (int index = 0; index < sizeof(a); ++index)
+		std::cout << a[index]; << std::endl;
+		}
+
+	6 (2) Write the declaration for the move assignment operator in the definition of class named Car. You do not need to write the implementation:
+									
+									______Car& operator=(Car&&);____________
+
+	7 (1) Write the declaration for a class variable named campus and of type int in the definition of class ICT:
+									
+									____class ICT { static int campus; }________
+
+	8 (1) OOP345 is a symbolic constant belonging to the Scoped Enumeration named Course. Write the statement that assigns this constant to a variable named mycourse, which is also of type Course.
+									
+									________Course mycourse = Course.OOP345;____  
+
+

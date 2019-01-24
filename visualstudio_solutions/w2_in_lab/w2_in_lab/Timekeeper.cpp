@@ -39,9 +39,9 @@ namespace sict
 
 	void Timekeeper::recordEvent(const char* incomingStr) const
 	{
-		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
-		recordObj[numOfRecords].durationTimePiece = 
-		numOfRecords++;
+		/*std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
+		recordObj[numOfRecords].durationTimePiece = endTimePiece.operator-=(startTimePiece);
+		numOfRecords++;*/
 	}
 
 	void Timekeeper::report(std::ostream& ostrObj) const

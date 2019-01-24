@@ -29,17 +29,18 @@ namespace sict
 
 	void Timekeeper::start() const
 	{
-		std::chrono::steady_clock::time_point startTimePiece = std::chrono::steady_clock::now();
+		startTimePiece = std::chrono::steady_clock::now();
 	}
 
 	void Timekeeper::stop() const
 	{
-		//endTimePiece = std::chrono::steady_clock::now();
+		endTimePiece = std::chrono::steady_clock::now();
 	}
 
 	void Timekeeper::recordEvent(const char* incomingStr) const
 	{
 		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
+		recordObj[numOfRecords].durationTimePiece = 
 		numOfRecords++;
 	}
 

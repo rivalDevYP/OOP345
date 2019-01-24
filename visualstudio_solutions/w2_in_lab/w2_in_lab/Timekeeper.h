@@ -19,11 +19,11 @@ namespace sict
 		static int numOfRecords; //The number records currently stored
 		//std::chrono::steady_clock::time_point start(); //The start time for the current event 
 		//std::chrono::steady_clock::time_point end(); //The end time for the current event 
-		std::chrono::steady_clock::time_point start;
-		std::chrono::steady_clock::time_point end;
+		std::chrono::steady_clock::time_point startTime;
+		std::chrono::steady_clock::time_point endTime;
 		struct record //array of records 
 		{
-			std::chrono::steady_clock::time_point durationTimePiece; //duration of the recorded event 
+			std::chrono::steady_clock::duration durationTimePiece; //duration of the recorded event 
 			char* message; //address of a C-style null-terminated string containing a message in a literal string
 			char* timeUnits; //address of a C-style null-terminated string containing the predefined units of time
 			//record();

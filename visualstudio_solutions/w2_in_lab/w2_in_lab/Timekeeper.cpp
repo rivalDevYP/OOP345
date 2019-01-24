@@ -37,10 +37,20 @@ namespace sict
 		return std::chrono::steady_clock::time_point();
 	}*/
 
+	void sict::Timekeeper::start() const
+	{
+		startTime = chrono::steady_clock::now();
+	}
+
+	void sict::Timekeeper::stop() const
+	{
+		endTime = chrono::steady_clock::now();
+	}
+
 	void Timekeeper::recordEvent(const char* incomingStr) const
 	{
 		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
-		recordObj[numOfRecords].durationTimePiece
+		recordObj[numOfRecords].durationTimePiece;
 		numOfRecords++;
 	}
 

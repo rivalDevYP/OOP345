@@ -27,13 +27,29 @@ namespace sict
 		std::string bufferOne;
 		if (fileptr.is_open())
 		{
-			while (!fileptr.eofbit) //while eofbit(error flag for end of file) has not been met yet
+			while (!fileptr.eof() && fileptr.good()) //while eofbit(error flag for end of file) has not been met yet
 			{
-				std::getline(fileptr,bufferOne,'\n');
-				bufferOne.clear();
-				lineCount++;
+				std::getline(fileptr,bufferOne,'\n'); //extract line into bufferOne
+				bufferOne.clear(); //clear out the bufferOne (we're just counting lines at this point)
+				lineCount++; //increment line count by one
 			}
-
+			//at this point, you've read down the file counting the lines
+			//you are now at the end of the file, you now gotta climb back up :)
+			if (fileptr.eof()) //eof returns true if end of file has been reached
+			{
+				//first, clear the eof flag
+				fileptr.clear();
+				//next, go to the beginning of the file
+				fileptr.seekg(0, fileptr.beg);
+			}
+			//you now have the number of lines in the file, now allocate dynamic memory for the string pointer
+			strArray = new std::string[lineCount];
+			int index = 0;
+			while (!fileptr.eof() && fileptr.good()) //while eofbit(error flag for end of file) has not been met yet
+			{				
+				std::getline(fileptr, strArray[index], '\n'); //reading line and storing in array of string objects
+				index++; //incrementing the value that holds the current position of string array
+			}
 		}
 	}
 	Text::Text(const Text & incomingTextObj)
@@ -59,6 +75,6 @@ namespace sict
 	}
 	size_t Text::size() const
 	{
-		return size_t();
+		return this->strArray->length();
 	}
 }

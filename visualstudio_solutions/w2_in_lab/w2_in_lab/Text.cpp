@@ -52,18 +52,18 @@ namespace sict
 			}
 		}
 	}
-	Text::Text(const Text & incomingTextObj)
+	Text::Text(const Text & incomingTextObj) //copy constructor
 	{
 		*this = incomingTextObj; //copy constructor called when new object created from existing object, make life easier by just calling copy assignment operator on the object that you are recieving while keeping (*this) as the left hand operand ('this' returns the address of the current object) so basically you are saying copy rhs over to lhs, in other words, copy incomingObj over to the current object
 	}
-	Text & Text::operator=(const Text & incomingObj)
+	Text & Text::operator=(const Text & incomingObj) //copy assignment operator
 	{
 		if (this != &incomingObj) //check for self-assignment (you don't wanna copy over to the same object)
 		{
 			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored; //shallow copy over non resource variables
 			delete[]this->strArray; //deallocate any previously allocated memory
 			this->strArray = nullptr; //good practice?
-			this->strArray = new std::string[incomingObj.strArray->length]; //allocate new memory for the size of the incomingObject's pointer(s)
+			this->strArray = new std::string[incomingObj.strArray->length()]; //allocate new memory for the size of the incomingObject's pointer(s)
 			this->strArray = incomingObj.strArray; //copy over the resource data from the source object to the freshly allocated pointer of the current object
 		}
 		return *this;

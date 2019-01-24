@@ -16,7 +16,7 @@ namespace sict
 	class Timekeeper
 	{
 		const int max = 10; //maximum number of record objects at 10
-		int numOfRecords; //The number records currently stored
+		static int numOfRecords; //The number records currently stored
 		std::chrono::steady_clock::time_point startTimePiece; //The start time for the current event 
 		std::chrono::steady_clock::time_point endTimePiece; //The end time for the current event 
 		struct record //array of records 
@@ -24,7 +24,7 @@ namespace sict
 			std::chrono::steady_clock::time_point durationTimePiece; //duration of the recorded event 
 			char* message; //address of a C-style null-terminated string containing a message in a literal string
 			char* timeUnits; //address of a C-style null-terminated string containing the predefined units of time
-			record();
+			//record();
 		};	
 		record recordObj[10]; //array of records 
 		static int objectCreationCount;
@@ -32,7 +32,7 @@ namespace sict
 		Timekeeper();
 		void start() const;
 		void stop() const;
-		void recordEvent() const;
+		void recordEvent(const char* incomingStr) const;
 		void report(std::ostream& ostrObj) const;
 	};
 }

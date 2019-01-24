@@ -17,8 +17,10 @@ namespace sict
 	{
 		const int max = 10; //maximum number of record objects at 10
 		static int numOfRecords; //The number records currently stored
-		std::chrono::steady_clock::time_point startTimePiece; //The start time for the current event 
-		std::chrono::steady_clock::time_point endTimePiece; //The end time for the current event 
+		//std::chrono::steady_clock::time_point start(); //The start time for the current event 
+		//std::chrono::steady_clock::time_point end(); //The end time for the current event 
+		std::chrono::steady_clock::time_point start;
+		std::chrono::steady_clock::time_point end;
 		struct record //array of records 
 		{
 			std::chrono::steady_clock::time_point durationTimePiece; //duration of the recorded event 

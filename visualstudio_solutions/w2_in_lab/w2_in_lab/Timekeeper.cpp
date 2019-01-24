@@ -27,21 +27,21 @@ namespace sict
 		objectCreationCount++;
 	}
 
-	void Timekeeper::start() const
+	/*std::chrono::steady_clock::time_point Timekeeper::start()
 	{
-		startTimePiece = std::chrono::steady_clock::now();
+		return std::chrono::steady_clock::time_point();
 	}
 
-	void Timekeeper::stop() const
+	std::chrono::steady_clock::time_point Timekeeper::end()
 	{
-		endTimePiece = std::chrono::steady_clock::now();
-	}
+		return std::chrono::steady_clock::time_point();
+	}*/
 
 	void Timekeeper::recordEvent(const char* incomingStr) const
 	{
-		/*std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
-		recordObj[numOfRecords].durationTimePiece = endTimePiece.operator-=(startTimePiece);
-		numOfRecords++;*/
+		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
+		recordObj[numOfRecords].durationTimePiece
+		numOfRecords++;
 	}
 
 	void Timekeeper::report(std::ostream& ostrObj) const

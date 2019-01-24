@@ -29,7 +29,7 @@ namespace sict
 		{
 			while (!fileptr.eof() && fileptr.good()) //while eofbit(error flag for end of file) has not been met yet
 			{
-				std::getline(fileptr,bufferOne,'\n'); //extract line into bufferOne
+				std::getline(fileptr, bufferOne, '\n'); //extract line into bufferOne
 				bufferOne.clear(); //clear out the bufferOne (we're just counting lines at this point)
 				lineCount++; //increment line count by one
 			}
@@ -46,7 +46,7 @@ namespace sict
 			strArray = new std::string[lineCount];
 			int index = 0;
 			while (!fileptr.eof() && fileptr.good()) //while eofbit(error flag for end of file) has not been met yet
-			{				
+			{
 				std::getline(fileptr, strArray[index], '\n'); //reading line and storing in array of string objects
 				index++; //incrementing the value that holds the current position of string array
 			}
@@ -58,13 +58,13 @@ namespace sict
 	}
 	Text & Text::operator=(const Text & incomingObj)
 	{
-		if (this != &incomingObj)
+		if (this != &incomingObj) //check for self-assignment (you don't wanna copy over to the same object)
 		{
-			numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored;
-			delete[]strArray;
-			strArray = nullptr;
-			strArray = new std::string[incomingObj.strArray->length];
-			strArray = incomingObj.strArray;
+			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored; //shallow copy over non resource variables
+			delete[]this->strArray; //deallocate any previously allocated memory
+			this->strArray = nullptr; //good practice?
+			this->strArray = new std::string[incomingObj.strArray->length]; //allocate new memory for the size of the incomingObject's pointer(s)
+			this->strArray = incomingObj.strArray; //copy over the resource data from the source object to the freshly allocated pointer of the current object
 		}
 		return *this;
 	}

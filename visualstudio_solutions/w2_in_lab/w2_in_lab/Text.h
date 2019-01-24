@@ -1,8 +1,8 @@
 /*
-	program: Text.h
-	programmer: yathavan, parameshwaran
-	date: January 21, 2019
-	description: workshop 2 in lab portion
+program: Text.h
+programmer: yathavan, parameshwaran
+date: January 21, 2019
+description: workshop 2 in lab portion
 */
 
 #ifndef SICT_TEXT_H

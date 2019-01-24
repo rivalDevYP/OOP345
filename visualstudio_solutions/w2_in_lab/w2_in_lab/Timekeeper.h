@@ -32,9 +32,9 @@ namespace sict
 		static int objectCreationCount;
 	public:
 		Timekeeper();
-		void start() const;
-		void stop() const;
-		void recordEvent(const char* incomingStr) const;
+		void start();
+		void stop();
+		void recordEvent(const char* incomingStr);
 		void report(std::ostream& ostrObj) const;
 	};
 }

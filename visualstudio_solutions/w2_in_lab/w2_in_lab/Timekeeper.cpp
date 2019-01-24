@@ -5,6 +5,7 @@
 	description: workshop 2 in lab portion
 */
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -59,7 +60,9 @@ namespace sict
 		*/
 
 		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
-		recordObj[numOfRecords].durationTimePiece = (endTime - startTime);
+		auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+		recordObj[numOfRecords].durationTimePiece = milliseconds;	
+
 		numOfRecords++;
 	}
 
@@ -71,14 +74,8 @@ namespace sict
 		for (int index = 0; index < numOfRecords; index++)
 		{
 			ostrObj << recordObj[index].message;
-			recordObj[index].durationTimePiece.count;
+			recordObj[index].durationTimePiece.count();
 			ostrObj << recordObj[index].timeUnits << std::endl;
 		}
-
-
 	}
-
-	
-	
-
 }

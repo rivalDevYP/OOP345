@@ -35,13 +35,13 @@ namespace sict
 
 	void Timekeeper::stop() const
 	{
-		endTimePiece = std::chrono::steady_clock::now();
+		//endTimePiece = std::chrono::steady_clock::now();
 	}
 
 	void Timekeeper::recordEvent(const char* incomingStr) const
 	{
-		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
-		numOfRecords++;
+		/*std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
+		numOfRecords++;*/
 	}
 
 	void Timekeeper::report(std::ostream& ostrObj) const

@@ -13,6 +13,7 @@
 
 using namespace std;
 
+
 namespace sict
 {
 	/*Timekeeper::record::record()
@@ -28,12 +29,13 @@ namespace sict
 
 	void Timekeeper::start() const
 	{
-		
+		startTimePiece = std::chrono::steady_clock::now();
+		std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
 	}
 
 	void Timekeeper::stop() const
 	{
-
+		endTimePiece = std::chrono::steady_clock::now();
 	}
 
 	void Timekeeper::recordEvent(const char* incomingStr) const

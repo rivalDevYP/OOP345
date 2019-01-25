@@ -26,7 +26,7 @@ namespace sict
 
 	Timekeeper::~Timekeeper()
 	{
-		delete[]recordObj;
+		
 	}
 
 	void sict::Timekeeper::start()

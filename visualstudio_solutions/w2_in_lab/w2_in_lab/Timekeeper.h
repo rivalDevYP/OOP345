@@ -16,6 +16,7 @@ namespace sict
 	class Timekeeper
 	{
 		const int max = 10; 
+		int tester;
 		static int numOfRecords; 
 		std::chrono::steady_clock::time_point startTime;
 		std::chrono::steady_clock::time_point endTime;

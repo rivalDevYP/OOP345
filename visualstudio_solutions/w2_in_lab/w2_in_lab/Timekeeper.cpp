@@ -19,12 +19,16 @@ namespace sict
     Timekeeper::Timekeeper()
     {
 		numOfRecords = 0;
-		
+		record->messageString = nullptr;
+		record->unitsOfTime = nullptr;
     }
 
     Timekeeper::~Timekeeper()
     {
-		
+		delete[]record->messageString;
+		record->messageString = nullptr;
+		delete[]record->unitsOfTime;
+		record->unitsOfTime = nullptr;
     }
 
     Timekeeper::Timekeeper (Timekeeper& incomingObj)
@@ -36,14 +40,25 @@ namespace sict
     {
 		if (this != &incomingObj)
 		{
-
+			//shallow copy
+			numOfRecords = incomingObj.numOfRecords;
+			startTime = incomingObj.startTime;
+			endTime = incomingObj.endTime;
+			record->durationTime = incomingObj.record->durationTime;
+			//deallocating 
+			delete[]record->messageString;
+			delete[]record->unitsOfTime;
+			record->messageString = nullptr;
+			record->unitsOfTime = nullptr;
+			//allocating
+			record->messageString = new char[strlen(incomingObj.record->messageString) + 1];
+			record->unitsOfTime = new char[strlen(incomingObj.record->unitsOfTime) + 1];
+			//copying over
+			strcpy(record->messageString, incomingObj.record->messageString);
+			strcpy(record->unitsOfTime, incomingObj.record->unitsOfTime);
 		}
-        //check for self-assignment
-		//shallow copy
-		//deallocate
-		//reallocate
-		//copy over to new
-    }
+		return *this;			
+	}
 
     void Timekeeper::start() 
     {
@@ -59,4 +74,11 @@ namespace sict
     {
 
     }
+
+	void Timekeeper::report(std::ostream& incoming_ostream_object) const
+	{
+
+	}
 }
+
+

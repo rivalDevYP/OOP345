@@ -35,6 +35,7 @@ namespace sict
         void start();
         void stop();
         void recordEvent(const char* incomingStr);
+		void report(std::ostream& incoming_ostream_object) const;
     };
 }
 

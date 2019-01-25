@@ -28,12 +28,12 @@ namespace sict
 
     void Timekeeper::start() 
     {
-
+        startTime = chrono::steady_clock::now();
     }
 
     void Timekeeper::stop()
     {
-
+        endTime = chrono::steady_clock::now();
     }
 
     void Timekeeper::recordEvent(const char* incomingStr)

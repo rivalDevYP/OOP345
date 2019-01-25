@@ -18,12 +18,31 @@ namespace sict
 {
     Timekeeper::Timekeeper()
     {
-        
+		numOfRecords = 0;
+		
     }
 
     Timekeeper::~Timekeeper()
     {
+		
+    }
 
+    Timekeeper::Timekeeper (Timekeeper& incomingObj)
+    {
+		*this = incomingObj;
+    }
+
+    Timekeeper& Timekeeper::operator=(const Timekeeper& incomingObj)
+    {
+		if (this != &incomingObj)
+		{
+
+		}
+        //check for self-assignment
+		//shallow copy
+		//deallocate
+		//reallocate
+		//copy over to new
     }
 
     void Timekeeper::start() 

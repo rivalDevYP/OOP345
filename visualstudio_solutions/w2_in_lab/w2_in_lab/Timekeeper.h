@@ -20,7 +20,7 @@ namespace sict
         std::chrono::steady_clock::time_point startTime;
         std::chrono::steady_clock::time_point endTime;
 
-        typedef struct 
+        /* typedef */ struct 
         {
             char* messageString;
             char* unitsOfTime;
@@ -30,6 +30,8 @@ namespace sict
     public:
         Timekeeper();
         ~Timekeeper();
+        Timekeeper (Timekeeper& incomingObj);
+        Timekeeper& operator=(const Timekeeper& incomingObj);
         void start();
         void stop();
         void recordEvent(const char* incomingStr);

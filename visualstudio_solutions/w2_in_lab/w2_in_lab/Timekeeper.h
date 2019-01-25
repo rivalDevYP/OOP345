@@ -15,11 +15,11 @@ namespace sict
 {
 	class Timekeeper
 	{
-		const int max = 10; 
+		const int maxNumOfRecords = 10; 
 		static int objectCreationCount;
 		const char* message = "this is a test";
 		int tester;
-		int numOfRecords; 
+		static int numOfRecords; 
 		std::chrono::steady_clock::time_point startTime;
 		std::chrono::steady_clock::time_point endTime;
 

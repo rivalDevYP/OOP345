@@ -20,6 +20,7 @@ namespace sict
 	{
 		strArray = nullptr;
 	}
+
 	Text::Text(const char * incomingStr)
 	{
 		std::ifstream fileptr(incomingStr);
@@ -33,8 +34,6 @@ namespace sict
 				bufferOne.clear(); 
 				lineCount++; 
 			}
-			
-			
 			if (fileptr.eof()) 
 			{
 				fileptr.clear();
@@ -50,10 +49,12 @@ namespace sict
 			}
 		}
 	}
+
 	Text::Text(const Text & incomingTextObj) 
 	{
 		*this = incomingTextObj; 
 	}
+
 	Text & Text::operator=(const Text & incomingObj) 
 	{
 		if (this != &incomingObj) 
@@ -66,11 +67,13 @@ namespace sict
 		}
 		return *this;
 	}
+
 	Text::~Text()
 	{
 		delete[]strArray;
 		strArray = nullptr;
 	}
+
 	size_t Text::size() const
 	{
 		return this->strArray->length();

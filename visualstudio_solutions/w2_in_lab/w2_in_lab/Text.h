@@ -14,7 +14,7 @@ namespace sict
 {
 	class Text
 	{
-		int numOfStringsCurrentlyStored; //class keeps track of the number of strings currently stored 
+		int numOfStringsCurrentlyStored; 
 		std::string* strArray;
 	public:
 		Text();

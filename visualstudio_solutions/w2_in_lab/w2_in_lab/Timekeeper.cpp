@@ -6,10 +6,12 @@ description: workshop 2 in lab portion
 */
 
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <chrono>
+
 #include "Timekeeper.h"
 #include "Text.h"
 

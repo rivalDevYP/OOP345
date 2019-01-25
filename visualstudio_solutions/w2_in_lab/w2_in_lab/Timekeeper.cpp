@@ -13,23 +13,25 @@ description: workshop 2 in lab portion
 #include <chrono>
 
 #include "Timekeeper.h"
-#include "Text.h"
+//#include "Text.h"
 
 using namespace std;
+
 
 namespace sict
 {
 	Timekeeper::Timekeeper()
 	{
 		//objectCreationCount++;
+		numOfRecords = 0;
 	}
 
-	void sict::Timekeeper::start()
+	void Timekeeper::start()
 	{
 		startTime = std::chrono::steady_clock::now();
 	}
 
-	void sict::Timekeeper::stop()
+	void Timekeeper::stop()
 	{
 		endTime = std::chrono::steady_clock::now();
 	}

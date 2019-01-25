@@ -17,20 +17,22 @@ namespace sict
 	{
 		const int max = 10; 
 		int tester;
-		static int numOfRecords; 
+		int numOfRecords; 
 		std::chrono::steady_clock::time_point startTime;
 		std::chrono::steady_clock::time_point endTime;
+
 		struct record 
 		{
 			std::chrono::steady_clock::duration durationTimePiece; 
 			char* message; 
 			char* timeUnits; 
 		};	
+
 		record recordObj[10]; 
 		
 	public:
 		Timekeeper();
-		//~Timekeeper();
+		//~Timekeeper(); 
 		void start();
 		void stop();
 		void recordEvent(const char* incomingStr);

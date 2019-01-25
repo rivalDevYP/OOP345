@@ -17,12 +17,16 @@ description: workshop 2 in lab portion
 
 using namespace std;
 
-
 namespace sict
 {
 	Timekeeper::Timekeeper()
 	{
 		objectCreationCount++;
+	}
+
+	Timekeeper::~Timekeeper()
+	{
+		delete[]recordObj;
 	}
 
 	void sict::Timekeeper::start()

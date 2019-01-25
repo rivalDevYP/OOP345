@@ -29,6 +29,7 @@ namespace sict
 		static int objectCreationCount;
 	public:
 		Timekeeper();
+		~Timekeeper();
 		void start();
 		void stop();
 		void recordEvent(const char* incomingStr);

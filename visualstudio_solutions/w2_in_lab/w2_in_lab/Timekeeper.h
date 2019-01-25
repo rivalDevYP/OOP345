@@ -16,6 +16,8 @@ namespace sict
 	class Timekeeper
 	{
 		const int max = 10; 
+		static int objectCreationCount;
+		const char* message = "this is a test";
 		int tester;
 		int numOfRecords; 
 		std::chrono::steady_clock::time_point startTime;

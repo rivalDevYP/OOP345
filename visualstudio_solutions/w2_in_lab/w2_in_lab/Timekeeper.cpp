@@ -20,10 +20,10 @@ using namespace std;
 
 namespace sict
 {
-	Timekeeper::Timekeeper()
+	Timekeeper::Timekeeper() 
 	{
-		//objectCreationCount++;
-		numOfRecords = 0;
+		objectCreationCount++;
+		//numOfRecords = 0;
 	}
 
 	void Timekeeper::start()
@@ -36,7 +36,7 @@ namespace sict
 		endTime = std::chrono::steady_clock::now();
 	}
 
-	void Timekeeper::recordEvent(const char* incomingStr)
+	void Timekeeper::recordEvent(const char* incomingStr) //error in here
 	{
 		std::strncpy(recordObj[numOfRecords].message, incomingStr, (strlen(incomingStr) + 1));
 		auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);

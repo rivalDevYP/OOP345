@@ -31,7 +31,13 @@ namespace sict
 
     }
 
+    void Timekeeper::stop()
+    {
 
+    }
 
+    void Timekeeper::recordEvent(const char* incomingStr)
+    {
 
+    }
 }

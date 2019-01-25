@@ -5,6 +5,9 @@ date: January 21, 2019
 description: workshop 2 in lab portion
 */
 
+#ifndef SICT_TIMEKEEPER_H
+#define SICT_TIMEKEEPER_H
+
 #include <iostream>
 #include <chrono>
 
@@ -32,3 +35,5 @@ namespace sict
         void recordEvent(const char* incomingStr);
     };
 }
+
+#endif //SICT_TIMEKEEPER_H

@@ -24,11 +24,6 @@ namespace sict
 		objectCreationCount++;
 	}
 
-	Timekeeper::~Timekeeper()
-	{
-		
-	}
-
 	void sict::Timekeeper::start()
 	{
 		startTime = std::chrono::steady_clock::now();

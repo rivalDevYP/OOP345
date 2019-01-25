@@ -21,7 +21,7 @@ namespace sict
 {
 	Timekeeper::Timekeeper()
 	{
-		objectCreationCount++;
+		//objectCreationCount++;
 	}
 
 	void sict::Timekeeper::start()

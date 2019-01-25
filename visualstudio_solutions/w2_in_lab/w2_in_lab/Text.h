@@ -25,4 +25,5 @@ namespace sict
 		size_t size() const;
 	};
 }
+
 #endif //SICT_TEXT_H

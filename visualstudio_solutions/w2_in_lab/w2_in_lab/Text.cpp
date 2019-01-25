@@ -1,5 +1,5 @@
 /*
-program: Text.h
+program: Text.cpp
 programmer: yathavan, parameshwaran
 date: January 21, 2019
 description: workshop 2 in lab portion

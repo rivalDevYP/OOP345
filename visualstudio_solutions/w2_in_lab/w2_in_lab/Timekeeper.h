@@ -16,19 +16,21 @@ namespace sict
     const int maxNumOfRecords = 10;
     class Timekeeper
     {
+		static int numberOfObjectsCreated;
         int numOfRecords;
         std::chrono::steady_clock::time_point startTime;
         std::chrono::steady_clock::time_point endTime;
 
         /* typedef */ struct 
         {
-            char* messageString;
-            char* unitsOfTime;
+            const char* messageString;
+            const char* unitsOfTime;
             std::chrono::steady_clock::duration durationTime;
         } record[maxNumOfRecords];
 
     public:
         Timekeeper();
+		static void newObjectCreated();
         ~Timekeeper();
         Timekeeper (Timekeeper& incomingObj);
         Timekeeper& operator=(const Timekeeper& incomingObj);

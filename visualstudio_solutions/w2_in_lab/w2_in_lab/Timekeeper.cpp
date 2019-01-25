@@ -18,18 +18,14 @@ namespace sict
 {
     Timekeeper::Timekeeper()
     {
+		static int numberOfObjectsCreated = 0;
 		numOfRecords = 0;
 		record->messageString = nullptr;
 		record->unitsOfTime = nullptr;
-		newObjectCreated();
+		numberOfObjectsCreated++;
     }
 
-	void Timekeeper::newObjectCreated()
-	{
-		numberOfObjectsCreated++;
-	}
-
-    void Timekeeper::start() 
+	void Timekeeper::start() 
     {
         startTime = chrono::steady_clock::now();
     }
@@ -41,12 +37,25 @@ namespace sict
 
     void Timekeeper::recordEvent(const char* incomingStr)
     {
-		record->durationTime=chrono::duration_cast
+		int counter = 0;
+		record[counter].messageString = incomingStr;
+		auto returnTime = record->durationTime = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
+		record[counter].durationTime = endTime - startTime;
+		counter++;
     }
 
 	void Timekeeper::report(std::ostream& incoming_ostream_object) const
 	{
-
+		incoming_ostream_object << "Execution Times:" << std::endl;
+		for (int index = 0; index < maxNumOfRecords; index++)
+		{
+			incoming_ostream_object << record[index].messageString 
+				<< "  " 
+				<< record[index].durationTime.count() 
+				<< " " 
+				<< record[index].unitsOfTime 
+				<< std::endl;
+		}
 	}
 }
 

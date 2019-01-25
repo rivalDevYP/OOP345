@@ -9,9 +9,8 @@ description: workshop 2 in lab portion
 #include <fstream>
 #include <string>
 #include <chrono>
-#include "Text.h"
-//#include "Timekeeper.h"
 
+#include "Text.h"
 
 using namespace std;
 
@@ -19,33 +18,35 @@ namespace sict
 {
 	Text::Text()
 	{
+		numOfStringsCurrentlyStored = 0;
 		strArray = nullptr;
 	}
 
 	Text::Text(const char * incomingStr)
 	{
-		std::ifstream fileptr(incomingStr);
+		ifstream fileptr(incomingStr);
 		int lineCount = 0;
-		std::string bufferOne;
+		string bufferOne;
 		if (fileptr.is_open())
 		{
 			while (!fileptr.eof() && fileptr.good()) 
 			{
-				std::getline(fileptr, bufferOne, '\n'); 
+				getline(fileptr, bufferOne, '\n'); 
 				bufferOne.clear(); 
 				lineCount++; 
 			}
+			numOfStringsCurrentlyStored = lineCount;
 			if (fileptr.eof()) 
 			{
 				fileptr.clear();
 				fileptr.seekg(0, fileptr.beg);
 			}
 			
-			strArray = new std::string[lineCount];
+			strArray = new string[lineCount];
 			int index = 0;
 			while (!fileptr.eof() && fileptr.good()) 
 			{
-				std::getline(fileptr, strArray[index], '\n'); 
+				getline(fileptr, strArray[index], '\n'); 
 				index++; 
 			}
 		}
@@ -61,9 +62,12 @@ namespace sict
 		if (this != &incomingObj) 
 		{
 			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored; 
-			delete[]this->strArray; 
-			this->strArray = nullptr; 
-			this->strArray = new std::string[incomingObj.strArray->length()]; 
+			if (this->strArray != nullptr)
+			{
+				delete[]this->strArray;
+				this->strArray = nullptr;
+			}
+			this->strArray = new string[incomingObj.strArray->length()]; 
 			this->strArray = incomingObj.strArray; 
 		}
 		return *this;
@@ -77,6 +81,6 @@ namespace sict
 
 	size_t Text::size() const
 	{
-		return this->strArray->length();
+		return this->numOfStringsCurrentlyStored;
 	}
 }

@@ -37,7 +37,7 @@ namespace sict
 
     void Timekeeper::recordEvent(const char* incomingStr)
     {
-		int counter = 0;
+		static int counter = 0;
 		record[counter].messageString = incomingStr;
 		auto returnTime = record->durationTime = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
 		record[counter].durationTime = endTime - startTime;
@@ -49,7 +49,8 @@ namespace sict
 		incoming_ostream_object << "Execution Times:" << std::endl;
 		for (int index = 0; index < maxNumOfRecords; index++)
 		{
-			incoming_ostream_object << record[index].messageString 
+			incoming_ostream_object << "\n"
+				<< record[index].messageString 
 				<< "  " 
 				<< record[index].durationTime.count() 
 				<< " " 

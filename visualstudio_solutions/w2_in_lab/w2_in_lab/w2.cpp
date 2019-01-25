@@ -49,11 +49,16 @@ int main (int argc, char* argv[]) {
 		t.stop();
 		t.recordEvent("Copy Assignment  ");
         std::cout << "Copy Assignment   - a.size = " << a.size() << std::endl;
-
+		std::cout << "a" << std::endl;
         t.start();
+		std::cout << "b" << std::endl;
     }
+	std::cout << "c" << std::endl;
     t.stop();
+	std::cout << "d" << std::endl;
 	t.recordEvent("Destructor       ");
+	std::cout << "e" << std::endl;
 
 	t.report(std::cout);
+	std::cout << "f" << std::endl;
 }

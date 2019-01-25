@@ -54,7 +54,8 @@ namespace sict
 
 	Text::Text(const Text & incomingTextObj) 
 	{
-		*this = incomingTextObj; 
+		strArray = nullptr;
+		*this = incomingTextObj; 		
 	}
 
 	Text & Text::operator=(const Text & incomingObj) 
@@ -62,11 +63,13 @@ namespace sict
 		if (this != &incomingObj) 
 		{
 			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored; 
+
 			if (this->strArray != nullptr)
 			{
 				delete[]this->strArray;
 				this->strArray = nullptr;
 			}
+
 			this->strArray = new string[incomingObj.strArray->length()]; 
 			this->strArray = incomingObj.strArray; 
 		}
@@ -75,8 +78,14 @@ namespace sict
 
 	Text::~Text()
 	{
-		delete[]strArray;
-		strArray = nullptr;
+		cout << "destructor called" << endl;
+		static int destructorCall = 0;
+		if (strArray != nullptr && destructorCall == 0)
+		{
+			delete[]strArray;
+			strArray = nullptr;
+			destructorCall++;
+		}		
 	}
 
 	size_t Text::size() const
@@ -84,3 +93,5 @@ namespace sict
 		return this->numOfStringsCurrentlyStored;
 	}
 }
+
+

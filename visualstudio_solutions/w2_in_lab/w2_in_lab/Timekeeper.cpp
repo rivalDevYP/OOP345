@@ -41,7 +41,7 @@ namespace sict
 		const char* unitTime = "seconds";
 		record[counter].messageString = incomingStr;
 		record[counter].unitsOfTime = unitTime;
-		auto returnTime = record->durationTime = chrono::duration_cast<chrono::seconds>(endTime - startTime);
+		auto returnTime = record->durationTime = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
 		record[counter].durationTime = endTime - startTime;
 		counter++;
 		numOfRecords++;
@@ -52,9 +52,11 @@ namespace sict
 		incoming_ostream_object << "\nExecution Times:" << std::endl;
 		for (int index = 0; index < numOfRecords; index++)
 		{
+			auto tempObj = record[index].durationTime.count();
+
 			incoming_ostream_object << record[index].messageString;
 			incoming_ostream_object << " ";
-			incoming_ostream_object << record[index].durationTime.count();
+			incoming_ostream_object << (tempObj/1000);
 			incoming_ostream_object << " ";
 			incoming_ostream_object << record[index].unitsOfTime;
 			incoming_ostream_object << "\n";

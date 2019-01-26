@@ -35,7 +35,7 @@ namespace sict
 				bufferOne.clear(); 
 				lineCount++; 
 			}
-			numOfStringsCurrentlyStored = lineCount;
+			numOfStringsCurrentlyStored = (lineCount-1);
 			if (fileptr.eof()) 
 			{
 				fileptr.clear();
@@ -82,7 +82,7 @@ namespace sict
 
 	size_t Text::size() const
 	{
-		return ((this->numOfStringsCurrentlyStored)-1);
+		return (this->numOfStringsCurrentlyStored);
 	}
 }
 

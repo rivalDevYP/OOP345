@@ -77,20 +77,14 @@ namespace sict
 	}
 
 	Text::~Text()
-	{
-		cout << "destructor called" << endl;
-		static int destructorCall = 0;
-		if (strArray != nullptr && destructorCall == 0)
-		{
-			delete[]strArray;
-			strArray = nullptr;
-			destructorCall++;
-		}		
+	{	
+		delete[]this->strArray;
+		this->strArray = nullptr;
 	}
 
 	size_t Text::size() const
 	{
-		return this->numOfStringsCurrentlyStored;
+		return ((this->numOfStringsCurrentlyStored)-1);
 	}
 }
 

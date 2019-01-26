@@ -63,15 +63,13 @@ namespace sict
 		if (this != &incomingObj) 
 		{
 			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored; 
-
-			if (this->strArray != nullptr)
-			{
-				delete[]this->strArray;
-				this->strArray = nullptr;
-			}
-
+			delete[]this->strArray;
+			this->strArray = nullptr;
 			this->strArray = new string[incomingObj.strArray->length()]; 
-			this->strArray = incomingObj.strArray; 
+			for (int index = 0; index < incomingObj.strArray->length(); index++)
+			{
+				this->strArray[index] = incomingObj.strArray[index];
+			}
 		}
 		return *this;
 	}

@@ -39,7 +39,7 @@ namespace sict
     {
 		static int counter = 0;
 		record[counter].messageString = incomingStr;
-		auto returnTime = record->durationTime = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
+		auto returnTime = record->durationTime = chrono::duration_cast<chrono::seconds>(endTime - startTime);
 		record[counter].durationTime = endTime - startTime;
 		counter++;
     }

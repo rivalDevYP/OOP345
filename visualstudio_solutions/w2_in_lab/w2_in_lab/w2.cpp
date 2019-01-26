@@ -22,7 +22,7 @@ int main (int argc, char* argv[]) {
         std::cerr << argv[0] << ": too many arguments\n";
         return 2;
     }
-
+	std::cout <<"\n"<<std::endl; //my addtion, remove before final submission
 	Timekeeper t;
     {
         std::cout << std::fixed << std::setprecision(3);

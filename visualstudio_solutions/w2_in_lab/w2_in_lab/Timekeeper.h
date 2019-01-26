@@ -23,7 +23,7 @@ namespace sict
         struct 
         {
             const char* messageString;
-            const char* unitsOfTime = "seconds";
+			const char* unitsOfTime;
             std::chrono::steady_clock::duration durationTime;
         } record[maxNumOfRecords];
 

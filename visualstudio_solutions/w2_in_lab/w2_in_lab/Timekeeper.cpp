@@ -38,24 +38,26 @@ namespace sict
     void Timekeeper::recordEvent(const char* incomingStr)
     {
 		static int counter = 0;
+		const char* unitTime = "seconds";
 		record[counter].messageString = incomingStr;
+		record[counter].unitsOfTime = unitTime;
 		auto returnTime = record->durationTime = chrono::duration_cast<chrono::seconds>(endTime - startTime);
 		record[counter].durationTime = endTime - startTime;
 		counter++;
+		numOfRecords++;
     }
 
 	void Timekeeper::report(std::ostream& incoming_ostream_object) const
 	{
-		incoming_ostream_object << "Execution Times:" << std::endl;
-		for (int index = 0; index < maxNumOfRecords; index++)
+		incoming_ostream_object << "\nExecution Times:" << std::endl;
+		for (int index = 0; index < numOfRecords; index++)
 		{
-			incoming_ostream_object << "\n"
-				<< record[index].messageString 
-				<< "  " 
-				<< record[index].durationTime.count() 
-				<< " " 
-				<< record[index].unitsOfTime 
-				<< std::endl;
+			incoming_ostream_object << record[index].messageString;
+			incoming_ostream_object << " ";
+			incoming_ostream_object << record[index].durationTime.count();
+			incoming_ostream_object << " ";
+			incoming_ostream_object << record[index].unitsOfTime;
+			incoming_ostream_object << "\n";
 		}
 	}
 }

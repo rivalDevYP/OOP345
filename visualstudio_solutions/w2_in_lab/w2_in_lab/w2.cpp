@@ -9,28 +9,28 @@
 #include "Timekeeper.h"
 using namespace sict;
 
-int main (int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	std::cout << "Command Line : ";
 	for (int i = 0; i < argc; i++) {
 		std::cout << argv[i] << ' ';
 	}
 	if (argc == 1) {
-        std::cerr << argv[0] << ": missing file operand\n";
-        return 1;
+		std::cerr << argv[0] << ": missing file operand\n";
+		return 1;
 	}
 	else if (argc != 2) {
-        std::cerr << argv[0] << ": too many arguments\n";
-        return 2;
-    }
-	std::cout <<"\n"<<std::endl; //my addtion, remove before final submission
+		std::cerr << argv[0] << ": too many arguments\n";
+		return 2;
+	}
+
 	Timekeeper t;
-    {
-        std::cout << std::fixed << std::setprecision(3);
+	{
+		std::cout << std::fixed << std::setprecision(3);
 		t.start();
-        Text a;
+		Text a;
 		t.stop();
 		t.recordEvent("0-arg Constructor");
-        std::cout << "0-arg Constructor - a.size = " << a.size() << std::endl;
+		std::cout << "0-arg Constructor - a.size = " << a.size() << std::endl;
 
 		t.start();
 		Text b(argv[1]);
@@ -42,20 +42,18 @@ int main (int argc, char* argv[]) {
 		Text c = b;
 		t.stop();
 		t.recordEvent("Copy Constructor ");
-        std::cout << "Copy Constructor  - c.size = " << c.size() << std::endl;
+		std::cout << "Copy Constructor  - c.size = " << c.size() << std::endl;
 
 		t.start();
 		a = b;
 		t.stop();
 		t.recordEvent("Copy Assignment  ");
-        std::cout << "Copy Assignment   - a.size = " << a.size() << std::endl;
-		
+		std::cout << "Copy Assignment   - a.size = " << a.size() << std::endl;
+
 		t.start();
-		
-    }
+	}
 	t.stop();
-	
 	t.recordEvent("Destructor       ");
+
 	t.report(std::cout);
-	
 }

@@ -16,12 +16,14 @@ using namespace std;
 
 namespace sict
 {
+	//constructor; called when Text object created
 	Text::Text()
 	{
 		numOfStringsCurrentlyStored = 0;
 		strArray = nullptr;
 	}
 
+	//1-arg constructor; recieves name of file; reads file and stores each line in a string
 	Text::Text(const char * incomingStr)
 	{
 		ifstream fileptr(incomingStr);
@@ -52,12 +54,14 @@ namespace sict
 		}
 	}
 
+	//copy constructor
 	Text::Text(const Text & incomingTextObj) 
 	{
 		strArray = nullptr;
 		*this = incomingTextObj; 		
 	}
 
+	//copy assignment operator
 	Text & Text::operator=(const Text & incomingObj) 
 	{
 		if (this != &incomingObj) 
@@ -74,12 +78,14 @@ namespace sict
 		return *this;
 	}
 
+	//destructor; called when object reaches end of scope 
 	Text::~Text()
 	{	
 		delete[]this->strArray;
 		this->strArray = nullptr;
 	}
 
+	//returns number of records stored in current object
 	size_t Text::size() const
 	{
 		return (this->numOfStringsCurrentlyStored);

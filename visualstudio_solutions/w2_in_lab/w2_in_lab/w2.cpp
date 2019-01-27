@@ -50,6 +50,18 @@ int main(int argc, char* argv[]) {
 		t.recordEvent("Copy Assignment  ");
 		std::cout << "Copy Assignment   - a.size = " << a.size() << std::endl;
 
+		t.start(); //move constructor
+		Text d = std::move(b);
+		t.stop();
+		t.recordEvent("Move Constructor ");
+		std::cout << "Move Constructor  - d.size = " << d.size() << std::endl;
+
+		t.start(); //move assignment operator
+		a = std::move(c);
+		t.stop();
+		t.recordEvent("Move Assignment ");
+		std::cout << "Move Assignment  - a.size = " << a.size() << std::endl;
+
 		t.start();
 	}
 	t.stop();

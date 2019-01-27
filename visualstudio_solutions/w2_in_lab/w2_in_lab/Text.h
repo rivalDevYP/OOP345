@@ -20,6 +20,8 @@ namespace sict
 		Text();
 		Text(const char* incomingStr);
 		Text(const Text& incomingTextObj);
+		Text(Text&& incomingObj);
+		Text& operator=(Text&& incomingObj);
 		Text& operator=(const Text& incomingObj);
 		~Text();
 		size_t size() const;

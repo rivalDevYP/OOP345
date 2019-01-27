@@ -37,7 +37,7 @@ namespace sict
 				bufferOne.clear(); 
 				lineCount++; 
 			}
-			numOfStringsCurrentlyStored = lineCount;
+			numOfStringsCurrentlyStored = (lineCount-1);
 			if (fileptr.eof()) 
 			{
 				fileptr.clear();

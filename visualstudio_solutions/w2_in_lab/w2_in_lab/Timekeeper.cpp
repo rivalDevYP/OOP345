@@ -18,30 +18,30 @@ namespace sict
 {
 
 	//constructor; called when Timekeeper object created
-    Timekeeper::Timekeeper()
-    {
+	Timekeeper::Timekeeper()
+	{
 		static int numberOfObjectsCreated = 0;
 		numOfRecords = 0;
 		record->messageString = nullptr;
 		record->unitsOfTime = nullptr;
 		numberOfObjectsCreated++;
-    }
+	}
 
 	//starts stopwatch
 	void Timekeeper::start() 
-    {
-        startTime = chrono::steady_clock::now();
-    }
+	{
+		startTime = chrono::steady_clock::now();
+	}
 
 	//stops stopwatch
-    void Timekeeper::stop()
-    {
-        endTime = chrono::steady_clock::now();
-    }
+	void Timekeeper::stop()
+	{
+		endTime = chrono::steady_clock::now();
+	}
 
 	//sets values of execution times and number of records created
-    void Timekeeper::recordEvent(const char* incomingStr)
-    {
+	void Timekeeper::recordEvent(const char* incomingStr)
+	{
 		static int counter = 0;
 		const char* unitTime = "seconds";
 		record[counter].messageString = incomingStr;
@@ -50,7 +50,7 @@ namespace sict
 		record[counter].durationTime = ((endTime - startTime)/1000);
 		counter++;
 		numOfRecords++;
-    }
+	}
 
 	//prints execution times
 	void Timekeeper::report(std::ostream& incoming_ostream_object) const

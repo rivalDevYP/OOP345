@@ -37,13 +37,13 @@ namespace sict
 				bufferOne.clear(); 
 				lineCount++; 
 			}
-			numOfStringsCurrentlyStored = (lineCount-1);
+			numOfStringsCurrentlyStored = lineCount;
 			if (fileptr.eof()) 
 			{
 				fileptr.clear();
 				fileptr.seekg(0, fileptr.beg);
 			}
-			
+
 			strArray = new string[lineCount];
 			int index = 0;
 			while (!fileptr.eof() && fileptr.good()) 
@@ -70,7 +70,7 @@ namespace sict
 			delete[]this->strArray;
 			this->strArray = nullptr;
 			this->strArray = new string[incomingObj.strArray->length()]; 
-			for (int index = 0; index < incomingObj.strArray->length(); index++)
+			for (long unsigned int index = 0; index < incomingObj.strArray->length(); index++)
 			{
 				this->strArray[index] = incomingObj.strArray[index];
 			}

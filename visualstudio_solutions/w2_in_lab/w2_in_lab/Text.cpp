@@ -61,36 +61,6 @@ namespace sict
 		*this = incomingTextObj; 		
 	}
 
-	//move constructor
-	Text::Text(Text && incomingObj)
-	{
-		this->strArray = nullptr;
-		*this = move(incomingObj);
-	}
-
-	//move assignment operator
-	Text & Text::operator=(Text && incomingObj)
-	{
-		if (this != &incomingObj)
-		{
-			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored;
-			incomingObj.numOfStringsCurrentlyStored = 0;
-			if (this->strArray != nullptr)
-			{
-				delete[]this->strArray;
-				strArray = nullptr;
-			}
-			this->strArray = new string[incomingObj.strArray->length()];
-			for (long unsigned int index = 0; index < incomingObj.strArray->length(); index++)
-			{
-				this->strArray[index] = incomingObj.strArray[index];
-			}
-			delete[]incomingObj.strArray;
-			incomingObj.strArray = nullptr;
-		}
-		return *this;
-	}
-
 	//copy assignment operator
 	Text & Text::operator=(const Text & incomingObj) 
 	{
@@ -104,6 +74,30 @@ namespace sict
 			{
 				this->strArray[index] = incomingObj.strArray[index];
 			}
+		}
+		return *this;
+	}
+
+	//move constructor
+	Text::Text(Text && incomingObj)
+	{
+		this->strArray = nullptr;
+		*this = move(incomingObj);
+	}
+
+	//move assignment operator
+	Text & Text::operator=(Text && incomingObj)
+	{
+		if (this != &incomingObj)
+		{
+			this->numOfStringsCurrentlyStored = incomingObj.numOfStringsCurrentlyStored;
+			if (this->strArray != nullptr)
+			{
+				delete[]this->strArray;
+				strArray = nullptr;
+			}
+			this->strArray = incomingObj.strArray;
+			incomingObj.strArray = nullptr;
 		}
 		return *this;
 	}

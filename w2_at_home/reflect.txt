@@ -1,14 +1,38 @@
-OOP345 Workshop 2 Reflection
+#OOP345 
 
-What I have Learned
-*******************
-- 
+Workshop 2 Reflection
 
-Summary of Concepts
-*******************
-- 
+In this workshop I have learned
+	
+	- anonymous structs
+		- a struct is like a class, but it is public by default
+		- 
+	- unions
+	- std::chrono
+	- copy constructors
+	- copy assignment operators
+	- move constructors
+	- move assignment operators
+	- size_t
+	- addresses and pointers
+	
+				
+				
+Basic questions required by guidelines : 
 
-Quiz Corrections
-****************
-- 
+	- the reason for the difference between the copy and move operations
+	
+		- 
+		
+	- the dynamic allocation of addresses to objects instead of objects themselves
+	
+		- 
+		
+	- the changes you made in upgrading your w2 and Text modules
+	
+		- 
+
+Quiz Reflection : 
+
+
 

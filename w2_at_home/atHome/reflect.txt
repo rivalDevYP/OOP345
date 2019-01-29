@@ -1,0 +1,79 @@
+#OOP345 
+
+Workshop 2 Reflection
+
+In this workshop I have learned
+	
+	- anonymous structs
+		- a struct is like a class, but it is public by default
+		- a struct can be declared/defined anonymously, meaning without a name
+		- an anonymous struct has no name or tag
+		- it is not considered as an object
+		- how to define an anonymous struct:
+							struct 
+							{
+								const char* messageString;
+								const char* unitsOfTime;
+								std::chrono::steady_clock::duration durationTime;
+							} record[maxNumOfRecords];
+
+	- unions
+		- a user-defined custom type
+		- like a struct, it can be used to set the behaviors for an object
+		- however, unlike a struct, it cannot use more than one data member at the same time
+		- an object of type union can only use one data member at a time
+		- a union only allocates enough memory for the largest data member, because at any time, only one member will be used
+		- how to define a union:		
+						union Book
+						{
+					                int bookId;
+					                char bookName[50];
+						};
+						
+						Book bookOne; //can only use bookId OR bookName at a time
+
+	- std::chrono
+		- a member of the std namespace
+		- used to manage time
+		- steady_clock
+			- used like a stop watch
+			- you create a time_point object, and you can manage time with it
+			- you can also calculate the duration between those objects
+		- how to use it
+			- create an std::chrono::steady_clock::time_point object
+			- set it to a the current snapshot of time by calling std::chrono::steady_clock::now();
+				- now() is a member function of steady_clock that returns the current time in timepoints
+			- make another time_point object
+			- call now() on that as well
+			- now make a duration object (std::chrono::steady_clock::duration)
+			- calculate the duration between timepoints --> durationObject = (endTimeObject - startTimeObject)
+			- now print it by calling count(); member function on durationObject
+	
+	- copy constructors
+		- 
+	- copy assignment operators
+	- move constructors
+	- move assignment operators
+	- size_t
+	- addresses and pointers
+	
+				
+				
+Basic questions required by guidelines : 
+
+	- the reason for the difference between the copy and move operations
+	
+		- 
+		
+	- the dynamic allocation of addresses to objects instead of objects themselves
+	
+		- 
+		
+	- the changes you made in upgrading your w2 and Text modules
+	
+		- 
+
+Quiz Reflection : 
+
+
+

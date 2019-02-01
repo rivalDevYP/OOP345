@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="gutenberg_shakespeare" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="reflect.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -38,5 +35,10 @@
     <ClInclude Include="Timekeeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gutenberg_shakespeare">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

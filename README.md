@@ -12,8 +12,6 @@
 </br></br>
 <p1> Regards, </p1></br><p1>Yathavan (rivalDevYP)</p1>
 </br></br></br>
-<p5> (and please, no pull requests, i don't want your code nor do i need it. i know it is hard to pass up an opportunity to contribute to this beautiful repo, but sorry, your code is not good enough) </p5> 
-</br></br>
 <p5>also I do not take any responsibility nor liability nor any shit from you if you decide to moronically use the "sudo rm -rf /*" command above to copy/clone this code; you are an idiot and you deserve to get your rootdir deleted</p5>
 
 

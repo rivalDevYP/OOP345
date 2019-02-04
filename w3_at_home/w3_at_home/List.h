@@ -39,9 +39,20 @@ namespace sict
 			{
 				arrayOne[numOfElements] = t;
 				numOfElements++;
-			}			
+			}
 		}
 
+	};
+
+	template<typename V, typename L, typename... List>
+	class LVList : public List...
+	{
+	public:
+		V accumulate(const L& label) const
+		{
+
+
+		}
 	};
 }
 

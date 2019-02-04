@@ -34,7 +34,7 @@ namespace sict
 		}
 
 		//display function: prints object to output stream
-		void display(std::ostream& os) const
+		virtual void display(std::ostream& os) const
 		{
 			os << this->myLabel << " : " << this->myValue << std::endl;
 		}
@@ -48,7 +48,34 @@ namespace sict
 		pair.display(os);
 		return os;
 	}	
+	
+	//SummableLVPair class deriving from LVPair class
+	template<typename L, typename V>
+	class SummableLVPair : LVPair<L, V>
+	{
+		static V initialValue;
+		static size_t minWidth;
+	public:
 
+		SummableLVPair()
+		{
+
+		}
+		SummableLVPair(const L& label, const V& v)
+		{
+
+		}
+		const V& getInitialValue()
+		{
+
+		}
+		
+		void display(std::ostream& os) const
+		{
+
+		}
+
+	};
 }
 
 #endif //SICT_LVPAIR_H

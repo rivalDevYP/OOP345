@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	// each LVPair consists of a label of type std::string and a value of type std::string
 	// the maximum number of elements in the list is 50
 	//
-	LVList<std::string,int 50>	 references;
+	LVList<std::string,int 50> references;
 
 	std::ifstream index(argv[1]);
 	if (!index) {

@@ -49,9 +49,9 @@ namespace sict
 		return os;
 	}	
 	
-	//SummableLVPair class deriving from LVPair class
+	//SummableLVPair class derives from LVPair class
 	template<typename L, typename V>
-	class SummableLVPair : LVPair<L, V>
+	class SummableLVPair : public LVPair<L, V>
 	{
 		static V initialValue;
 		static size_t minWidth;
@@ -74,6 +74,23 @@ namespace sict
 		{
 
 		}
+
+		//templated declaration that initializes the field width class variable to 0
+
+		//template specialization that initializes the starting value for an LVPair<std::string, int> type to 0.
+		template<>
+		class LVPair<std::string, int>
+		{
+
+		};
+
+		//template specialization that initializes the starting value for an LVPair<std::string, std::string > type to an empty string
+		template<>
+		class LVPair<std::string, std::string>
+		{
+			myLabel.clear();
+			myValue.clear();
+		};
 
 	};
 }

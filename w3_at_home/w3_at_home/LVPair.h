@@ -87,8 +87,10 @@ namespace sict
 		//template specialization that initializes the starting value for an LVPair<std::string, std::string > type to an empty string
 		
 		/* professor provided */
+
 		template<> //template specialization 
 		std::string SummableLVPair<std::string, std::string>::initial = std::string(""); //returnType className<templateParams>::noClue = std::string("");
+
 		/* professor provided */
 
 	};

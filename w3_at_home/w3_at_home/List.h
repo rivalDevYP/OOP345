@@ -47,6 +47,12 @@ namespace sict
 
 
 
+	/*
+	T -> the type of any element in the array
+	L -> the type of the specified label 
+	V -> the type of the summation value
+	N -> the maximum number of elements in the array 
+	*/
 
 	template<typename T, typename L, typename V, int N>
 	class LVList : public List<T, int N>
@@ -58,6 +64,19 @@ namespace sict
 			//returns sum of values of all elements in current LVList object that have lavel of specified label in locally created value object
 			//initialize accumulator object to initial value for objects of label-value pair (T)
 			//accumulate values by calling append query on each element in list stored in base class
+			/*Check label of current object against the incoming label object
+			Initialize V to initial value of T(check hints)
+			Call += operator to accumulate values on each element in list stored in base class FROM the locally created V object
+			Return said V object*/
+			if (this<L> == label)
+			{
+				V VOBJECT;
+				T TOBJECT;
+				VOBJECT = TOBJECT;
+
+
+			}
+			
 
 		}
 	};

@@ -39,9 +39,27 @@ namespace sict
 			{
 				arrayOne[numOfElements] = t;
 				numOfElements++;
-			}			
+			}
+		
 		}
 
+	};
+
+
+
+
+	template<typename T, typename L, typename V, int N>
+	class LVList : public List<T, int N>
+	{
+	public:
+		V accumulate(const L& label) const
+		{
+			//query recieves reference to L object
+			//returns sum of values of all elements in current LVList object that have lavel of specified label in locally created value object
+			//initialize accumulator object to initial value for objects of label-value pair (T)
+			//accumulate values by calling append query on each element in list stored in base class
+
+		}
 	};
 }
 

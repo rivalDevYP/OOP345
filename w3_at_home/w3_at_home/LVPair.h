@@ -84,11 +84,15 @@ namespace sict
 		{
 			//returns the initial value for the summation of a set of LVPair objects of label type L
 			return initialValue<L>;
+
 		}
 
 		V sum(const L& label, const V& sum) const
 		{
-			return (this->sum + sum);
+			if (myLabel == label)
+			{
+				return (this->sum + sum);
+			}			
 		}
 
 		void display(std::ostream& os) const
@@ -108,17 +112,16 @@ namespace sict
 		}
 
 
+		V SummableLVPair<L, V>::initialValue = 0;
+
+		template<>
+		int SummableLVPair<std::string, int>::initialValue = 0;
+		
 		template<>
 		std::string SummableLVPair<std::string, std::string>::initialValue = std::string("");
 
 		template<>
-		int SummableLVPair<std::string, int>::initialValue = 0;
-
-		
-
-		V SummableLVPair<L, V>::initialValue = 0;
-
-
+		V sum(const std::string label, const std::string sum) const { V temp; temp << label << " " << sum; return temp; }
 
 	};
 

@@ -34,7 +34,7 @@ namespace sict
 		}
 
 		//display function: prints object to output stream
-		void display(std::ostream& os) const
+		virtual void display(std::ostream& os) const
 		{
 			os << this->myLabel << " : " << this->myValue << std::endl;
 		}
@@ -48,6 +48,81 @@ namespace sict
 		pair.display(os);
 		return os;
 	}	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	template<typename L, typename V>
+	class SummableLVPair :public LVPair<L, V>
+	{
+		static V initialValue;
+		static size_t minWidth;
+
+	public:
+
+		SummableLVPair()
+		{
+			//setClear();
+		}
+
+		SummableLVPair(const L& label, const V& v)
+		{
+			//call base class constructor, and pass all recieved values to it
+			LVPair(label, v);
+			if (minWidth < label.size())
+			{
+				minWidth++;
+			}
+		}
+
+		static const V& getInitialValue()
+		{
+			//returns the initial value for the summation of a set of LVPair objects of label type L
+			return initialValue<L>;
+		}
+
+		V sum(const L& label, const V& sum) const
+		{
+			return (this->sum + sum);
+		}
+
+		void display(std::ostream& os) const
+		{
+			os << std::setw(minWidth);
+			display(os);
+		}
+
+		static V getInitVal()
+		{
+			return initialValue;
+		}
+
+		static size_t getMinWidthVal()
+		{
+			return minWidth;
+		}
+
+
+		template<>
+		std::string SummableLVPair<std::string, std::string>::initialValue = std::string("");
+
+		template<>
+		int SummableLVPair<std::string, int>::initialValue = 0;
+
+		
+
+		V SummableLVPair<L, V>::initialValue = 0;
+
+
+
+	};
+
+	
 
 }
 

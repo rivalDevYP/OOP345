@@ -67,12 +67,11 @@ namespace sict
 
 		SummableLVPair()
 		{
-			//setClear();
+			
 		}
 
 		SummableLVPair(const L& label, const V& v)
 		{
-			//call base class constructor, and pass all recieved values to it
 			LVPair(label, v);
 			if (minWidth < label.size())
 			{
@@ -82,9 +81,7 @@ namespace sict
 
 		static const V& getInitialValue()
 		{
-			//returns the initial value for the summation of a set of LVPair objects of label type L
-			return initialValue<L>;
-
+			
 		}
 
 		V sum(const L& label, const V& sum) const

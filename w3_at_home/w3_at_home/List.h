@@ -10,6 +10,8 @@
 #ifndef SICT_LIST_H
 #define SICT_LIST_H
 
+#include "LVPair.h"
+
 namespace sict
 {
 	template <typename T, int N>
@@ -48,20 +50,14 @@ namespace sict
 
 
 	template<typename T, typename L, typename V, int N>
-	class LVList : public List<T, int N>
+	class LVList : public List<T, N>
 	{
+		SummableLVPair<L, V> obj1;
 	public:
 		V accumulate(const L& label) const
 		{
-			if (this<L> == label)
-			{
-				V VOBJECT;
-				T TOBJECT;
-				VOBJECT = TOBJECT;
-
-
-			}
-
+			
+			
 
 		}
 	};

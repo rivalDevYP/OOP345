@@ -10,6 +10,8 @@
 #ifndef SICT_LVPAIR_H
 #define SICT_LVPAIR_H
 
+#include "List.h"
+
 namespace sict
 {
 	template<typename L, typename V>
@@ -49,14 +51,6 @@ namespace sict
 		return os;
 	}
 
-
-
-
-
-
-
-
-
 	template<typename L, typename V>
 	class SummableLVPair :public LVPair<L, V>
 	{
@@ -70,46 +64,57 @@ namespace sict
 			
 		}
 
+		//2 arg constructor
 		SummableLVPair(const L& label, const V& v)
 		{
 			LVPair(label, v);
 			if (minWidth < label.size())
 			{
-				minWidth++;
+				int excess;
+				excess = label.size() - minWidth;
+				minWidth = minWidth + excess;
 			}
 		}
 
+		//returns locally stored initial value
 		static const V& getInitialValue()
 		{
-			
+			return initialValue;
 		}
 
+		//checks local label against incoming label, and if match, sums up the values
 		V sum(const L& label, const V& sum) const
 		{
 			if (myLabel == label)
 			{
-				return (this->sum + sum);
+				return myValue + sum;
 			}
 		}
 
+		//sets minimum width for pretty formatting when displaying the values
 		void display(std::ostream& os) const
 		{
 			os << std::setw(minWidth);
 			display(os);
 		}
 
+		//class function: returns initial value
 		static V getInitVal()
 		{
 			return initialValue;
 		}
 
+		//class function: returns minimum width
 		static size_t getMinWidthVal()
 		{
 			return minWidth;
 		}
 
 
+		//template declaration
 		V SummableLVPair<L, V>::initialValue = 0;
+
+		//template specializations
 
 		template<>
 		int SummableLVPair<std::string, int>::initialValue = 0;

@@ -8,5 +8,75 @@
 
 namespace sict
 {
+	//default constructor, sets object to safe empty state
+	Notifications::Notifications()
+	{
 
+	}
+
+	//1 arg constructor, recieves maximum number of elements in aggregations
+	Notifications::Notifications(const int maxNum)
+	{
+
+	}
+
+	//destructor
+	Notifications::~Notifications()
+	{
+
+	}
+
+	//copy constructor
+	Notifications::Notifications(const Notifications & incomingObj)
+	{
+
+	}
+
+	//copy assignment operator
+	Notifications & Notifications::operator=(const Notifications & incomingObj)
+	{
+		// TODO: insert return statement here
+	}
+
+	//move constructor
+	Notifications::Notifications(const Notifications && incomingObj)
+	{
+
+	}
+
+	//move assignment operator
+	Notifications && Notifications::operator=(const Notifications && incomingObj)
+	{
+		// TODO: insert return statement here
+	}
+
+	//plus_equal operator overload
+	Notifications & Notifications::operator+=(const Message & msg)
+	{
+		// TODO: insert return statement here
+	}
+
+	//minus_equal operator overload
+	Notifications & Notifications::operator-=(const Message & msg)
+	{
+		// TODO: insert return statement here
+	}
+
+	//display query, prints object to output
+	void Notifications::display(const std::ostream & os) const
+	{
+
+	}
+
+	//size query, returns number of Message objects pointed to by current object
+	size_t Notifications::size() const
+	{
+		return size_t();
+	}
+
+	//output stream overload, calls display query on incoming object passing reference to output stream
+	std::ostream & operator<<(std::ostream & os, Notifications & incomingObj)
+	{
+		// TODO: insert return statement here
+	}
 }

@@ -1,8 +1,13 @@
+// program: Message.h
+// programmer: Yathavan, Parameshwaran
+// professor: Chris, Szalwinski
+// project: workshop 4
+
 #ifndef SICT_MESSAGE_H
 #define SICT_MESSAGE_H
 
 #include <iostream>
-#include <fstream>
+#include <string>
 
 namespace sict
 {
@@ -11,6 +16,7 @@ namespace sict
 		std::string tweet;
 		std::string userName;
 		std::string replyName;
+		bool isReply(std::string) const;
 
 	public:
 		Message();
@@ -18,7 +24,7 @@ namespace sict
 		bool empty() const;
 		void display(std::ostream& os) const;
 	};
-	std::ostream operator<<(const std::ostream& os, const Message& msgObj);
+	
 }
 
 #endif //SICT_MESSAGE_H

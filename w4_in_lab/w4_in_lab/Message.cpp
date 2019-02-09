@@ -35,35 +35,39 @@ namespace sict
 		{
 			userString = incomingStr.substr(0, firstSpace);
 
+			this->userName = userString;
+
 			if (incomingStr.find('@') != std::string::npos) 
 			{
 				replyString = incomingStr.substr((at + 1), ((secondSpace - firstSpace) - 2));
 				tweetString = incomingStr.substr(secondSpace + 1);
+
+				this->replyName = replyString;
+				this->tweet = tweetString;
 			}
+
 			else
 			{
 				tweetString = incomingStr.substr(firstSpace + 1);
-			}
 
-			this->userName = userString;
-			this->replyName = replyString;
-			this->tweet = tweetString;
+				this->tweet = tweetString;
+				this->replyName.clear();
+			}
 		}		
 	}
 
 	//empty query; returns true is the object is in a safe empty state
 	bool Message::empty() const
 	{
-
 		if (tweet[0] == '\0' && (userName[0] == '\0' || replyName[0]=='\0'))
 		{
 			return true;
 		}
+
 		else
 		{
 			return false;
 		}
-
 	}
 
 	//display query; prints object to output stream
@@ -77,11 +81,11 @@ namespace sict
 			{
 				os << "User  : " << this->userName << "\n" << " Reply : " << this->replyName << "\n" << " Tweet : " << this->tweet << std::endl;
 			}
+
 			else
 			{
 				os << "User  : " << this->userName << "\n" << " Tweet : " << this->tweet << std::endl;
 			}			
-
 		}
 	}
 }

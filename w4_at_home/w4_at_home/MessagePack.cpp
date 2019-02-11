@@ -4,6 +4,8 @@
 // project: workshop 4
 
 #include <iostream>
+#include <string>
+
 #include "MessagePack.h"
 
 namespace sict
@@ -11,12 +13,22 @@ namespace sict
 	//default constructor, sets object to safe empty state
 	MessagePack::MessagePack()
 	{
-
+		mesobg = nullptr;
 	}
 
 	//2 arg constructor, recieves reference to array of Message objects and a value defining size of array
 	MessagePack::MessagePack(Message & incomingObj, size_t sizeOfArray)
 	{
+		if (sizeOfArray > 0)
+		{
+			mesobg = new Message*[sizeOfArray];
+			for (size_t index = 0; index < sizeOfArray; index++)
+			{
+				*mesobg[index] = incomingObj[index];
+			}
+		}
+		
+
 
 	}
 

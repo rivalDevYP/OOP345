@@ -12,10 +12,13 @@ namespace sict
 {
 	class Notifications
 	{
+		const Message** MesObj;
+		int maxNum;
+		int currentNum;
 
 	public:
 		Notifications();
-		Notifications(const int maxNum);
+		Notifications(const int maxNumber);
 		~Notifications();
 		Notifications(const Notifications& incomingObj);
 		Notifications& operator=(const Notifications& incomingObj);

@@ -9,15 +9,19 @@
 namespace sict
 {
 	//default constructor, sets object to safe empty state
-	Notifications::Notifications()
+	Notifications::Notifications() : MesObj(nullptr)
 	{
-
+		maxNum = 0;
+		currentNum = 0;
 	}
 
 	//1 arg constructor, recieves maximum number of elements in aggregations
-	Notifications::Notifications(const int maxNum)
+	Notifications::Notifications(const int maxNumber) : (maxNum > 0 ? MesObj = new const Message*[maxNumber] : nullptr)
 	{
+		if (maxNumber >= 1)
+		{
 
+		}
 	}
 
 	//destructor

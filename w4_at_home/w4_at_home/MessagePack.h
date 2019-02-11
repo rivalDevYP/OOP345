@@ -14,8 +14,8 @@ namespace sict
 {
 	class MessagePack
 	{
-		const Message* msg;
-		const Message** msg;
+		Message **mesobg;
+
 	public:
 		MessagePack();
 		MessagePack(Message& incomingObj, size_t sizeOfArray);

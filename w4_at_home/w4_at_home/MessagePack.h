@@ -14,7 +14,8 @@ namespace sict
 {
 	class MessagePack
 	{
-		Message **mesobg;
+		static size_t numOfObjects;
+		Message **mesobg; //points to pointers 
 
 	public:
 		MessagePack();
@@ -26,8 +27,9 @@ namespace sict
 		MessagePack& operator=(MessagePack&& incomingObj);
 		void display(std::ostream& os) const;
 		size_t size() const;
+		static void incrementObjectNum();
 	};
-	std::ostream operator<<(std::ostream& os, const MessagePack& incomingObj);
+	std::ostream& operator<<(std::ostream& os, const MessagePack& incomingObj);
 }
 
 #endif //SICT_MESSAGEPACK_H

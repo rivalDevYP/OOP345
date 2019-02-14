@@ -18,7 +18,7 @@ namespace sict
 		~Notifications();
 		Notifications(const Notifications& incomingObj);
 		Notifications& operator=(const Notifications& incomingObj);
-		Notifications(const Notifications&& incomingObj);
+		Notifications(Notifications&& incomingObj);
 		Notifications& operator=(Notifications&& incomingObj);
 		Notifications& operator+=(const Message& msg);
 		Notifications& operator-=(const Message& msg);

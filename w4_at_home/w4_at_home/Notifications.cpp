@@ -13,7 +13,7 @@ namespace sict
 		numAddr = 0;
 	}
 
-	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? new const Message*[maxElements] : nullptr)
+	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? new const Message*[maxElements] {nullptr} : nullptr)
 	{
 		if (maxElements > 0)
 		{
@@ -26,15 +26,21 @@ namespace sict
 	{
 		for (int index = 0; index < numAddr; index++)
 		{
-			delete[]mesObj[index];
-			mesObj[index] = nullptr;
+			if (mesObj[index] != nullptr)
+			{
+				mesObj[index] = nullptr;
+			}			
 		}
-		delete[]mesObj;
-		mesObj = nullptr;
+		if (mesObj != nullptr)
+		{
+			delete[]mesObj;
+			mesObj = nullptr;
+		}		
 	}
 
 	Notifications::Notifications(const Notifications & incomingObj)
 	{
+		this->mesObj = nullptr;
 		*this = incomingObj;
 	}
 
@@ -57,14 +63,18 @@ namespace sict
 			mesObj = new const Message*[incomingObj.maxAddr];
 			for (int index = 0; index < incomingObj.numAddr; index++)
 			{
-				this->mesObj[index] = incomingObj.mesObj[index];
+				if (incomingObj.mesObj[index] != nullptr)
+				{
+					this->mesObj[index] = incomingObj.mesObj[index];
+				}				
 			}
 		}
 		return *this;
 	}
 
-	Notifications::Notifications(const Notifications && incomingObj)
+	Notifications::Notifications(Notifications && incomingObj)
 	{
+		this->mesObj = nullptr;
 		*this = std::move(incomingObj);
 	}
 
@@ -80,16 +90,22 @@ namespace sict
 			{
 				for (int index = 0; index < this->numAddr; index++)
 				{
-					delete[]this->mesObj[index];
 					this->mesObj[index] = nullptr;
 				}
-				delete[]this->mesObj;
 				this->mesObj = nullptr;
 			}
-			for (int index = 0; index < this->numAddr; index++)
+			/*for (int index = 0; index < this->numAddr; index++)
 			{
-				this->mesObj[index] = incomingObj.mesObj[index];
-			}			
+				if (incomingObj.mesObj[index] != nullptr)
+				{
+					this->mesObj[index] = incomingObj.mesObj[index];
+				}				
+			}*/	
+			if (incomingObj.mesObj != nullptr)
+			{
+				this->mesObj = incomingObj.mesObj;
+			}
+			incomingObj.mesObj = nullptr;
 		}
 		return *this;
 	}
@@ -100,9 +116,12 @@ namespace sict
 		{
 			for (int index = 0; index < maxAddr; ++index)
 			{
-				if (mesObj[index]->empty())
+				if (mesObj[index]==nullptr)
 				{
 					this->mesObj[index] = &msg;
+					this->numAddr++;
+					break;
+					//TODO: if message is empty, don't increment
 				}
 			}
 			
@@ -112,15 +131,18 @@ namespace sict
 
 	Notifications & Notifications::operator-=(const Message & msg)
 	{
-		for (int index = 0; index < this->numAddr; index++)
+		int temp = this->numAddr;
+
+		for (int index = 0; index < temp; index++)
 		{
-			if (this->mesObj[index] = &msg)
+			if (this->mesObj[index] == &msg)
 			{
 				this->mesObj[index] = nullptr;
-				for (int i = 0; i < (maxAddr - numAddr); i++)
+				numAddr--;
+				/*for (int i = 0; i < (maxAddr - numAddr); i++)
 				{
 					this->mesObj[index+i] = this->mesObj[index - 1];
-				}
+				}*/
 			}
 		}
 		return *this;
@@ -128,9 +150,13 @@ namespace sict
 
 	void Notifications::display(std::ostream & os) const
 	{
-		for (int index = 0; index < numAddr; index++)
+		for (int index = 0; index < this->maxAddr; index++)
 		{
-			this->mesObj[index]->display(os);
+			if (this->mesObj[index] != nullptr)
+			{
+				this->mesObj[index]->display(os);
+			}
+			
 		}		
 	}
 

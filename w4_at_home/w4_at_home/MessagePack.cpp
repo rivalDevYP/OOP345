@@ -1,5 +1,6 @@
-#include <iostream>
+#define _CRT_SECURE_NO_WARNINGS
 
+#include <iostream>
 #include "MessagePack.h"
 
 namespace sict
@@ -10,16 +11,16 @@ namespace sict
 		numObj = 0;
 	}
 
-	MessagePack::MessagePack(Message* incomingArr, size_t numOfElements)
+	MessagePack::MessagePack(Message** incomingArr, size_t numOfElements)
 	{
 		if (numOfElements > 0)
 		{
 			objectRef = new Message[numOfElements];
 			for (int index = 0; index < numOfElements; index++)
 			{
-				if (!incomingArr[index].empty())
+				if (!incomingArr[index]->empty())
 				{
-					objectRef[index] = incomingArr[index];
+					objectRef[index] = *incomingArr[index];
 					numObj++;
 				}
 			}

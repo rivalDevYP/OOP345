@@ -2,6 +2,7 @@
 #define SICT_NOTIFICATIONS_H
 
 #include <iostream>
+
 #include "Message.h"
 
 namespace sict
@@ -13,7 +14,7 @@ namespace sict
 		int numAddr; //number of addresses currently stored in the aggregation
 	public:
 		Notifications();
-		Notifications(size_t maxElements) : mesObj() {};
+		Notifications(size_t maxElements) : (maxElements > 0 ? mesObj = new const Message*[maxElements] : nullptr) {};
 		~Notifications();
 		Notifications(const Notifications& incomingObj);
 		Notifications& operator=(const Notifications& incomingObj);

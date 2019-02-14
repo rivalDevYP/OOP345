@@ -1,6 +1,7 @@
-#ifndef SICT_NOTIFICATIONS_H
-#define SICT_NOTIFICATIONS_H
+#ifndef SICT_MESSAGEPACK_H
+#define SICT_MESSAGEPACK_H
 
+#include <iostream>
 #include "Message.h"
 
 namespace sict
@@ -11,7 +12,7 @@ namespace sict
 		size_t numObj;
 	public:
 		MessagePack();
-		MessagePack(Message* incomingArr, size_t numOfElements);
+		MessagePack(Message** incomingArr, size_t numOfElements);
 		~MessagePack();
 		MessagePack(const MessagePack& incomingObj);
 		MessagePack& operator=(const MessagePack& incomingObj);
@@ -23,4 +24,4 @@ namespace sict
 	std::ostream& operator<<(std::ostream& os, MessagePack& msgPackObj);
 }
 
-#endif //SICT_NOTIFICATIONS_H
+#endif //SICT_MESSAGEPACK_H

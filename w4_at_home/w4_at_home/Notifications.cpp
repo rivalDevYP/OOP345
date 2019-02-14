@@ -1,5 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include "Notifications.h"
+
 
 namespace sict
 {
@@ -10,7 +13,7 @@ namespace sict
 		numAddr = 0;
 	}
 
-	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? mesObj = new const Message*[maxElements] : nullptr)
+	Notifications::Notifications(size_t maxElements) : (maxElements > 0 ? mesObj = new const Message*[maxElements] : nullptr)
 	{
 		if (maxElements > 0)
 		{
@@ -92,22 +95,40 @@ namespace sict
 
 	Notifications & Notifications::operator+=(const Message & msg)
 	{
-		// TODO: insert return statement here
+		if (this->numAddr < this->maxAddr)
+		{
+			this->mesObj[numAddr + 1] = &msg;
+		}
+		return *this;
 	}
 
 	Notifications & Notifications::operator-=(const Message & msg)
 	{
-		// TODO: insert return statement here
+		for (int index = 0; index < this->numAddr; index++)
+		{
+			if (this->mesObj[index] = &msg)
+			{
+				this->mesObj[index] = nullptr;
+				for (int i = 0; i < (maxAddr - numAddr); i++)
+				{
+					this->mesObj[index+i] = this->mesObj[index - 1];
+				}
+			}
+		}
+		return *this;
 	}
 
 	void Notifications::display(std::ostream & os) const
 	{
-
+		for (int index = 0; index < numAddr; index++)
+		{
+			this->mesObj[index]->display(os);
+		}		
 	}
 
 	size_t Notifications::size() const
 	{
-		return size_t();
+		return numAddr;
 	}
 
 	std::ostream & operator<<(std::ostream & os, Notifications & incomingObj)

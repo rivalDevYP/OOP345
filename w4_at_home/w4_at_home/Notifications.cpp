@@ -13,11 +13,12 @@ namespace sict
 		numAddr = 0;
 	}
 
-	Notifications::Notifications(size_t maxElements) : (maxElements > 0 ? mesObj = new const Message*[maxElements] : nullptr)
+	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? new const Message*[maxElements] : nullptr)
 	{
 		if (maxElements > 0)
 		{
 			maxAddr = maxElements;
+			numAddr = 0;
 		}
 	}
 
@@ -88,16 +89,23 @@ namespace sict
 			for (int index = 0; index < this->numAddr; index++)
 			{
 				this->mesObj[index] = incomingObj.mesObj[index];
-			}
-			
+			}			
 		}
+		return *this;
 	}
 
 	Notifications & Notifications::operator+=(const Message & msg)
 	{
 		if (this->numAddr < this->maxAddr)
 		{
-			this->mesObj[numAddr + 1] = &msg;
+			for (int index = 0; index < maxAddr; ++index)
+			{
+				if (mesObj[index]->empty())
+				{
+					this->mesObj[index] = &msg;
+				}
+			}
+			
 		}
 		return *this;
 	}
@@ -134,6 +142,7 @@ namespace sict
 	std::ostream & operator<<(std::ostream & os, Notifications & incomingObj)
 	{
 		incomingObj.display(os);
+		return os;
 	}
 }
 

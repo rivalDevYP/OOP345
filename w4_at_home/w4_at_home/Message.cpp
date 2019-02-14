@@ -54,7 +54,7 @@ namespace sict
 	//empty query; returns true is the object is in a safe empty state
 	bool Message::empty() const
 	{
-		if (tweet[0] == '\0' && (userName[0] == '\0' || replyName[0]=='\0'))
+		if (tweet.empty() && (userName.empty() || replyName.empty()))
 		{
 			return true;
 		}

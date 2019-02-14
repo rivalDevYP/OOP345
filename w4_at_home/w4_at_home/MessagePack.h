@@ -16,7 +16,7 @@ namespace sict
 		~MessagePack();
 		MessagePack(const MessagePack& incomingObj);
 		MessagePack& operator=(const MessagePack& incomingObj);
-		MessagePack(const MessagePack&& incomingObj);
+		MessagePack(MessagePack&& incomingObj);
 		MessagePack& operator=(MessagePack&& incomingObj);
 		void display(std::ostream& os) const;
 		size_t size() const;

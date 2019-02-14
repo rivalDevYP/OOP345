@@ -14,7 +14,7 @@ namespace sict
 		int numAddr; //number of addresses currently stored in the aggregation
 	public:
 		Notifications();
-		Notifications(size_t maxElements) : (maxElements > 0 ? mesObj = new const Message*[maxElements] : nullptr) {};
+		Notifications(size_t maxElements);
 		~Notifications();
 		Notifications(const Notifications& incomingObj);
 		Notifications& operator=(const Notifications& incomingObj);

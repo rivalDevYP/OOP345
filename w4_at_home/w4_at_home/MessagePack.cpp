@@ -13,6 +13,7 @@ namespace sict
 
 	MessagePack::MessagePack(Message** incomingArr, size_t numOfElements)
 	{
+		numObj = numOfElements;
 		if (numOfElements > 0)
 		{
 			objectRef = new Message[numOfElements];
@@ -20,8 +21,7 @@ namespace sict
 			{
 				if (!incomingArr[index]->empty())
 				{
-					objectRef[index] = *incomingArr[index];
-					numObj++;
+					objectRef[index] = *incomingArr[index];					
 				}
 			}
 		}
@@ -58,8 +58,9 @@ namespace sict
 		return *this;
 	}
 
-	MessagePack::MessagePack(const MessagePack && incomingObj)
+	MessagePack::MessagePack(MessagePack && incomingObj)
 	{
+		this->objectRef = nullptr;
 		*this = std::move(incomingObj);
 	}
 
@@ -83,11 +84,10 @@ namespace sict
 
 	void MessagePack::display(std::ostream & os) const
 	{
-		if (!this->objectRef->empty())
+		for (int index = 0; index < numObj; index++)
 		{
-			this->objectRef->display(os);
-		}
-		
+			this->objectRef[index].display(os);
+		}		
 	}
 
 	size_t MessagePack::size() const

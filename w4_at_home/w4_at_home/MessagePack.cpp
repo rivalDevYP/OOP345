@@ -1,3 +1,8 @@
+// program: MessagePack.cpp 
+// programmer: Yathavan, Parameshwaran
+// professor: Chris, Szalwinski
+// date: February 14, 2019
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
@@ -5,12 +10,14 @@
 
 namespace sict
 {
+	//default constructor, sets object to safe empty state
 	MessagePack::MessagePack()
 	{
 		objectRef = nullptr;
 		numObj = 0;
 	}
 
+	//two argument constructor, initializes object to incoming Message array
 	MessagePack::MessagePack(Message** incomingArr, size_t numOfElements)
 	{
 		numObj = 0;
@@ -29,18 +36,21 @@ namespace sict
 		}
 	}
 
+	//destructor, deallocates any previously allocated memory
 	MessagePack::~MessagePack()
 	{
 		delete[]this->objectRef;
 		this->objectRef = nullptr;
 	}
 
+	//copy constructor
 	MessagePack::MessagePack(const MessagePack & incomingObj)
 	{
 		this->objectRef = nullptr;
 		*this = incomingObj;
 	}
 
+	//copy assignment operator
 	MessagePack & MessagePack::operator=(const MessagePack & incomingObj)
 	{
 		if (this != &incomingObj)
@@ -61,12 +71,14 @@ namespace sict
 		return *this;
 	}
 
+	//move constructor
 	MessagePack::MessagePack(MessagePack && incomingObj)
 	{
 		this->objectRef = nullptr;
 		*this = std::move(incomingObj);
 	}
 
+	//move assignment operator
 	MessagePack& MessagePack::operator=(MessagePack && incomingObj)
 	{
 		if (this != &incomingObj)
@@ -86,7 +98,7 @@ namespace sict
 		return *this;
 	}
 
-
+	//display query, prints object to output stream
 	void MessagePack::display(std::ostream & os) const
 	{
 		for (size_t index = 0; index < maxObj; index++)
@@ -94,16 +106,17 @@ namespace sict
 			if (!objectRef[index].empty())
 			{
 				this->objectRef[index].display(os);
-			}
-			
+			}			
 		}		
 	}
 
+	//size query, returns number of objects currently stored
 	size_t MessagePack::size() const
 	{
 		return numObj;
 	}
 
+	//ostream operator overload, calls display query whilst passing reference to ostream object 
 	std::ostream & operator<<(std::ostream & os, MessagePack & msgPackObj)
 	{
 		msgPackObj.display(os);

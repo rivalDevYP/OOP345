@@ -1,3 +1,8 @@
+// program: Notifications.h
+// programmer: Yathavan, Parameshwaran
+// professor: Chris, Szalwinski
+// date: February 14, 2019
+
 #ifndef SICT_NOTIFICATIONS_H
 #define SICT_NOTIFICATIONS_H
 

@@ -23,8 +23,7 @@ namespace sict
 		Message(const std::string& str);
 		bool empty() const;
 		void display(std::ostream& os) const;
-	};
-	
+	};	
 }
 
 #endif //SICT_MESSAGE_H

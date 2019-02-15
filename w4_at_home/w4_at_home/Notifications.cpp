@@ -1,11 +1,16 @@
+// program: Notifications.cpp 
+// programmer: Yathavan, Parameshwaran
+// professor: Chris, Szalwinski
+// date: February 14, 2019
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include "Notifications.h"
 
-
 namespace sict
 {
+	//default constructor, sets object to safe empty state
 	Notifications::Notifications()
 	{
 		mesObj = nullptr;
@@ -13,6 +18,7 @@ namespace sict
 		numAddr = 0;
 	}
 
+	//2 arg constructor, allocates memory for object
 	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? new const Message*[maxElements] {nullptr} : nullptr)
 	{
 		if (maxElements > 0)
@@ -22,6 +28,7 @@ namespace sict
 		}
 	}
 
+	//destructor, deallocates any previously allocated memory
 	Notifications::~Notifications()
 	{
 		for (int index = 0; index < numAddr; index++)
@@ -38,12 +45,14 @@ namespace sict
 		}		
 	}
 
+	//copy constructor
 	Notifications::Notifications(const Notifications & incomingObj)
 	{
 		this->mesObj = nullptr;
 		*this = incomingObj;
 	}
 
+	//copy assignment operator
 	Notifications & Notifications::operator=(const Notifications & incomingObj)
 	{
 		if (this != &incomingObj)
@@ -72,12 +81,14 @@ namespace sict
 		return *this;
 	}
 
+	//move constructor
 	Notifications::Notifications(Notifications && incomingObj)
 	{
 		this->mesObj = nullptr;
 		*this = std::move(incomingObj);
 	}
 
+	//move assignment operator
 	Notifications & Notifications::operator=(Notifications && incomingObj)
 	{
 		if (this != &incomingObj)
@@ -94,13 +105,6 @@ namespace sict
 				}
 				this->mesObj = nullptr;
 			}
-			/*for (int index = 0; index < this->numAddr; index++)
-			{
-				if (incomingObj.mesObj[index] != nullptr)
-				{
-					this->mesObj[index] = incomingObj.mesObj[index];
-				}				
-			}*/	
 			if (incomingObj.mesObj != nullptr)
 			{
 				this->mesObj = incomingObj.mesObj;
@@ -110,6 +114,7 @@ namespace sict
 		return *this;
 	}
 
+	//plus equals operator overload, adds an object to the current object
 	Notifications & Notifications::operator+=(const Message & msg)
 	{
 		if (this->numAddr < this->maxAddr)
@@ -134,6 +139,7 @@ namespace sict
 		return *this;
 	}
 
+	//minus equals operator overload, removes an object from current object 
 	Notifications & Notifications::operator-=(const Message & msg)
 	{
 		int temp = this->numAddr;
@@ -144,15 +150,12 @@ namespace sict
 			{
 				this->mesObj[index] = nullptr;
 				numAddr--;
-				/*for (int i = 0; i < (maxAddr - numAddr); i++)
-				{
-					this->mesObj[index+i] = this->mesObj[index - 1];
-				}*/
 			}
 		}
 		return *this;
 	}
 
+	//display query, prints object to output stream
 	void Notifications::display(std::ostream & os) const
 	{
 		for (int index = 0; index < this->maxAddr; index++)
@@ -165,11 +168,13 @@ namespace sict
 		}		
 	}
 
+	//size query, returns current number of objects
 	size_t Notifications::size() const
 	{
 		return numAddr;
 	}
 
+	//ostream operator overload, calls display query whilst passing reference to ostream object
 	std::ostream & operator<<(std::ostream & os, Notifications & incomingObj)
 	{
 		incomingObj.display(os);

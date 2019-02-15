@@ -1,3 +1,8 @@
+// program: MessagePack.h 
+// programmer: Yathavan, Parameshwaran
+// professor: Chris, Szalwinski
+// date: February 14, 2019
+
 #ifndef SICT_MESSAGEPACK_H
 #define SICT_MESSAGEPACK_H
 

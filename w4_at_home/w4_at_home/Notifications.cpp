@@ -13,70 +13,50 @@ namespace sict
 	//default constructor, sets object to safe empty state
 	Notifications::Notifications()
 	{
-		mesObj = nullptr;
-		maxAddr = 0;
-		numAddr = 0;
+
 	}
 
 	//2 arg constructor, allocates memory for object
 	Notifications::Notifications(size_t maxElements) : mesObj(maxElements > 0 ? new const Message*[maxElements] {nullptr} : nullptr)
 	{
-		if (maxElements > 0)
-		{
-			maxAddr = maxElements;
-			numAddr = 0;
-		}
+		maxAddr = maxElements;
 	}
 
 	//destructor, deallocates any previously allocated memory
 	Notifications::~Notifications()
 	{
-		for (int index = 0; index < numAddr; index++)
-		{
-			if (mesObj[index] != nullptr)
-			{
-				mesObj[index] = nullptr;
-			}			
-		}
-		if (mesObj != nullptr)
-		{
-			delete[]mesObj;
-			mesObj = nullptr;
-		}		
+		delete[]mesObj;
 	}
 
 	//copy constructor
 	Notifications::Notifications(const Notifications & incomingObj)
 	{
-		this->mesObj = nullptr;
 		*this = incomingObj;
 	}
 
 	//copy assignment operator
-	Notifications & Notifications::operator=(const Notifications & incomingObj)
+	Notifications & Notifications::operator=(const Notifications & incomingObj) 
 	{
 		if (this != &incomingObj)
 		{
-			this->maxAddr = incomingObj.maxAddr;
 			this->numAddr = incomingObj.numAddr;
-			if (this->mesObj != nullptr)
+			delete[]this->mesObj;
+			if (maxAddr > 0) 
 			{
-				for (int index = 0; index < this->numAddr; index++)
-				{
-					delete[]this->mesObj[index];
-					this->mesObj[index] = nullptr;
-				}
-				delete[]this->mesObj;
-				this->mesObj = nullptr;
-			}
-			mesObj = new const Message*[incomingObj.maxAddr];
-			for (int index = 0; index < incomingObj.numAddr; index++)
-			{
-				if (incomingObj.mesObj[index] != nullptr)
+				mesObj = new const Message*[incomingObj.maxAddr];
+				for (int index = 0; index < incomingObj.maxAddr; index++)
 				{
 					this->mesObj[index] = incomingObj.mesObj[index];
-				}				
+				}
 			}
+			else 
+			{
+				for (int index = 0; index < incomingObj.maxAddr; index++)
+				{
+					this->mesObj[index] = nullptr;
+				}
+			}
+			
 		}
 		return *this;
 	}
@@ -84,7 +64,6 @@ namespace sict
 	//move constructor
 	Notifications::Notifications(Notifications && incomingObj)
 	{
-		this->mesObj = nullptr;
 		*this = std::move(incomingObj);
 	}
 
@@ -94,22 +73,15 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->maxAddr = incomingObj.maxAddr;
-			incomingObj.maxAddr = 0;
 			this->numAddr = incomingObj.numAddr;
+			incomingObj.maxAddr = 0;
 			incomingObj.numAddr = 0;
-			if (this->mesObj != nullptr)
-			{
-				for (int index = 0; index < this->numAddr; index++)
-				{
-					this->mesObj[index] = nullptr;
-				}
-				this->mesObj = nullptr;
+			this->mesObj = nullptr;
+			if (incomingObj.mesObj != nullptr) 
+			{	
+				this->mesObj = incomingObj.mesObj; 
+				incomingObj.mesObj = nullptr; 
 			}
-			if (incomingObj.mesObj != nullptr)
-			{
-				this->mesObj = incomingObj.mesObj;
-			}
-			incomingObj.mesObj = nullptr;
 		}
 		return *this;
 	}
@@ -118,22 +90,8 @@ namespace sict
 	Notifications & Notifications::operator+=(const Message & msg)
 	{
 		if (this->numAddr < this->maxAddr)
-		{
-			for (int index = 0; index < maxAddr; ++index)
-			{
-				if (msg.empty())
-				{
-					break;
-				}
-				if (mesObj[index]==nullptr)
-				{
-					this->mesObj[index] = &msg;
-					this->numAddr++;
-					break;
-				}
-			}
-			
-		}
+			if (!msg.empty())
+				mesObj[numAddr++] = &msg;
 		return *this;
 	}
 
@@ -142,12 +100,16 @@ namespace sict
 	{
 		int temp = this->numAddr;
 
-		for (int index = 0; index < temp; index++)
+		for (int index = 0; index < temp; index++)  
 		{
 			if (this->mesObj[index] == &msg)
 			{
 				this->mesObj[index] = nullptr;
 				numAddr--;
+				for (int i = index+1; i < maxAddr; i++)
+				{
+					this->mesObj[i-1] = this->mesObj[i];
+				}
 			}
 		}
 		return *this;
@@ -156,13 +118,9 @@ namespace sict
 	//display query, prints object to output stream
 	void Notifications::display(std::ostream & os) const
 	{
-		for (int index = 0; index < this->maxAddr; index++)
+		for (int index = 0; index < this->numAddr; index++)
 		{
-			if (this->mesObj[index] != nullptr)
-			{
-				this->mesObj[index]->display(os);
-			}
-			
+			this->mesObj[index]->display(os);
 		}		
 	}
 

@@ -12,16 +12,12 @@ namespace sict
 {
 	//default constructor, sets object to safe empty state
 	MessagePack::MessagePack()
-	{
-		objectRef = nullptr;
-		numObj = 0;
+	{		
 	}
 
 	//two argument constructor, initializes object to incoming Message array
 	MessagePack::MessagePack(Message** incomingArr, size_t numOfElements)
 	{
-		numObj = 0;
-		maxObj = numOfElements;
 		if (numOfElements > 0)
 		{
 			objectRef = new Message[numOfElements];
@@ -29,8 +25,7 @@ namespace sict
 			{
 				if (!incomingArr[index]->empty())
 				{
-					objectRef[index] = *incomingArr[index];		
-					numObj++;
+					objectRef[numObj++] = *incomingArr[index];
 				}
 			}
 		}
@@ -46,7 +41,6 @@ namespace sict
 	//copy constructor
 	MessagePack::MessagePack(const MessagePack & incomingObj)
 	{
-		this->objectRef = nullptr;
 		*this = incomingObj;
 	}
 
@@ -56,12 +50,7 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->numObj = incomingObj.numObj;
-			this->maxObj = incomingObj.maxObj;
-			if (this->objectRef != nullptr)
-			{
-				delete[]this->objectRef;
-				this->objectRef = nullptr;
-			}
+			delete[]this->objectRef;
 			this->objectRef = new Message[incomingObj.numObj];
 			for (size_t index = 0; index < numObj; index++)
 			{
@@ -74,7 +63,6 @@ namespace sict
 	//move constructor
 	MessagePack::MessagePack(MessagePack && incomingObj)
 	{
-		this->objectRef = nullptr;
 		*this = std::move(incomingObj);
 	}
 
@@ -84,16 +72,13 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->numObj = incomingObj.numObj;
-			this->maxObj = incomingObj.maxObj;
 			incomingObj.numObj = 0;
-			incomingObj.maxObj = 0;
-			if (this->objectRef != nullptr)
+			delete[]this->objectRef;
+			if (incomingObj.objectRef != nullptr)
 			{
-				delete[]this->objectRef;
-				this->objectRef = nullptr;
+				this->objectRef = incomingObj.objectRef;
+				incomingObj.objectRef = nullptr;
 			}
-			this->objectRef = incomingObj.objectRef;
-			incomingObj.objectRef = nullptr;
 		}
 		return *this;
 	}
@@ -101,12 +86,9 @@ namespace sict
 	//display query, prints object to output stream
 	void MessagePack::display(std::ostream & os) const
 	{
-		for (size_t index = 0; index < maxObj; index++)
+		for (size_t index = 0; index < numObj; index++)
 		{
-			if (!objectRef[index].empty())
-			{
-				this->objectRef[index].display(os);
-			}			
+			this->objectRef[index].display(os);
 		}		
 	}
 

@@ -1,0 +1,24 @@
+#OOP345 W4 REFLECTION
+
+#professor specifications
+
+	Reflection
+	
+	Study your final solution, reread the related parts of the course notes, and make sure that you
+	have understood the concepts covered by this workshop. This should take no less than 30
+	minutes of your time. Explain in your own words what you have learned in completing this
+	workshop. Include in your explanation but do not limit it to the following points (40%):
+	
+	• The difference between the implementations of a composition and an aggregation.
+	• The difference between the implementations of move and copy functions in a composition and an aggregation.
+	
+	To avoid deductions, refer to code in your solution as examples to support your explanations.
+	
+	Include all corrections to the Quiz(zes) you have received (30%). 
+	
+	
+#summary of notes 
+
+
+
+#quiz corrections

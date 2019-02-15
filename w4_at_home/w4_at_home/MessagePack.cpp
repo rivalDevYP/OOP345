@@ -14,6 +14,7 @@ namespace sict
 	MessagePack::MessagePack(Message** incomingArr, size_t numOfElements)
 	{
 		numObj = 0;
+		maxObj = numOfElements;
 		if (numOfElements > 0)
 		{
 			objectRef = new Message[numOfElements];
@@ -85,9 +86,12 @@ namespace sict
 
 	void MessagePack::display(std::ostream & os) const
 	{
-		for (size_t index = 0; index < numObj; index++)
+		for (size_t index = 0; index < maxObj; index++)
 		{
-			this->objectRef[index].display(os);
+			if (!objectRef[index].empty())
+			{
+				this->objectRef[index].display(os);
+			}			
 		}		
 	}
 

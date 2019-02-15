@@ -10,6 +10,7 @@ namespace sict
 	{
 		Message* objectRef;
 		size_t numObj;
+		size_t maxObj;
 	public:
 		MessagePack();
 		MessagePack(Message** incomingArr, size_t numOfElements);

@@ -44,14 +44,14 @@ namespace sict
 			if (maxAddr > 0) 
 			{
 				mesObj = new const Message*[incomingObj.maxAddr];
-				for (int index = 0; index < incomingObj.maxAddr; index++)
+				for (unsigned int index = 0; index < incomingObj.maxAddr; index++)
 				{
 					this->mesObj[index] = incomingObj.mesObj[index];
 				}
 			}
 			else 
 			{
-				for (int index = 0; index < incomingObj.maxAddr; index++)
+				for (unsigned int index = 0; index < incomingObj.maxAddr; index++)
 				{
 					this->mesObj[index] = nullptr;
 				}
@@ -76,7 +76,7 @@ namespace sict
 			this->numAddr = incomingObj.numAddr;
 			incomingObj.maxAddr = 0;
 			incomingObj.numAddr = 0;
-			this->mesObj = nullptr;
+			delete[]this->mesObj;
 			if (incomingObj.mesObj != nullptr) 
 			{	
 				this->mesObj = incomingObj.mesObj; 
@@ -98,15 +98,15 @@ namespace sict
 	//minus equals operator overload, removes an object from current object 
 	Notifications & Notifications::operator-=(const Message & msg)
 	{
-		int temp = this->numAddr;
+		unsigned int temp = this->numAddr;
 
-		for (int index = 0; index < temp; index++)  
+		for (unsigned int index = 0; index < temp; index++)  
 		{
 			if (this->mesObj[index] == &msg)
 			{
 				this->mesObj[index] = nullptr;
 				numAddr--;
-				for (int i = index+1; i < maxAddr; i++)
+				for (unsigned int i = index+1; i < maxAddr; i++)
 				{
 					this->mesObj[i-1] = this->mesObj[i];
 				}
@@ -118,7 +118,7 @@ namespace sict
 	//display query, prints object to output stream
 	void Notifications::display(std::ostream & os) const
 	{
-		for (int index = 0; index < this->numAddr; index++)
+		for (unsigned int index = 0; index < this->numAddr; index++)
 		{
 			this->mesObj[index]->display(os);
 		}		

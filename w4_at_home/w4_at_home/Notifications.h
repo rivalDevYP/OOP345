@@ -15,7 +15,7 @@ namespace sict
 	class Notifications
 	{
 		const Message** mesObj{nullptr};
-		int maxAddr{ 0 };
+		size_t maxAddr{ 0 };
 		int numAddr{ 0 };
 	public:
 		Notifications();

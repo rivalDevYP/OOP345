@@ -142,12 +142,12 @@
     <Text Include="PriceList.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="w5.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="KVList.h" />
     <ClInclude Include="KVPair.h" />
     <ClInclude Include="Taxable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="w5.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

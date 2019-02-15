@@ -6,7 +6,7 @@ namespace sict
 	template<typename T>
 	class KVList
 	{
-		T* listOfTees{ nullptr }; //heh heh heh... tees... XD
+		T* listOfTees{ nullptr };
 		size_t currentNumOfTees{ 0 };
 		size_t maximumNumOfTees{ 0 };
 	public:
@@ -17,7 +17,7 @@ namespace sict
 		}
 
 		//one argument constructor, initializes listOfTees
-		KVList(int n) : listOfTees(n > 0 ? new T[n]{ nullptr } : nullptr)
+		KVList(int n) : listOfTees(n > 0 ? new T[n] : nullptr)
 		{
 			maximumNumOfTees = n;
 		}
@@ -31,7 +31,15 @@ namespace sict
 		//move constructor
 		KVList(KVList&& incomingObj)
 		{
-			*this = std::move(incomingObj);
+			this->currentNumOfTees = incomingObj.currentNumOfTees;
+			this->maximumNumOfTees = incomingObj.maximumNumOfTees;
+			incomingObj.currentNumOfTees = 0;
+			incomingObj.maximumNumOfTees = 0;
+			if (incomingObj.listOfTees != nullptr)
+			{
+				this->listOfTees = incomingObj.listOfTees;
+				incomingObj.listOfTees = nullptr;
+			}
 		}
 
 		//disabled move assignment operator
@@ -64,12 +72,10 @@ namespace sict
 		{
 			if (currentNumOfTees < maximumNumOfTees)
 			{
-				for (unsigned int index = 0; index < maximumNumOfTees; index++)
-				{
-					listOfTees[currentNumOfTees++] = t;
-				}
+				listOfTees[currentNumOfTees++] = t;
 			}
 		}
+
 	};
 }
 

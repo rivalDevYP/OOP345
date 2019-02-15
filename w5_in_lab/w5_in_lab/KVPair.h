@@ -1,13 +1,17 @@
 #ifndef SICT_KVPAIR_H
 #define SICT_KVPAIR_H
 
+#include "Taxable.h"
+
 namespace sict
 {
 	template <typename K, typename V>
 	class KVPair
 	{
+		Taxable myObj;
 		K myKey;
 		V myValue;
+		
 	public:
 
 		//default constructor

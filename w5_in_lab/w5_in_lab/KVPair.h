@@ -2,6 +2,7 @@
 #define SICT_KVPAIR_H
 
 #include "Taxable.h"
+#include "KVPair.h"
 
 namespace sict
 {

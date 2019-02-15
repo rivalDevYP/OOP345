@@ -1,6 +1,9 @@
 #ifndef SICT_KVLIST_H
 #define SICT_KVLIST_H
 
+#include "KVPair.h"
+#include "Taxable.h"
+
 namespace sict
 {
 	template<typename T>

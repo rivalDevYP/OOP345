@@ -123,7 +123,6 @@ namespace sict
 			{
 				if (msg.empty())
 				{
-					//index--;
 					break;
 				}
 				if (mesObj[index]==nullptr)
@@ -131,7 +130,6 @@ namespace sict
 					this->mesObj[index] = &msg;
 					this->numAddr++;
 					break;
-					//TODO: if message is empty, don't increment
 				}
 			}
 			

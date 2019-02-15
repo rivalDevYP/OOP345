@@ -15,8 +15,8 @@ namespace sict
 	class Notifications
 	{
 		const Message** mesObj;
-		int maxAddr; //maximum number of addresses that can be stored in the aggregation
-		int numAddr; //number of addresses currently stored in the aggregation
+		int maxAddr; 
+		int numAddr; 
 	public:
 		Notifications();
 		Notifications(size_t maxElements);

@@ -70,7 +70,7 @@ namespace sict
 		if (!empty())
 		{
 			os << ">User  : " << this->userName << std::endl;
-			if (!replyName[0] == '\0')
+			if (!replyName.empty()) //TODO FIX BUG
 			{
 				os << " Reply : " << this->replyName << std::endl;
 			}

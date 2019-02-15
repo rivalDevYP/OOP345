@@ -116,6 +116,11 @@ namespace sict
 		{
 			for (int index = 0; index < maxAddr; ++index)
 			{
+				if (msg.empty())
+				{
+					//index--;
+					break;
+				}
 				if (mesObj[index]==nullptr)
 				{
 					this->mesObj[index] = &msg;

@@ -46,6 +46,7 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->numObj = incomingObj.numObj;
+			this->maxObj = incomingObj.maxObj;
 			if (this->objectRef != nullptr)
 			{
 				delete[]this->objectRef;
@@ -71,7 +72,9 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->numObj = incomingObj.numObj;
+			this->maxObj = incomingObj.maxObj;
 			incomingObj.numObj = 0;
+			incomingObj.maxObj = 0;
 			if (this->objectRef != nullptr)
 			{
 				delete[]this->objectRef;
@@ -91,7 +94,8 @@ namespace sict
 			if (!objectRef[index].empty())
 			{
 				this->objectRef[index].display(os);
-			}			
+			}
+			
 		}		
 	}
 

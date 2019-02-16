@@ -6,6 +6,8 @@
 #ifndef SICT_KVPAIR_H
 #define SICT_KVPAIR_H
 
+#include <iostream>
+
 #include "Taxable.h"
 #include "KVPair.h"
 
@@ -40,17 +42,15 @@ namespace sict
 			os << std::left;
 			os << std::setw(11);
 			os << myKey;
-			os << std::setw(7);
+			os << std::setw(8);
 			os << ": ";
+			os << std::setw(10);
 			os << myValue;
-			os << "  ";
 			os << totalPrice;
 			os << std::endl;
 		}
-
 
 	};
 }
 
 #endif //SICT_KVPAIR_H
-

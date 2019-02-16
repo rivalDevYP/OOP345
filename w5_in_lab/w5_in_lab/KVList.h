@@ -6,8 +6,9 @@
 #ifndef SICT_KVLIST_H
 #define SICT_KVLIST_H
 
+#include <iostream>
+
 #include "KVPair.h"
-#include "Taxable.h"
 
 namespace sict
 {

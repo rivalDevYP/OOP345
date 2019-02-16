@@ -1,7 +1,7 @@
 // program    : Taxable.h
 // programmer : Yathavan, Parameshwaran
 // professor  : Chris, Szalwinski
-//  date      : February 15, 2019
+// date       : February 15, 2019
 
 #ifndef SICT_TAXABLE_H
 #define SICT_TAXABLE_H

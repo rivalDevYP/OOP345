@@ -1,7 +1,7 @@
 // program    : KVPair.h
 // programmer : Yathavan, Parameshwaran
 // professor  : Chris, Szalwinski
-//  date      : February 15, 2019
+// date       : February 15, 2019
 
 #ifndef SICT_KVPAIR_H
 #define SICT_KVPAIR_H

@@ -1,3 +1,8 @@
+// program    : KVPair.h
+// programmer : Yathavan, Parameshwaran
+// professor  : Chris, Szalwinski
+//  date      : February 15, 2019
+
 #ifndef SICT_KVPAIR_H
 #define SICT_KVPAIR_H
 
@@ -9,7 +14,6 @@ namespace sict
 	template <typename K, typename V>
 	class KVPair
 	{
-		Taxable myObj;
 		K myKey;
 		V myValue;
 		
@@ -31,7 +35,17 @@ namespace sict
 		template<typename F>
 		void display(std::ostream& os, F f) const
 		{
-			os << myKey << " : " << myValue << "\t" << f(myValue) << std::endl;
+			Taxable myObj(f);
+			double totalPrice = myObj(myValue);
+			os << std::left;
+			os << std::setw(11);
+			os << myKey;
+			os << std::setw(7);
+			os << ": ";
+			os << myValue;
+			os << "  ";
+			os << totalPrice;
+			os << std::endl;
 		}
 
 

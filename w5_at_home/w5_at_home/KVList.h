@@ -26,7 +26,7 @@ namespace sict
 		}
 
 		//one argument constructor, initializes listOfTees
-		KVList(int n) : listOfTees(n > 0 ? new T[n] : nullptr)
+		KVList(int n) : listOfTees(n > 0 ? new T[n] : throw("incoming number not positive valued!"))
 		{
 			maximumNumOfTees = n;
 		}
@@ -63,7 +63,14 @@ namespace sict
 		//operator overload
 		const T& operator[](size_t i) const
 		{
-			return listOfTees[i];
+			if (i < 0 || i > currentNumOfTees || i > maximumNumOfTees)
+			{
+				throw("index out of bounds!");
+			}
+			else
+			{
+				return listOfTees[i];
+			}			
 		}
 		
 		//templated display query

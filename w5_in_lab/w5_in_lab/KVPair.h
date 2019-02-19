@@ -37,8 +37,6 @@ namespace sict
 		template<typename F>
 		void display(std::ostream& os, F f) const
 		{
-			Taxable myObj(f);
-			double totalPrice = myObj(myValue);
 			os << std::left;
 			os << std::setw(11);
 			os << myKey;
@@ -46,7 +44,7 @@ namespace sict
 			os << ": ";
 			os << std::setw(10);
 			os << myValue;
-			os << totalPrice;
+			os << f(myValue);
 			os << std::endl;
 		}
 

@@ -44,6 +44,12 @@ L createList(char* filename) {
 	return std::move(list);
 }
 
+//template <typename L, typename T, typename K, typename V>
+//L createGradeList(char* gradeFileName)
+//{
+//
+//}
+
 int main(int argc, char* argv[]) {
 	std::cout << "Command Line : ";
 	for (int i = 0; i < argc; i++) {
@@ -64,7 +70,19 @@ int main(int argc, char* argv[]) {
 		std::string, 
 		float>
 		(argv[1]);
+
+	// process grade list file
+	KVList<KVPair<int, float>> gradeList = createList<
+		KVList<KVPair<int, float>>,
+		KVPair<int, float>,
+		int,
+		float>
+		(argv[2]);
+
 	std::cout << "\nPrice List with G+S Taxes Included\n==================================\n";
 	std::cout << "Description:      Price Price+Tax\n";
 	priceList.display(std::cout, Taxable(HST));
+	std::cout << "\nList Letter Grades Included\n===================================\n";
+	std::cout << "Student No :      Grade   Letter\n";
+	gradeList.display(std::cout);
 }

@@ -37,17 +37,16 @@ namespace sict
 		template<typename F>
 		void display(std::ostream& os, F f) const
 		{
-					
-			double totalPrice = f(myValue);
-			os << std::left;
-			os << std::setw(11);
-			os << myKey;
-			os << std::setw(8);
-			os << ": ";
-			os << std::setw(10);
-			os << myValue;
-			os << totalPrice;
-			os << std::endl;
+			os << std::left 
+				<< std::setw(10) 
+				<< myKey 
+				<< " : " 
+				<< std::setw(10)
+				<< std::right 
+				<< myValue 
+				<< std::setw(10) 
+				<< f(myValue) 
+				<< std::endl;
 		}
 
 	};

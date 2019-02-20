@@ -1,0 +1,191 @@
+#OOP345 Workshop 5 REFLECTION
+
+#course notes
+	
+	exception handling
+		* in my workshop, i have added exception handling to the createList function, to my KVPair constructor, the subscript operator overload, and my lambda expression where the grade value is converted into a grade letter *
+		- an exception is thrown when an unfamiliar process occurs, and the program has no idea how to handle it
+		- programs can be designed to keep running even when an error ( exception ) occurs
+		- the process for building a "fix it" solution into a program is called "exception handling"
+		- exceptions are made up of two parts:
+												- the exception is thrown (reported)
+												- the exception is caught (handled)
+		- exception handling is made up of two parts as well:
+														- the code that identifies a possible piece of code that may throw a bug
+														- the code that handles said bug
+		- the code that contains/identifies the possibly buggy code is the "try" block
+		- the code that handles and exceptions thrown is called the "catch" block
+		- the try block and catch work in unison
+			- the try block contains the possibly buggy code
+			- if any exception occurs within the try block, the exception is "thrown"
+			- the catch block awaits at the closing brace of the try block
+			- the catch block is equipped with a parameter specifier that corresponds to the type of error that was thrown
+			- the thrown exception keeps bypassing the catch statement(s) until the one with its type is encountered
+			- when the catch statement "catches" the exception, it then proceeds to work around the exception, or print it out to the console
+		- an example of try...catch...
+			try //try block contains possibly buggy code
+			{
+				if (x < b) //if x is less than b
+					throw "x is less than b"; //throws an exception/error
+			} catch (int errCode) { //catch block with a parameter of "int"
+				std::cout << "program exited with error code: " << errCode << std::endl; //prints error code to screen
+			} catch (const char* errMsg) { //catch block with a parameter of "const char*"
+				std::cout << "program exited with error message: " << errMsg << std::endl; //prints error message to screen
+			}
+
+			- take note that there are two catch statements, and only the one with the parameter type corresponding to the type thrown will catch the thrown exception/error
+		
+		- an example of try...catch... from my workshop
+
+			KVList(int n) : listOfTees(n > 0 ? new T[n] : throw("incoming number not positive valued!"))
+			{
+				maximumNumOfTees = n;
+			}
+
+			try 
+			{
+
+				KVList<KVPair<int, float>> gradeList = createList<
+				KVList<KVPair<int, float>>,
+				KVPair<int, float>,
+				int,
+				float>
+				(argv[2]);
+
+				//lambda expression goes here, but don't want to make reflection too messy
+
+				std::cout << "\nStudent List Letter Grades Included\n===================================\n";
+				std::cout << "Student No :      Grade    Letter\n";
+			}
+			catch (int errCode) {
+				std::cout << "The program has exited with the error code: " << errCode << std::endl;
+			}
+			catch (const char* errMsg) {
+				std::cout << "The program has exited with the error message: " << errMsg << std::endl;
+			}
+			catch (...) {
+				std::cout << "The program has exited with an error..." << std::endl;
+			}
+			
+	function pointer
+		- a variable/pointer that holds the address of a function type
+		- the pointer identifies where in the memory the control is transferred to, to start executing the function's code
+		- it is basically a pointer that holds a pointer to a function
+		- you define it like this
+			- returnType (*identifier) (parameter, parameter, parameter, etc) = fn;
+				- returnType -> defines the type of whatever the function is returning
+				- *identifier -> defines the name of the pointer to function
+				- (parameter, parameter, parameter, etc) -> incoming parameter list
+				- "= fn;" -> initial address (optional)
+
+			- as you can see, a function pointer closely resembles an ordinary function
+
+	function object
+		- also called a functor
+		- basically any object where the "()" operator has been overloaded
+		- allows you to use an object like a function, where you can call the object (functor) on a variable
+		- a function object allows you to store a state
+		- because a functor has a type, it can be thrown around the same way an object is passed around
+		- because a functor has the same flexibility as a function, we can use the functor to perform the same operator on different types in different parts of a program
+		- how to make a function object
+			- make a class
+			- overload the '()' operator
+			- make an object, and call it on things like: object(parameter);
+		- workshop example:
+
+			class Taxable
+			{
+				const float taxRate;
+			public:
+				
+				//constructor goes here
+
+				float operator()(float incomingPrice) // this makes this object a "function object" because the function call operator is getting overloaded
+				{
+					return (incomingPrice + ((incomingPrice / 100)*(taxRate*100)));
+				}
+			};
+		 
+	lambda expression
+		- an anonymous function
+		- a lambda expression is a function with the same flexibility of a variable, meaning you can pass it around the program just as you pass a variable
+		- how to make a lambda expression:
+			- auto variableName = [captureList] (incoming parameters) {...};
+				- auto variableName -> a variable of type auto, auto is preferred as you don't know what the return type is going to be
+				- [captureList] -> a capture clause specified what variable are captured from the surrounding scope, you can capture by reference ('&') or by value (without a '&')
+				- (incoming parameters) -> parameters you recieve, just like a regular function
+				- {...}; -> function body where logic exists to perform operators, just like a regular function
+		- a lambda expression offers the same flexibility and pros of function objects
+		- but like a function pointer, you can avoid having to write an entire class for it
+
+		- in workshop example:
+			auto convertToGrade = [](float incomingGrade)
+			{
+				if (incomingGrade >= 0 && incomingGrade <= 49.9)
+					return "F ";
+				if (incomingGrade >= 50 && incomingGrade <= 54.9)
+					return "D ";
+				if (incomingGrade >= 55 && incomingGrade <= 59.9)
+					return "D+";
+				if (incomingGrade >= 60 && incomingGrade <= 64.9)
+					return "C ";
+				if (incomingGrade >= 65 && incomingGrade <= 69.9)
+					return "C+";
+				if (incomingGrade >= 70 && incomingGrade <= 74.9)
+					return "B ";
+				if (incomingGrade >= 75 && incomingGrade <= 79.9)
+					return "B+";
+				if (incomingGrade >= 80 && incomingGrade <= 89.9)
+					return "A ";
+				if (incomingGrade >= 90 && incomingGrade <= 100)
+					return "A+";
+				else
+					return "F ";
+			};	
+
+#quiz corrections
+
+	Quiz Score -- 6/10
+	
+	1 (3) The standard template library consists of the following three major but independent components:
+		________________________  ___________________________ _________________________ 
+	2 (2) The standard template library includes adapters for converting a class to operate in a specific context. Name two of these adapters:
+		________________________  _________________________ 
+	3 (1) The ______________ template is optimized for addition and deletion of an element at the back-end of a sequence only. 
+	4 (1) The ______________ template is optimized for addition and deletion of elements in the interior of a sequence. 
+	5 (3) The following code inserts into the standard output stream the objects the collection named q. The collection starts with 10 objects initialized to the value 45.78f. The code adds the same value (67.8f) to the front and the back of the collection. Fill in the missing code and complete the iteration clause and body using the .begin and .end member functions on the collection:
+	#include <iostream>
+	#include 
+
+	int main() {
+		std::         <float> q (10, 45.78f);
+	
+		// add the value 67.8f to the front and back of the collection
+	
+		q._______________________(67.8f);
+	
+		q._______________________(67.8f);
+	
+		for(_____________________________________________________________) {	
+
+			std::cout << ______________________ << std::endl;
+		}
+	}
+
+ANSWERS
+*******
+1) containers, iterators, algorithms
+2) stack, queue
+3) vector
+4) list
+5)	#include <iostream>
+	#include <deque>
+	int main () {
+		std::deque<float> q(10,45.78f);
+		// add the value 67.8f to the front and back of the collection
+		q.push_front(67.8f);
+		q.push_back(67.8f);
+		for (int index = q.begin(); index < q.end(); index++) {
+			std::cout << q[index] << std::endl;
+		}
+	}

@@ -44,11 +44,6 @@ L createList(char* filename) {
 	return std::move(list);
 }
 
-//template <typename L, typename T, typename K, typename V>
-//L createGradeList(char* gradeFileName)
-//{
-//
-//}
 
 int main(int argc, char* argv[]) {
 	std::cout << "Command Line : ";
@@ -58,31 +53,98 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl;
 
 	// check for command line errors
-	if (argc != 2) exit(1);
+	try {
+		if (argc != 3) exit(1);
+	}
+	catch (int errCode) {
+		std::cout << "The program has exited with the error code: " << errCode << std::endl;
+	}
+	catch (const char* errMsg) {
+		std::cout << "The program has exited with the error message: " << errMsg << std::endl;
+	}
+	catch (...) {
+		std::cout << "The program has exited with an error..." << std::endl;
+	}
 
 	// set for fixed, 2-decimal point output
 	std::cout << std::fixed << std::setprecision(2);
 
 	// process price list file
-	KVList<KVPair<std::string, float>> priceList = createList< 
-		KVList<KVPair<std::string, float>>, 
-		KVPair<std::string, float>, 
-		std::string, 
-		float>
-		(argv[1]);
+	try
+	{	
+		KVList<KVPair<std::string, float>> priceList = createList<
+			KVList<KVPair<std::string, float>>,
+			KVPair<std::string, float>,
+			std::string,
+			float>
+			(argv[1]);
+
+		std::cout << "\nPrice List with G+S Taxes Included\n==================================\n";
+		std::cout << "Description:      Price Price+Tax\n";
+		priceList.display(std::cout, Taxable(HST));
+
+	}
+	catch (int errCode) {
+		std::cout << "The program has exited with the error code: " << errCode << std::endl;
+	}
+	catch (const char* errMsg) {
+		std::cout << "The program has exited with the error message: " << errMsg << std::endl;
+	}
+	catch (...) {
+		std::cout << "The program has exited with an error..." << std::endl;
+	}
 
 	// process grade list file
-	KVList<KVPair<int, float>> gradeList = createList<
-		KVList<KVPair<int, float>>,
-		KVPair<int, float>,
-		int,
-		float>
-		(argv[2]);
+	try 
+	{
 
-	std::cout << "\nPrice List with G+S Taxes Included\n==================================\n";
-	std::cout << "Description:      Price Price+Tax\n";
-	priceList.display(std::cout, Taxable(HST));
-	std::cout << "\nList Letter Grades Included\n===================================\n";
-	std::cout << "Student No :      Grade   Letter\n";
-	gradeList.display(std::cout);
+		KVList<KVPair<int, float>> gradeList = createList<
+			KVList<KVPair<int, float>>,
+			KVPair<int, float>,
+			int,
+			float>
+			(argv[2]);
+
+		std::cout << "\nStudent List Letter Grades Included\n===================================\n";
+		std::cout << "Student No :      Grade    Letter\n";
+
+		auto convertToGrade = [](float incomingGrade)
+		{
+			if (incomingGrade >= 0 && incomingGrade <= 49.9)
+				return "F ";
+			if (incomingGrade >= 50 && incomingGrade <= 54.9)
+				return "D ";
+			if (incomingGrade >= 55 && incomingGrade <= 59.9)
+				return "D+";
+			if (incomingGrade >= 60 && incomingGrade <= 64.9)
+				return "C ";
+			if (incomingGrade >= 65 && incomingGrade <= 69.9)
+				return "C+";
+			if (incomingGrade >= 70 && incomingGrade <= 74.9)
+				return "B ";
+			if (incomingGrade >= 75 && incomingGrade <= 79.9)
+				return "B+";
+			if (incomingGrade >= 80 && incomingGrade <= 89.9)
+				return "A ";
+			if (incomingGrade >= 90 && incomingGrade <= 100)
+				return "A+";
+			else
+				throw("undefined grade value recieved...");
+		};	
+
+		gradeList.display(std::cout, convertToGrade);
+
+
+	}
+	catch (int errCode) {
+		std::cout << "The program has exited with the error code: " << errCode << std::endl;
+	}
+	catch (const char* errMsg) {
+		std::cout << "The program has exited with the error message: " << errMsg << std::endl;
+	}
+	catch (...) {
+		std::cout << "The program has exited with an error..." << std::endl;
+	}
+
+
 }

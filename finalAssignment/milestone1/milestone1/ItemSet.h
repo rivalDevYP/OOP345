@@ -29,6 +29,7 @@ namespace sict
 		const unsigned int getSerialNumber() const;
 		const unsigned int getQuantity() const;
 		ItemSet& operator--();
+		void display(std::ostream& os, bool full) const;
 	};
 }
 

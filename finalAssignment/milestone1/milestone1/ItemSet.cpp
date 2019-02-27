@@ -73,4 +73,10 @@ namespace sict
 	{
 		// TODO: insert return statement here
 	}
+
+	//display query, prints current object to output
+	void ItemSet::display(std::ostream & os, bool full) const
+	{
+
+	}
 }

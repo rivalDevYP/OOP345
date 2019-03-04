@@ -17,7 +17,8 @@ namespace sict
 	//destructor
 	Utilities::~Utilities()
 	{
-
+		delete[]this->myToken;
+		this->myToken = nullptr;
 	}
 
 	//copy constructor

@@ -13,6 +13,7 @@ namespace sict
 		std::string* myToken{ nullptr };
 		char myDelim{ '\0' };
 		int myFieldWidth{ 0 };
+		int numOfTokens{ 0 };
 	public:
 		//standard member functions
 		Utilities();

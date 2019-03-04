@@ -15,7 +15,6 @@ namespace sict
 		Utilities helper;
 
 		char myDelim;
-		static int myFieldWidth;
 
 		std::string myName;
 		std::string myDescription;
@@ -39,9 +38,6 @@ namespace sict
 		ItemSet& operator--();
 
 		void display(std::ostream& os, bool full) const;
-
-		static void setFieldWidth(int incomingWidth);
-		static int getFieldWidth();
 	};
 }
 

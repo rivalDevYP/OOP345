@@ -4,8 +4,6 @@
 //	professor  : Chris, Szalwinski
 
 #include <iostream>
-#include <string>
-#include <iomanip>
 #include "ItemSet.h"
 
 namespace sict
@@ -19,18 +17,22 @@ namespace sict
 
 	ItemSet::ItemSet(std::string & incomingStr)
 	{
+		size_t beginningOfStr = 0;
 		size_t positionOfFirstDelim = incomingStr.find_first_of(this->myDelim);
 		std::string newStr = incomingStr.substr(positionOfFirstDelim + 1, incomingStr.length());
 		size_t positionOfSecondDelim = newStr.find_first_of(this->myDelim);
 		std::string newStr1 = newStr.substr(positionOfSecondDelim + 1, newStr.length());
 		size_t positionOfThirdDelim = newStr1.find_first_of(this->myDelim);
 
-		this->myName = incomingStr.substr(0, positionOfFirstDelim);
-		this->mySerialNum = std::stol(newStr.substr(0, positionOfSecondDelim));
-		this->myQuantity = std::stoi(newStr1.substr(0, positionOfThirdDelim));
-		this->myDescription = newStr1.substr(positionOfThirdDelim + 1, newStr1.length());
 
-		setFieldWidth(myName.length());
+		//call extract token from utilities using the positions
+
+		this->myName = helper.extractToken(incomingStr, beginningOfStr);
+		this->mySerialNum = std::stol(helper.extractToken(newStr,beginningOfStr));
+		this->myQuantity = std::stoi(helper.extractToken(newStr1, beginningOfStr));
+		//this->myDescription = helper.extractToken(newStr1, positionOfThirdDelim);
+
+		
 	}
 
 	const std::string & ItemSet::getName() const
@@ -59,28 +61,15 @@ namespace sict
 	{
 		if (full)
 		{
-			os << std::left << std::setw(getFieldWidth()) << this->myName << " " <<
+			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " " <<
 				std::setw(5) << this->mySerialNum << " " <<
 				std::setw(3) << this->myQuantity << " " <<
 				this->myDescription << std::endl;
 		}
 		else
 		{
-			os << std::left << std::setw(getFieldWidth()) << this->myName << " " <<
+			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " " <<
 				std::setw(5) << this->mySerialNum << std::endl;
 		}
-	}
-
-	void ItemSet::setFieldWidth(int incomingWidth) 
-	{ 
-		if (incomingWidth > myFieldWidth) 
-		{
-			myFieldWidth = incomingWidth;
-		}
-	}
-
-	int ItemSet::getFieldWidth() 
-	{ 
-		return myFieldWidth; 
 	}
 }

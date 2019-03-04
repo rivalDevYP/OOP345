@@ -6,13 +6,16 @@
 #ifndef SICT_UTILITIES_H
 #define SICT_UTILITIES_H
 
+#include <string>
+#include <iomanip>
+
 namespace sict
 {
 	class Utilities
 	{
 		std::string* myToken{ nullptr };
-		char myDelim{ '\0' };
-		int myFieldWidth{ 0 };
+		static char myDelim;
+		static size_t myFieldWidth;
 		int numOfTokens{ 0 };
 	public:
 		//standard member functions
@@ -27,8 +30,8 @@ namespace sict
 		const std::string extractToken(const std::string& str, size_t& next_pos);
 		const char getDelimiter() const;
 		size_t getFieldWidth() const;
-		void setDelimiter(const char d);
-		void setFieldWidth(size_t t);
+		static void setDelimiter(const char d);
+		static void setFieldWidth(size_t t);
 	};
 }
 

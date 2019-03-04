@@ -11,7 +11,7 @@ namespace sict
 	//default constructor
 	Utilities::Utilities()
 	{
-
+		setDelimiter('\0');
 	}
 
 	//destructor
@@ -49,6 +49,7 @@ namespace sict
 				myToken = nullptr;
 			}
 		}
+		return *this;
 	}
 
 
@@ -82,13 +83,20 @@ namespace sict
 				this->myToken = nullptr;
 			}
 		}
+		return *this;
 	}
 
 	//extracts tokens based on incoming params
 	const std::string Utilities::extractToken(const std::string & str, size_t & next_pos)
 	{
-		//increment numOfTokens each time a new token is extracted and added to the string
-		return std::string();
+		std::string tempStr;
+		
+		size_t positionOfDelim = str.find(getDelimiter());
+		tempStr = str.substr(next_pos, positionOfDelim);
+		if (tempStr.empty())
+			throw("Exception occured in extractToken!");
+		setFieldWidth(tempStr.length());
+		return tempStr;
 	}
 
 	//returns local delimiter character
@@ -106,12 +114,12 @@ namespace sict
 	//sets delimiter character based on incoming param
 	void Utilities::setDelimiter(const char d)
 	{
-		this->myDelim = d;
+		myDelim = d;
 	}
 
 	//sets field width for current object based on incoming param
 	void Utilities::setFieldWidth(size_t t)
 	{
-		this->myFieldWidth = t;
+		myFieldWidth = t > myFieldWidth ? t : myFieldWidth;		
 	}
 }

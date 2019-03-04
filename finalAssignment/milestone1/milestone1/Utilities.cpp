@@ -33,7 +33,6 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->myDelim = incomingObj.myDelim;
-			this->myFieldWidth = incomingObj.myFieldWidth;
 			this->numOfTokens = incomingObj.numOfTokens;
 
 			delete[]myToken;
@@ -65,11 +64,9 @@ namespace sict
 		if (this != &incomingObj)
 		{
 			this->myDelim = incomingObj.myDelim;
-			this->myFieldWidth = incomingObj.myFieldWidth;
 			this->numOfTokens = incomingObj.numOfTokens;
 
 			incomingObj.myDelim = '\0';
-			incomingObj.myFieldWidth = 0;
 			incomingObj.numOfTokens = 0;
 
 			delete[]this->myToken;

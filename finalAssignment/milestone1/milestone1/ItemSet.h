@@ -28,7 +28,7 @@ namespace sict
 		// disabled copy & move semantics
 		ItemSet(const ItemSet& incomingObj) = delete;
 		ItemSet& operator=(const ItemSet& incomingObj) = delete;
-		ItemSet(ItemSet&& incomingObj) = delete;
+		ItemSet(ItemSet&& incomingObj);
 		ItemSet& operator=(ItemSet&& incomingObj) = delete;		
 
 		const std::string& getName() const;

@@ -35,6 +35,24 @@ namespace sict
 		
 	}
 
+	ItemSet::ItemSet(ItemSet && incomingObj)
+	{
+		if (this != &incomingObj)
+		{
+			this->myName = incomingObj.myName;
+			this->myDescription = incomingObj.myDescription;
+			this->mySerialNum = incomingObj.mySerialNum;
+			this->myQuantity = incomingObj.myQuantity;
+			this->myDelim = incomingObj.myDelim;
+
+			incomingObj.myName.clear();
+			incomingObj.myDescription.clear();
+			incomingObj.mySerialNum = 0;
+			incomingObj.myQuantity = 0;
+			incomingObj.myDelim = '\0';
+		}
+	}
+
 	const std::string & ItemSet::getName() const
 	{
 		return this->myName;

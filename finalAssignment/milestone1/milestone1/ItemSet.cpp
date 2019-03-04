@@ -11,19 +11,20 @@ namespace sict
 	//default constructor
 	ItemSet::ItemSet()
 	{
-
+		myName.clear();
 	}
 
 	//destructor
 	ItemSet::~ItemSet()
 	{
-
+		delete[]myTokens;
+		myTokens = nullptr;
 	}
 
 	//copy constructor
 	ItemSet::ItemSet(const ItemSet & incomingObj)
 	{
-
+		
 	}
 
 	//copy assignment operator

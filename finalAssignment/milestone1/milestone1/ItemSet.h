@@ -10,10 +10,10 @@ namespace sict
 {
 	class ItemSet
 	{
-		std::string* myTokens;
+		std::string* myTokens{ nullptr };
 		std::string myName;
-		long mySerialNum;
-		int myQuantity;
+		long mySerialNum{ 0 };
+		int myQuantity{ 0 };
 	public:
 		//standard member functions
 		ItemSet();

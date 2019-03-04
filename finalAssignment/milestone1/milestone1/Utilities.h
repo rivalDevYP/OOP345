@@ -10,9 +10,9 @@ namespace sict
 {
 	class Utilities
 	{
-		std::string* myToken;
-		char* myDelim;
-		int myFieldWidth;	
+		std::string* myToken{ nullptr };
+		char myDelim{ '\0' };
+		int myFieldWidth{ 0 };
 	public:
 		//standard member functions
 		Utilities();

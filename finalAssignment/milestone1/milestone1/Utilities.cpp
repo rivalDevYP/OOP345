@@ -11,7 +11,7 @@ namespace sict
 	//default constructor
 	Utilities::Utilities()
 	{
-
+		
 	}
 
 	//destructor

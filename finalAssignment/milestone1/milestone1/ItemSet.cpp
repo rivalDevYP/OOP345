@@ -83,15 +83,15 @@ namespace sict
 	{
 		if (full)
 		{
-			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " " <<
-				std::setw(5) << this->mySerialNum << " " <<
-				std::setw(3) << this->myQuantity << " " <<
+			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " [" <<
+				std::setw(5) << this->mySerialNum << "] Quantity " <<
+				std::setw(3) << this->myQuantity << " Description: " <<
 				this->myDescription << std::endl;
 		}
 		else
 		{
-			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " " <<
-				std::setw(5) << this->mySerialNum << std::endl;
+			os << std::left << std::setw(helper.getFieldWidth()) << this->myName << " [" <<
+				std::setw(5) << this->mySerialNum << "]" << std::endl;
 		}
 	}
 }

@@ -29,10 +29,17 @@ namespace sict
 		std::string newStr1 = newStr.substr(positionOfSecondDelim + 1, newStr.length());
 		positionOfThirdDelim = incomingStr.rfind(helper.getDelimiter());
 
-		this->myName = helper.extractToken(incomingStr, beginningOfStr);
-		this->mySerialNum = std::stol(helper.extractToken(newStr,beginningOfStr));
-		this->myQuantity = std::stoi(helper.extractToken(newStr1, beginningOfStr));
-		this->myDescription = incomingStr.substr(positionOfThirdDelim+1, incomingStr.length());
+		try 
+		{
+			this->myName = helper.extractToken(incomingStr, beginningOfStr);
+			this->mySerialNum = std::stol(helper.extractToken(newStr, beginningOfStr));
+			this->myQuantity = std::stoi(helper.extractToken(newStr1, beginningOfStr));
+			this->myDescription = incomingStr.substr(positionOfThirdDelim + 1, incomingStr.length());
+		}
+		catch (const char* errMsg) 
+		{
+			std::cout << "ERROR : " << errMsg << std::endl;
+		}
 	}
 
 	//move constructor

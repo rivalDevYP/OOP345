@@ -14,14 +14,13 @@ namespace sict
 	//default constructor
 	Utilities::Utilities()
 	{
-		//setDelimiter('\0');
+		
 	}
 
 	//destructor
 	Utilities::~Utilities()
 	{
-		delete[]this->myToken;
-		this->myToken = nullptr;
+
 	}
 
 	//copy constructor
@@ -37,23 +36,9 @@ namespace sict
 		{
 			this->myDelim = incomingObj.myDelim;
 			this->numOfTokens = incomingObj.numOfTokens;
-
-			delete[]myToken;
-			if (incomingObj.myToken != nullptr)
-			{
-				for (int index = 0; index < incomingObj.numOfTokens; index++)
-				{
-					this->myToken[index] = incomingObj.myToken[index];
-				}
-			}
-			else
-			{
-				myToken = nullptr;
-			}
 		}
 		return *this;
 	}
-
 
 	//move constructor
 	Utilities::Utilities(Utilities && incomingObj)
@@ -71,17 +56,6 @@ namespace sict
 
 			incomingObj.myDelim = '\0';
 			incomingObj.numOfTokens = 0;
-
-			delete[]this->myToken;
-			if (incomingObj.myToken != nullptr)
-			{
-				this->myToken = incomingObj.myToken;
-				incomingObj.myToken = nullptr;
-			}
-			else
-			{
-				this->myToken = nullptr;
-			}
 		}
 		return *this;
 	}

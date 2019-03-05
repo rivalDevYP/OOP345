@@ -14,8 +14,6 @@ namespace sict
 	{
 		Utilities helper;
 
-		//char myDelim{ '\0' };
-
 		std::string myName;
 		std::string myDescription;
 		long mySerialNum{ 0 };

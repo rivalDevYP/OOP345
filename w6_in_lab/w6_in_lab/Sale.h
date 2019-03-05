@@ -1,13 +1,13 @@
 #ifndef SICT_SALE_H
 #define SICT_SALE_H
 
-#include "Product.h"
+#include "iProduct.h"
 
 namespace sict
 {
 	class Sale
 	{
-		std::vector <iProduct> proObj;
+		std::vector <iProduct*> proObj;
 	public:
 		Sale(const char* incomingFileName);
 		void display(std::ostream& os) const;

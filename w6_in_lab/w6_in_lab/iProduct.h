@@ -9,7 +9,7 @@
 
 namespace sict 
 {
-	int FW;
+	//extern int FW;
 
 	class iProduct
 	{
@@ -18,7 +18,7 @@ namespace sict
 		virtual void display(std::ostream& os) const = 0;
 	};
 	iProduct* readRecord(std::ifstream& file);
-	std::ostream& operator<<(std::ostream& os, const iProduct& p);
+	std::ostream& operator<<(std::ostream&, const iProduct&);
 }
 
 #endif //SICT_IPRODUCT_H

@@ -8,7 +8,7 @@ namespace sict
 	class Product : public iProduct
 	{
 		unsigned int myProductNum{ 0 };
-		double myPrice{ 0.0f };
+		double myPrice{ 0.0f };		
 	public:
 		Product(long incomingProductNum, double incomingPrice);
 		double price() const;

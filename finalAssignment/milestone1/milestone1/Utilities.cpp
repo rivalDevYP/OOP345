@@ -11,53 +11,9 @@ namespace sict
 	char Utilities::myDelim = '\0';
 	size_t Utilities::myFieldWidth = 0;
 
-	//default constructor
 	Utilities::Utilities()
 	{
-		
-	}
 
-	//destructor
-	Utilities::~Utilities()
-	{
-
-	}
-
-	//copy constructor
-	Utilities::Utilities(const Utilities & incomingObj)
-	{
-		*this = incomingObj;
-	}
-
-	//copy assignment operator
-	Utilities & Utilities::operator=(const Utilities & incomingObj)
-	{
-		if (this != &incomingObj)
-		{
-			this->myDelim = incomingObj.myDelim;
-			this->numOfTokens = incomingObj.numOfTokens;
-		}
-		return *this;
-	}
-
-	//move constructor
-	Utilities::Utilities(Utilities && incomingObj)
-	{
-		*this = std::move(incomingObj);
-	}
-
-	//move assignment operator
-	Utilities & Utilities::operator=(Utilities && incomingObj)
-	{
-		if (this != &incomingObj)
-		{
-			this->myDelim = incomingObj.myDelim;
-			this->numOfTokens = incomingObj.numOfTokens;
-
-			incomingObj.myDelim = '\0';
-			incomingObj.numOfTokens = 0;
-		}
-		return *this;
 	}
 
 	//extracts tokens based on incoming params

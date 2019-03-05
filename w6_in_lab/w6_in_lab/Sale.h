@@ -1,3 +1,8 @@
+//	program		:	Sale.h
+//	programmer	:	Yathavan, Parameshwaran
+//	date		:	March 5, 2019
+//	professor	:	Chris, Szalwinski
+
 #ifndef SICT_SALE_H
 #define SICT_SALE_H
 

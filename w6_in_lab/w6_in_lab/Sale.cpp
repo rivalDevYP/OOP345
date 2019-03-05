@@ -1,3 +1,8 @@
+//	program		:	Sale.cpp
+//	programmer	:	Yathavan, Parameshwaran
+//	date		:	March 5, 2019
+//	professor	:	Chris, Szalwinski
+
 #include "Sale.h"
 
 extern int FW;

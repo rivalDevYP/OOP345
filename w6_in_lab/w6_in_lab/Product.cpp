@@ -1,3 +1,8 @@
+//	program		:	Product.cpp
+//	programmer	:	Yathavan, Parameshwaran
+//	date		:	March 5, 2019
+//	professor	:	Chris, Szalwinski
+
 #include "Product.h"
 
 extern int FW;

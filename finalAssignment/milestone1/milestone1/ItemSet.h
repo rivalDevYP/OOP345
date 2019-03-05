@@ -14,7 +14,7 @@ namespace sict
 	{
 		Utilities helper;
 
-		char myDelim;
+		//char myDelim{ '\0' };
 
 		std::string myName;
 		std::string myDescription;
@@ -25,7 +25,6 @@ namespace sict
 		ItemSet();
 		ItemSet(std::string& incomingStr);
 
-		// disabled copy & move semantics
 		ItemSet(const ItemSet& incomingObj) = delete;
 		ItemSet& operator=(const ItemSet& incomingObj) = delete;
 		ItemSet(ItemSet&& incomingObj);

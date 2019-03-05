@@ -8,33 +8,34 @@
 
 namespace sict
 {
+	//default constructor
 	ItemSet::ItemSet()
 	{
 		this->myName.clear();
 		this->myDescription.clear();
-		this->myDelim = helper.getDelimiter();
 	}
 
+	//1 arg. constructor, initializes object
 	ItemSet::ItemSet(std::string & incomingStr)
 	{
 		size_t beginningOfStr = 0;
-		size_t positionOfFirstDelim = incomingStr.find_first_of(this->myDelim);
+		size_t positionOfFirstDelim = 0;
+		size_t positionOfSecondDelim = 0;
+		size_t positionOfThirdDelim = 0;
+
+		positionOfFirstDelim = incomingStr.find(helper.getDelimiter());
 		std::string newStr = incomingStr.substr(positionOfFirstDelim + 1, incomingStr.length());
-		size_t positionOfSecondDelim = newStr.find_first_of(this->myDelim);
+		positionOfSecondDelim = newStr.find_first_of(helper.getDelimiter());	
 		std::string newStr1 = newStr.substr(positionOfSecondDelim + 1, newStr.length());
-		size_t positionOfThirdDelim = newStr1.find_first_of(this->myDelim);
-
-
-		//call extract token from utilities using the positions
+		positionOfThirdDelim = incomingStr.rfind(helper.getDelimiter());
 
 		this->myName = helper.extractToken(incomingStr, beginningOfStr);
 		this->mySerialNum = std::stol(helper.extractToken(newStr,beginningOfStr));
 		this->myQuantity = std::stoi(helper.extractToken(newStr1, beginningOfStr));
-		//this->myDescription = helper.extractToken(newStr1, positionOfThirdDelim);
-
-		
+		this->myDescription = incomingStr.substr(positionOfThirdDelim+1, incomingStr.length());
 	}
 
+	//move constructor
 	ItemSet::ItemSet(ItemSet && incomingObj)
 	{
 		if (this != &incomingObj)
@@ -43,31 +44,33 @@ namespace sict
 			this->myDescription = incomingObj.myDescription;
 			this->mySerialNum = incomingObj.mySerialNum;
 			this->myQuantity = incomingObj.myQuantity;
-			this->myDelim = incomingObj.myDelim;
 
 			incomingObj.myName.clear();
 			incomingObj.myDescription.clear();
 			incomingObj.mySerialNum = 0;
 			incomingObj.myQuantity = 0;
-			incomingObj.myDelim = '\0';
 		}
 	}
 
+	//query, returns name
 	const std::string & ItemSet::getName() const
 	{
 		return this->myName;
 	}
 
+	//query, returns serial number
 	const unsigned int ItemSet::getSerialNumber() const
 	{
 		return this->mySerialNum;
 	}
 
+	//query, returns quantity
 	const unsigned int ItemSet::getQuantity() const
 	{
 		return this->myQuantity;
 	}
 
+	//operator-- overload, gets called when product stock depletes
 	ItemSet & ItemSet::operator--()
 	{
 		this->myQuantity--;
@@ -75,6 +78,7 @@ namespace sict
 		return *this;
 	}
 
+	//display query
 	void ItemSet::display(std::ostream & os, bool full) const
 	{
 		if (full)

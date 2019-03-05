@@ -8,10 +8,13 @@
 
 namespace sict
 {
+	char Utilities::myDelim = '\0';
+	size_t Utilities::myFieldWidth = 0;
+
 	//default constructor
 	Utilities::Utilities()
 	{
-		setDelimiter('\0');
+		//setDelimiter('\0');
 	}
 
 	//destructor

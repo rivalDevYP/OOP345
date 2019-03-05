@@ -11,10 +11,8 @@ namespace sict
 	char Utilities::myDelim = '\0';
 	size_t Utilities::myFieldWidth = 0;
 
-	Utilities::Utilities()
-	{
-
-	}
+	//default constructor
+	Utilities::Utilities() {}
 
 	//extracts tokens based on incoming params
 	const std::string Utilities::extractToken(const std::string & str, size_t & next_pos)

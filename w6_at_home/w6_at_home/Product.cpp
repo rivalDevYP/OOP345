@@ -9,6 +9,11 @@ extern int FW;
 
 namespace sict
 {
+	Product::Product()
+	{
+
+	}
+
 	//2 arg. constructor, initialized object w/ incoming params
 	Product::Product(long incomingProductNum, double incomingPrice)
 	{
@@ -27,10 +32,10 @@ namespace sict
 	{
 		int fieldWidth = FW;
 
-		os << this->myProductNum 
-			<< std::setw(fieldWidth) 
-			<< this->myPrice 
-			<< std::endl;
+		os << this->myProductNum
+			<< std::setw(fieldWidth)
+			<< this->myPrice
+			<< " " << std::endl;
 	}
 
 	//readRecord, reads records from incoming file object
@@ -39,6 +44,7 @@ namespace sict
 		static int callCount{ 0 };
 		long proNum{ 0 };
 		double price{ 0.0f };
+		char taxableStatus{ '\0' };
 		std::string temppstr;
 		static std::string* tempStr;
 		int index{ 0 };
@@ -73,13 +79,21 @@ namespace sict
 				std::getline(file, tempStr[index++], '\n');
 			}
 		}
-
-		proNum = std::stol(tempStr[callCount].substr(0, tempStr[callCount].find(' ')));
-		price = std::stod(tempStr[callCount].substr(tempStr[callCount].find(' '), tempStr[callCount].length()));
-
-		callCount++;
-		
-		return new Product(proNum, price);	
+		if (tempStr[callCount].length() < 13)
+		{
+			proNum = std::stol(tempStr[callCount].substr(0, tempStr[callCount].find(' ')));
+			price = std::stod(tempStr[callCount].substr(tempStr[callCount].find(' '), tempStr[callCount].length()));
+			callCount++;
+			return new Product(proNum, price);
+		}
+		else
+		{
+			proNum = std::stol(tempStr[callCount].substr(0, tempStr[callCount].find(' ')));
+			price = std::stod(tempStr[callCount].substr(tempStr[callCount].find(' '), tempStr[callCount].length()));
+			taxableStatus = tempStr[callCount].at(12);
+			callCount++;
+			return new TaxableProduct(proNum, price, taxableStatus);
+		}		
 	}
 
 	//ostream overload, prints iProduct object to output
@@ -87,5 +101,28 @@ namespace sict
 	{
 		p.display(os);
 		return os;
+	}
+	TaxableProduct::TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType) : Product(incomingProNum, incomingPrice)
+	{
+		isTaxable = incomingTaxType;
+	}
+	double TaxableProduct::price() const
+	{
+		if (isTaxable == 'H')
+		{
+			double tempPrice = this->price();
+			double tax = (tempPrice / 100) * HST;
+			return tempPrice + tax;
+		}
+		else if (isTaxable == 'P')
+		{
+			double tempPrice = this->price();
+			double tax = (tempPrice / 100) * PST;
+			return tempPrice + tax;
+		}
+	}
+	void TaxableProduct::display(std::ostream & os) const
+	{
+		os << isTaxable;
 	}
 }

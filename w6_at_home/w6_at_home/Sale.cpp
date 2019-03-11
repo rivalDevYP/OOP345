@@ -45,7 +45,7 @@ namespace sict
 		{
 			os << std::right << std::setw(field) << std::fixed << std::setprecision(2);
 			proObj.at(index)->display(os);
-
+			
 			totalPrice = totalPrice + proObj.at(index)->price();
 		}
 

@@ -93,7 +93,7 @@ namespace sict
 			taxableStatus = tempStr[callCount].at(12);
 			callCount++;
 			return new TaxableProduct(proNum, price, taxableStatus);
-		}		
+		}
 	}
 
 	//ostream overload, prints iProduct object to output

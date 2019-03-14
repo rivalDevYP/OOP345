@@ -10,10 +10,8 @@
 
 namespace sict
 {
-	class Product : public iProduct
-	{
-		unsigned int myProductNum{ 0 };
-		double myPrice{ 0.0f };		
+	class Product : private iProduct
+	{	
 	public:
 		Product();
 		Product(long incomingProductNum, double incomingPrice);
@@ -22,19 +20,19 @@ namespace sict
 	};
 	iProduct* readRecord(std::ifstream& file);
 
-	class TaxableProduct : public Product
-	{
-		enum taxType
-		{
-			HST = 13,
-			PST = 8
-		};
-		char isTaxable;
-	public:
-		TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType);
-		double price() const;
-		void display(std::ostream& os) const;
-	};
+	// class TaxableProduct : public Product
+	// {
+	// 	enum taxType
+	// 	{
+	// 		HST = 13,
+	// 		PST = 8
+	// 	};
+	// 	char isTaxable;
+	// public:
+	// 	TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType);
+	// 	double price() const;
+	// 	void display(std::ostream& os) const;
+	// };
 }
 
 #endif //SICT_PRODUCT_H

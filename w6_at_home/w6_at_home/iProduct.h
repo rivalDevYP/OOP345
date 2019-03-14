@@ -13,6 +13,10 @@ namespace sict
 
 	class iProduct
 	{
+	protected:
+		unsigned int myProductNum{ 0 };
+		double myPrice{ 0.0f };	
+		std::string* extractedString{nullptr};
 	public:
 		virtual double price() const = 0;
 		virtual void display(std::ostream& os) const = 0;

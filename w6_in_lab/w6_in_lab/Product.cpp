@@ -34,7 +34,7 @@ namespace sict
 	}
 
 	//readRecord, reads records from incoming file object
-	iProduct* readRecord(std::ifstream& file)
+	iProduct* readRecord(std::ifstream& file) //this is incorrect, please fix to professor's emailed specifications
 	{
 		static int callCount{ 0 };
 		long proNum{ 0 };

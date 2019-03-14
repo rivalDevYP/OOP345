@@ -9,10 +9,7 @@ extern int FW;
 
 namespace sict
 {
-	Product::Product()
-	{
-
-	}
+	Product::Product() {}
 
 	//2 arg. constructor, initialized object w/ incoming params
 	Product::Product(long incomingProductNum, double incomingPrice)

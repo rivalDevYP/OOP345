@@ -9,7 +9,7 @@
 
 namespace sict 
 {
-	//extern int FW;
+	extern int FW;
 
 	class iProduct
 	{

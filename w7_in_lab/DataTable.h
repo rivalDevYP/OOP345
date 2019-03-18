@@ -117,26 +117,26 @@ namespace sict
 					<< std::setprecision(myPrecision) << deviatedValues()
 					<< std::endl;
 			}
-
+  
 			T deviatedValues() const
 			{
-				T u;
-				std::deque<T> b;
-				T v;
-				T deviationVal;
+				T mean, deviation, variableVariance;
+				std::deque<T> variation;
 
-				u = (std::accumulate(myProductNum.begin(), myProductNum.end(), 0))/myProductNum.size();
-				
-				for (int index = 0; index < myProductNum.size(); index++)
+				T accumulatedValues = std::accumulate(myProductNum.begin(), myProductNum.end(), 0);
+				mean = accumulatedValues/myProductNum.size();
+
+				for (long unsigned int index = 0; index < myProductNum.size(); index++)
 				{
-					b.push_back(pow((myProductNum.at(index)-u),2));
+					variation.push_back(
+						powf((myProductNum.at(index)-mean),2)
+					);
 				}
-				
-				v = (std::accumulate(b.begin(), b.end(), 0))/b.size();
-				
-				deviationVal=sqrt(v);
+				variableVariance = (std::accumulate(variation.begin(),variation.end(),0))/variation.size();
 
-				return deviationVal;
+				deviation = sqrt(variableVariance);
+
+				return deviation;				
 			}
 		}; 
 }

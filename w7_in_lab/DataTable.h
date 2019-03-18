@@ -7,11 +7,16 @@
 #define SICT_DATATABLE_H
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <deque>
+#include <algorithm>
+#include <numeric>
 
 namespace sict
 {
+	int FW;
+
 	class DataTable
 	{
 		std::deque<double> myPrice;

@@ -12,6 +12,7 @@
 #include <deque>
 #include <algorithm>
 #include <numeric>
+#include <math.h>
 
 extern int FW;
 extern int ND;
@@ -94,7 +95,7 @@ namespace sict
 				int myFieldWidth = FW;
 				int myPrecision = ND;
 
-				T accumulatedValues = std::accumulate(myPrice.begin(), myPrice.end(), 0);
+				T accumulatedValues = std::accumulate(myProductNum.begin(), myProductNum.end(), 0);
 
 				os << "\n\nStatistics" << "\n----------" << std::endl;
 
@@ -104,7 +105,7 @@ namespace sict
 					<< std::setw(4)
 					<< "="
 					<< std::right << std::fixed << std::setw(myFieldWidth)
-					<< std::setprecision(myPrecision) << accumulatedValues
+					<< std::setprecision(myPrecision) << accumulatedValues/myProductNum.size()
 					<< std::endl;
 
 				os << std::right << std::fixed
@@ -113,10 +114,31 @@ namespace sict
 					<< std::setw(4)
 					<< "="
 					<< std::right << std::fixed << std::setw(myFieldWidth)
-					<< std::setprecision(myPrecision) << accumulatedValues / myPrice.size()
+					<< std::setprecision(myPrecision) << deviatedValues()
 					<< std::endl;
 			}
-		};
+
+			T deviatedValues() const
+			{
+				T u;
+				std::deque<T> b;
+				T v;
+				T deviationVal;
+
+				u = (std::accumulate(myProductNum.begin(), myProductNum.end(), 0))/myProductNum.size();
+				
+				for (int index = 0; index < myProductNum.size(); index++)
+				{
+					b.push_back(pow((myProductNum.at(index)-u),2));
+				}
+				
+				v = (std::accumulate(b.begin(), b.end(), 0))/b.size();
+				
+				deviationVal=sqrt(v);
+
+				return deviationVal;
+			}
+		}; 
 }
 
 #endif //SICT_DATATABLE_H

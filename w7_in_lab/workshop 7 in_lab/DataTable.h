@@ -1,7 +1,7 @@
 //	program		:	DataTable.h
 //	programmer	:	Yathavan, Parameshwaran
 //	date 		:	March 15, 2019
-// professor	:	Chris, Szalwinski
+// 	professor	:	Chris, Szalwinski
 
 #ifndef SICT_DATA_TABLE_H
 #define SICT_DATA_TABLE_H
@@ -148,4 +148,4 @@ namespace sict
 	};
 }
 
-#endif //SICT_DATATABLE_H
+#endif //SICT_DATA_TABLE_H

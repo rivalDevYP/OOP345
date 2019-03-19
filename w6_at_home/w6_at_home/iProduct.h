@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <vector>
+#include <deque>
 #include <fstream>
 #include <string>
 

@@ -10,8 +10,9 @@
 
 namespace sict
 {
-	class Product : private iProduct
+	class Product : protected iProduct
 	{	
+		
 	public:
 		Product();
 		Product(long incomingProductNum, double incomingPrice);

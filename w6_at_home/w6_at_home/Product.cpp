@@ -38,7 +38,9 @@ namespace sict
 	//readRecord, reads records from incoming file object
 	iProduct* readRecord(std::ifstream& file)
 	{
-		//need to add implementation	
+		std::string temp;
+		std::getline(file, temp, '\n');
+		
 		
 	}
 

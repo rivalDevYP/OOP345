@@ -12,7 +12,8 @@ namespace sict
 {
 	class Sale
 	{
-		std::vector <iProduct*> proObj;
+		std::deque <iProduct*> proObj;
+		
 	public:
 		Sale(const char* incomingFileName);
 		void display(std::ostream& os) const;

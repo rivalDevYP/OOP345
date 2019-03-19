@@ -42,11 +42,20 @@ namespace sict
 		size_t proNum;
 		double priceVar;
 
-		std::getline(file, temp, '\n');
-		proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
-		priceVar = std::stod(temp.substr(temp.find_last_of(' '),temp.length()));
+		if (file.eof())
+		{
+			throw("end of file met...");
+		}
+		else
+		{
+			std::getline(file, temp, '\n');
+			proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
+			priceVar = std::stod(temp.substr(temp.find_last_of(' '), temp.length()));
 
-		return new Product(proNum,priceVar);		
+			return new Product(proNum, priceVar);
+		}
+		
+		
 	}
 
 	//ostream overload, prints iProduct object to output

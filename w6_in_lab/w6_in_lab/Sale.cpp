@@ -14,10 +14,17 @@ namespace sict
 	{
 		std::ifstream fileptr(incomingFileName);
 		std::string temp;
-		int lineCount{ 0 };
 		if (fileptr.is_open())
 		{
-			proObj.push_back(readRecord(fileptr));
+			for (int index = 0; index < 10; index++)
+			{
+				try {
+					proObj.push_back(readRecord(fileptr));
+				} catch (const char* errMsg) {
+					std::cout << errMsg << std::endl;
+					break;
+				}
+			}
 		}
 		else
 		{

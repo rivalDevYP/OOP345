@@ -9,8 +9,10 @@ extern int FW;
 
 namespace sict
 {
+	Product::Product() {}
+
 	//2 arg. constructor, initialized object w/ incoming params
-	Product::Product(long incomingProductNum, double incomingPrice)
+	Product::Product(size_t incomingProductNum, double incomingPrice)
 	{
 		this->myProductNum = incomingProductNum;
 		this->myPrice = incomingPrice;
@@ -27,59 +29,24 @@ namespace sict
 	{
 		int fieldWidth = FW;
 
-		os << this->myProductNum 
-			<< std::setw(fieldWidth) 
-			<< this->myPrice 
-			<< std::endl;
+		os << this->myProductNum
+			<< std::setw(fieldWidth)
+			<< this->myPrice
+			<< " " << std::endl;
 	}
 
 	//readRecord, reads records from incoming file object
-	iProduct* readRecord(std::ifstream& file) //this is incorrect, please fix to professor's emailed specifications
+	iProduct* readRecord(std::ifstream& file)
 	{
-		static int callCount{ 0 };
-		long proNum{ 0 };
-		double price{ 0.0f };
-		std::string temppstr;
-		static std::string* tempStr;
-		int index{ 0 };
+		std::string temp;
+		size_t proNum;
+		double priceVar;
 
-		if (file.is_open() && callCount == 0)
-		{
-			size_t counter{ 0 };
+		std::getline(file, temp, '\n');
+		proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
+		priceVar = std::stod(temp.substr(temp.find_last_of(' '),temp.length()));
 
-			if (file.eof())
-			{
-				file.clear();
-				file.seekg(0, file.beg);
-			}
-
-			while (!file.eof() && file.good())
-			{
-				std::getline(file, temppstr, '\n');
-				temppstr.clear();
-				counter++;
-			}
-
-			if (file.eof())
-			{
-				file.clear();
-				file.seekg(0, file.beg);
-			}
-
-			tempStr = new std::string[counter];
-
-			while (!file.eof() && file.good())
-			{
-				std::getline(file, tempStr[index++], '\n');
-			}
-		}
-
-		proNum = std::stol(tempStr[callCount].substr(0, tempStr[callCount].find(' ')));
-		price = std::stod(tempStr[callCount].substr(tempStr[callCount].find(' '), tempStr[callCount].length()));
-
-		callCount++;
-		
-		return new Product(proNum, price);	
+		return new Product(proNum,priceVar);		
 	}
 
 	//ostream overload, prints iProduct object to output
@@ -88,4 +55,27 @@ namespace sict
 		p.display(os);
 		return os;
 	}
+	// TaxableProduct::TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType) : Product(incomingProNum, incomingPrice)
+	// {
+	// 	isTaxable = incomingTaxType;
+	// }
+	// double TaxableProduct::price() const
+	// {
+	// 	if (isTaxable == 'H')
+	// 	{
+	// 		double tempPrice = this->price();
+	// 		double tax = (tempPrice / 100) * HST;
+	// 		return tempPrice + tax;
+	// 	}
+	// 	else if (isTaxable == 'P')
+	// 	{
+	// 		double tempPrice = this->price();
+	// 		double tax = (tempPrice / 100) * PST;
+	// 		return tempPrice + tax;
+	// 	}
+	// }
+	// void TaxableProduct::display(std::ostream & os) const
+	// {
+	// 	os << isTaxable;
+	// }
 }

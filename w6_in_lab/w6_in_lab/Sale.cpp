@@ -17,18 +17,12 @@ namespace sict
 		int lineCount{ 0 };
 		if (fileptr.is_open())
 		{
-			while (!fileptr.eof() && fileptr.good())
-			{
-				std::getline(fileptr, temp, '\n');
-				lineCount++;
-				temp.clear();
-			}
-
-			for (int index = 0; index < lineCount-1; index++)
-			{
-				proObj.push_back(readRecord(fileptr));
-			}
+			proObj.push_back(readRecord(fileptr));
 		}
+		else
+		{
+			throw("error reading file... ");
+		}	
 	}
 
 	//display query, prints products to output

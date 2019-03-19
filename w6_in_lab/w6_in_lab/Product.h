@@ -12,8 +12,11 @@ namespace sict
 {
 	class Product : public iProduct
 	{		
+		unsigned int myProductNum{ 0 };
+		double myPrice{ 0.0f };
 	public:
-		Product(long incomingProductNum, double incomingPrice);
+		Product();
+		Product(size_t incomingProductNum, double incomingPrice);
 		double price() const;
 		void display(std::ostream& os) const;
 	};

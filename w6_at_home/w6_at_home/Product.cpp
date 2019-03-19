@@ -39,7 +39,11 @@ namespace sict
 	iProduct* readRecord(std::ifstream& file)
 	{
 		std::string temp;
+		size_t proNum;
+		double priceVar;
+
 		std::getline(file, temp, '\n');
+		proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
 		
 		
 	}
@@ -50,27 +54,27 @@ namespace sict
 		p.display(os);
 		return os;
 	}
-	TaxableProduct::TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType) : Product(incomingProNum, incomingPrice)
-	{
-		isTaxable = incomingTaxType;
-	}
-	double TaxableProduct::price() const
-	{
-		if (isTaxable == 'H')
-		{
-			double tempPrice = this->price();
-			double tax = (tempPrice / 100) * HST;
-			return tempPrice + tax;
-		}
-		else if (isTaxable == 'P')
-		{
-			double tempPrice = this->price();
-			double tax = (tempPrice / 100) * PST;
-			return tempPrice + tax;
-		}
-	}
-	void TaxableProduct::display(std::ostream & os) const
-	{
-		os << isTaxable;
-	}
+	// TaxableProduct::TaxableProduct(unsigned int incomingProNum, double incomingPrice, char incomingTaxType) : Product(incomingProNum, incomingPrice)
+	// {
+	// 	isTaxable = incomingTaxType;
+	// }
+	// double TaxableProduct::price() const
+	// {
+	// 	if (isTaxable == 'H')
+	// 	{
+	// 		double tempPrice = this->price();
+	// 		double tax = (tempPrice / 100) * HST;
+	// 		return tempPrice + tax;
+	// 	}
+	// 	else if (isTaxable == 'P')
+	// 	{
+	// 		double tempPrice = this->price();
+	// 		double tax = (tempPrice / 100) * PST;
+	// 		return tempPrice + tax;
+	// 	}
+	// }
+	// void TaxableProduct::display(std::ostream & os) const
+	// {
+	// 	os << isTaxable;
+	// }
 }

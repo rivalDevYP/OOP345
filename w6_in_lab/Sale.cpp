@@ -14,29 +14,22 @@ namespace sict
 	{
 		std::ifstream fileptr(incomingFileName);
 		std::string temp;
-		if (fileptr.is_open())
-		{
-			for (int index = 0; index < 10; index++)
-			{
-				try {
-					proObj.push_back(readRecord(fileptr));
-				} catch (const char* errMsg) {
-					std::cout << errMsg << std::endl;
-					break;
-				}
-			}
-		}
-		else
-		{
-			throw("error reading file... ");
-		}	
+        for (int index = 0; index < 10; index++)
+        {
+            try {
+                proObj.push_back(readRecord(fileptr));
+            } catch (const char* errMsg) {
+                std::cout << errMsg << std::endl;
+                break;
+            }
+        }
 	}
 
 	//display query, prints products to output
 	void Sale::display(std::ostream& os) const
 	{
 		int field = FW;
-		double totalPrice{ 0.0f };
+        double totalPrice{ 0.0 };
 
 		os << std::right << std::setw(field) << "\nProduct No"
 			<< std::right << std::setw(field) << "  Cost"

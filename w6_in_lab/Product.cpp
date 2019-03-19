@@ -38,24 +38,22 @@ namespace sict
 	//readRecord, reads records from incoming file object
 	iProduct* readRecord(std::ifstream& file)
 	{
-		std::string temp;
-		size_t proNum;
-		double priceVar;
+        std::string temp;
+		size_t proNum{0};
+		double priceVar{0.0f};
 
-		if (file.eof())
-		{
-			throw("end of file met...");
-		}
-		else
+		if (!file.eof())
 		{
 			std::getline(file, temp, '\n');
 			proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
-			priceVar = std::stod(temp.substr(temp.find_last_of(' '), temp.length()));
-
+			priceVar = std::stod(temp.substr(temp.find_first_of(' '), temp.length()));
+			temp.clear();
 			return new Product(proNum, priceVar);
 		}
-		
-		
+		else
+		{
+			throw("end of file met!");
+		}		
 	}
 
 	//ostream overload, prints iProduct object to output

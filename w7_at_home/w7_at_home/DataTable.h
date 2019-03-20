@@ -6,6 +6,8 @@
 #ifndef SICT_DATA_TABLE_H
 #define SICT_DATA_TABLE_H
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -22,8 +24,8 @@ namespace sict
 	template <typename T>
 	class DataTable
 	{
-		std::deque<T> myPrice;
-		std::deque<T> myProductNum;
+		std::deque<T> xValue;
+		std::deque<T> yValue;
 
 		int numOfRecords{ 0 };
 
@@ -33,13 +35,13 @@ namespace sict
 			T mean, deviation, variableVariance;
 			std::deque<T> variation;
 
-			T accumulatedValues = std::accumulate(myProductNum.begin(), myProductNum.end(), 0);
-			mean = accumulatedValues / myProductNum.size();
+			T accumulatedValues = std::accumulate(yValue.begin(), yValue.end(), 0);
+			mean = accumulatedValues / yValue.size();
 
-			for (long unsigned int index = 0; index < myProductNum.size(); index++)
+			for (long unsigned int index = 0; index < yValue.size(); index++)
 			{
 				variation.push_back(
-					(myProductNum.at(index) - mean)*(myProductNum.at(index) - mean)
+					(yValue.at(index) - mean)*(yValue.at(index) - mean)
 				);
 			}
 			T accumulationOfVariances = std::accumulate(variation.begin(), variation.end(), 0);
@@ -49,6 +51,30 @@ namespace sict
 			deviation = sqrt(variableVariance);
 
 			return deviation;
+		}
+
+		//private query, used to calculate and return slope
+		T slopeIntercept(int selectorKey) const
+		{
+			T Exy{};
+			for (int index = 0; index < xValue.size(); index++)
+			{
+				Exy = Exy+xValue.at(index)*yValue.at(index);
+			}
+
+			T accumulatedXs = std::accumulate(xValue.begin(), xValue.end(), 0);
+			T accumulatedYs = std::accumulate(yValue.begin(), yValue.end(), 0);
+
+			T accumulatedXsSquared = (accumulatedXs*accumulatedXs);
+
+			T intercept = ((accumulatedYs*accumulatedXsSquared) - (accumulatedXs)*(Exy))/(xValue.size()*accumulatedXsSquared)-powl(accumulatedXs,2);
+			T slope = xValue.size()*(Exy)-(accumulatedXs*accumulatedYs) / ((xValue.size()*(accumulatedXsSquared)) - powl(accumulatedXs, 2));
+
+			if (selectorKey == 1)
+				return slope;
+			else
+				return intercept;
+
 		}
 
 	public:
@@ -72,8 +98,8 @@ namespace sict
 					tempPrice = std::stof(temp.substr(0, positionFirstSpace));
 					tempNum = std::stof(temp.substr(positionFirstSpace, temp.length()));
 
-					myPrice.push_back(tempPrice);
-					myProductNum.push_back(tempNum);
+					xValue.push_back(tempPrice);
+					yValue.push_back(tempNum);
 
 					temp.clear();
 					tempNum = 0;
@@ -109,9 +135,9 @@ namespace sict
 				{
 					os << std::right << std::fixed
 						<< std::setw(myFieldWidth)
-						<< std::setprecision(myPrecision) << myPrice.at(index)
+						<< std::setprecision(myPrecision) << xValue.at(index)
 						<< std::setw(myFieldWidth)
-						<< std::setprecision(myPrecision) << myProductNum.at(index)
+						<< std::setprecision(myPrecision) << yValue.at(index)
 						<< std::endl;
 				}
 			}
@@ -123,7 +149,13 @@ namespace sict
 			int myFieldWidth = FW;
 			int myPrecision = ND;
 
-			T accumulatedValues = std::accumulate(myProductNum.begin(), myProductNum.end(), 0);
+			T accumulatedValues = std::accumulate(yValue.begin(), yValue.end(), 0);
+
+			T intercept;
+
+			std::sort(yValue.begin(), yValue.end(),std::greater<T>());
+			T median = yValue[yValue.size() / 2];
+
 
 			os << "\nStatistics" << "\n----------" << std::endl;
 
@@ -133,7 +165,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth+1)
-				<< std::setprecision(myPrecision) << accumulatedValues / myProductNum.size()
+				<< std::setprecision(myPrecision) << accumulatedValues / yValue.size() 
 				<< std::endl;
 
 			os << std::right << std::fixed
@@ -142,7 +174,34 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth+1)
-				<< std::setprecision(myPrecision) << deviatedValues()
+				<< std::setprecision(myPrecision) << deviatedValues() 
+				<< std::endl;
+
+			os << std::right << std::fixed
+				<< std::setw(myFieldWidth + 1)
+				<< "y median"
+				<< std::setw(4)
+				<< "="
+				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
+				<< std::setprecision(myPrecision) << median // change to calculate median
+				<< std::endl;
+
+			os << std::right << std::fixed
+				<< std::setw(myFieldWidth + 1)
+				<< "slope"
+				<< std::setw(4)
+				<< "="
+				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
+				<< std::setprecision(myPrecision) << slopeIntercept(1)
+				<< std::endl;
+
+			os << std::right << std::fixed
+				<< std::setw(myFieldWidth + 1)
+				<< "intercept"
+				<< std::setw(4)
+				<< "="
+				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
+				<< std::setprecision(myPrecision) << slopeIntercept(2)
 				<< std::endl;
 		}
 	};

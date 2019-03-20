@@ -3,20 +3,16 @@
 
 #include <iostream>
 #include <iomanip>
-#include <deque>
+#include <vector>
 #include <fstream>
 #include <string>
 
-namespace sict 
+namespace sict
 {
-	extern int FW;
+	//extern int FW;
 
 	class iProduct
 	{
-	protected:
-		unsigned int myProductNum{ 0 };
-		double myPrice{ 0.0f };	
-		std::string* extractedString{nullptr};
 	public:
 		virtual double price() const = 0;
 		virtual void display(std::ostream& os) const = 0;

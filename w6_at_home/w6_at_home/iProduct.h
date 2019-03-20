@@ -1,3 +1,8 @@
+//	program		:	iProduct.h
+//	programmer	:	Yathavan, Parameshwaran
+//	date		:	March 13, 2019
+//	professor	:	Chris, Szalwinski
+
 #ifndef SICT_IPRODUCT_H
 #define SICT_IPRODUCT_H
 

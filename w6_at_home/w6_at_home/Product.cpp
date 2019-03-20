@@ -1,6 +1,6 @@
 //	program		:	Product.cpp
 //	programmer	:	Yathavan, Parameshwaran
-//	date		:	March 5, 2019
+//	date		:	March 13, 2019
 //	professor	:	Chris, Szalwinski
 
 #include "Product.h"
@@ -28,7 +28,7 @@ namespace sict
 	void Product::display(std::ostream & os) const
 	{
 		int fieldWidth = FW;
-
+		
 		os << this->myProductNum
 			<< std::setw(fieldWidth)
 			<< this->myPrice
@@ -42,40 +42,67 @@ namespace sict
 		return os;
 	}
 
-	TaxableProduct::TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus)
+	//3 arg. constructor, initializes TaxableProduct object
+	TaxableProduct::TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus) : Product(incomingProductNum, incomingPrice)
 	{
 		taxableStatus = incomingTaxStatus;
-		new Product(incomingProductNum, incomingPrice);
 	}
 
+	//overloaded price query
 	double TaxableProduct::price() const
 	{
-		double newPrice = this->myPrice / 100;
-
-		double addTax{ 0.0f };
-
-		if (taxableStatus == 'H')
+		if (this->taxableStatus != '\n')
 		{
-			addTax = newPrice * HST;
+			double newPrice = this->myPrice / 100;
+
+			double addTax{ 0.0f };
+
+			if (taxableStatus == 'H')
+			{
+				addTax = newPrice * HST;
+			}
+			else if (taxableStatus == 'P')
+			{
+				addTax = newPrice * PST;
+			}
+
+			return (this->myPrice + addTax);
 		}
-		else if (taxableStatus == 'P')
+		else
 		{
-			addTax = newPrice * PST;
-		}		
-
-		return (this->myPrice + addTax);
+			return this->myPrice;
+		}
 	}
 
-	void TaxableProduct::display(std::ostream & os)
+	//overloaded display query
+	void TaxableProduct::display(std::ostream & os) const
 	{
 		int fieldWidth = FW;
+		std::string temp;
 
-		os << this->myProductNum
-			<< std::setw(fieldWidth)
-			<< this->myPrice
-			<< std::setw(fieldWidth)
-			<< this->taxableStatus
-			<< " " << std::endl;
+		if (this->taxableStatus == '\n')
+		{
+			int fieldWidth = FW;
+
+			os << this->myProductNum
+				<< std::setw(fieldWidth)
+				<< this->myPrice
+				<< " " << std::endl;
+		}
+		else
+		{
+			if (this->taxableStatus == 'H')
+				temp = "HST";
+			if (this->taxableStatus == 'P')
+				temp = "PST";
+
+			os << this->myProductNum
+				<< std::setw(fieldWidth)
+				<< this->myPrice
+				<< " "
+				<< temp
+				<< " " << std::endl;
+		}
 	}
 
 	//readRecord, reads records from incoming file object
@@ -95,8 +122,8 @@ namespace sict
 				int positionOfFirstSpace = temp.find_first_of(' ');
 				int positionOfLastSpace = temp.find_last_of(' ');
 				proNum = std::stoi(temp.substr(0, positionOfFirstSpace));
-				priceVar = std::stod(temp.substr(positionOfFirstSpace, 5));
-				taxableStatus = temp.at(temp.length());
+				priceVar = std::stod(temp.substr(positionOfFirstSpace, 6));
+				taxableStatus = temp.at(temp.length()-1);
 				temp.clear();
 
 				return new TaxableProduct(proNum, priceVar, taxableStatus);

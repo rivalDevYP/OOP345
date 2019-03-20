@@ -1,6 +1,6 @@
 //	program		:	Sale.cpp
 //	programmer	:	Yathavan, Parameshwaran
-//	date		:	March 5, 2019
+//	date		:	March 13, 2019
 //	professor	:	Chris, Szalwinski
 
 #include "Sale.h"
@@ -40,7 +40,7 @@ namespace sict
 
 		os << std::right << std::setw(field) << "\nProduct No"
 			<< std::right << std::setw(field) << "  Cost"
-			<< std::right << std::setw(field) << "  Tax"
+			<< std::right << " " << "Taxable"
 			<< std::endl;
 
 		for (size_t index = 0; index < proObj.size(); index++)

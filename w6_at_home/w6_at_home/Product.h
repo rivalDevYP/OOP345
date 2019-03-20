@@ -1,6 +1,6 @@
 //	program		:	Product.h
 //	programmer	:	Yathavan, Parameshwaran
-//	date		:	March 5, 2019
+//	date		:	March 13, 2019
 //	professor	:	Chris, Szalwinski
 
 #ifndef SICT_PRODUCT_H
@@ -18,8 +18,8 @@ namespace sict
 	public:
 		Product();
 		Product(size_t incomingProductNum, double incomingPrice);
-		double price() const;
-		void display(std::ostream& os) const;
+		virtual double price() const;
+		virtual void display(std::ostream& os) const;
 	};
 
 	class TaxableProduct : public Product
@@ -35,7 +35,7 @@ namespace sict
 	public:
 		TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus);
 		double price() const;
-		void display(std::ostream& os);
+		void display(std::ostream& os) const;
 	};
 
 	iProduct* readRecord(std::ifstream& file);

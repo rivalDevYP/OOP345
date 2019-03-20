@@ -20,6 +20,22 @@ namespace sict
 		double price() const;
 		void display(std::ostream& os) const;
 	};
+
+	class TaxableProduct : public Product
+	{
+		enum taxRates
+		{
+			HST=13,
+			PST=8
+		};
+
+		char taxableStatus{ '\n' };
+	public:
+		TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus);
+		double price() const;
+		void display(std::ostream& os);
+	};
+
 	iProduct* readRecord(std::ifstream& file);
 }
 

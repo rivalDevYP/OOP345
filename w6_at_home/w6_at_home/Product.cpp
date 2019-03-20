@@ -63,4 +63,14 @@ namespace sict
 		p.display(os);
 		return os;
 	}
+	TaxableProduct::TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus)
+	{
+	}
+	double TaxableProduct::price() const
+	{
+		return 0.0;
+	}
+	void TaxableProduct::display(std::ostream & os)
+	{
+	}
 }

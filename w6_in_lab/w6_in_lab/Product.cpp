@@ -38,9 +38,9 @@ namespace sict
 	//readRecord, reads records from incoming file object
 	iProduct* readRecord(std::ifstream& file)
 	{
-        std::string temp;
-		size_t proNum{0};
-		double priceVar{0.0f};
+		std::string temp;
+		size_t proNum{ 0 };
+		double priceVar{ 0.0f };
 
 		if (!file.eof())
 		{
@@ -53,7 +53,7 @@ namespace sict
 		else
 		{
 			throw("end of file met!");
-		}		
+		}
 	}
 
 	//ostream overload, prints iProduct object to output

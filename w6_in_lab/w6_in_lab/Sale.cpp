@@ -14,22 +14,23 @@ namespace sict
 	{
 		std::ifstream fileptr(incomingFileName);
 		std::string temp;
-        for (int index = 0; index < 10; index++)
-        {
-            try {
-                proObj.push_back(readRecord(fileptr));
-            } catch (const char* errMsg) {
-                std::cout << errMsg << std::endl;
-                break;
-            }
-        }
+		for (int index = 0; index < 10; index++)
+		{
+			try {
+				proObj.push_back(readRecord(fileptr));
+			}
+			catch (const char* errMsg) {
+				std::cout << errMsg << std::endl;
+				break;
+			}
+		}
 	}
 
 	//display query, prints products to output
 	void Sale::display(std::ostream& os) const
 	{
 		int field = FW;
-        double totalPrice{ 0.0 };
+		double totalPrice{ 0.0 };
 
 		os << std::right << std::setw(field) << "\nProduct No"
 			<< std::right << std::setw(field) << "  Cost"
@@ -43,8 +44,8 @@ namespace sict
 			totalPrice = totalPrice + proObj.at(index)->price();
 		}
 
-		os << std::right 
-			<< std::setw(field) 
+		os << std::right
+			<< std::setw(field)
 			<< "Total" << std::setw(field)
 			<< totalPrice
 			<< std::endl;

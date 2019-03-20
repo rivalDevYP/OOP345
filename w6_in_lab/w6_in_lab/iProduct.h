@@ -7,12 +7,12 @@
 #include <fstream>
 #include <string>
 
-namespace sict 
+namespace sict
 {
 	//extern int FW;
 
 	class iProduct
-	{		
+	{
 	public:
 		virtual double price() const = 0;
 		virtual void display(std::ostream& os) const = 0;

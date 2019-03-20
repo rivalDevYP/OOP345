@@ -13,16 +13,22 @@ namespace sict
 	Sale::Sale(const char* incomingFileName)
 	{
 		std::ifstream fileptr(incomingFileName);
-		std::string temp;
-		for (int index = 0; index < 10; index++)
+		if (fileptr.good())
 		{
-			try {
-				proObj.push_back(readRecord(fileptr));
+			std::string temp;
+			for (int index = 0; index < 10; index++)
+			{
+				try {
+					proObj.push_back(readRecord(fileptr));
+				}
+				catch (const char* errMsg) {
+					break;
+				}
 			}
-			catch (const char* errMsg) {
-				std::cout << errMsg << std::endl;
-				break;
-			}
+		}
+		else
+		{
+			throw("file not found...");
 		}
 	}
 

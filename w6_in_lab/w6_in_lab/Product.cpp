@@ -42,9 +42,10 @@ namespace sict
 		size_t proNum{ 0 };
 		double priceVar{ 0.0f };
 
-		if (!file.eof())
+		std::getline(file, temp, '\n');
+
+		if (!temp.empty())
 		{
-			std::getline(file, temp, '\n');
 			proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
 			priceVar = std::stod(temp.substr(temp.find_first_of(' '), temp.length()));
 			temp.clear();

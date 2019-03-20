@@ -15,8 +15,6 @@
 
 namespace sict
 {
-	//extern int FW;
-
 	class iProduct
 	{
 	public:

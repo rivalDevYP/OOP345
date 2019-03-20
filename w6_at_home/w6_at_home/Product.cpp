@@ -31,7 +31,7 @@ namespace sict
 		
 		os << std::right << std::setw(fieldWidth) << std::fixed
 			<< this->myProductNum
-			<< std::setw(fieldWidth) << std::setprecision(2)
+			<< std::setw(fieldWidth) << std::setprecision(2) 
 			<< this->myPrice << std::endl;
 	}
 
@@ -88,8 +88,9 @@ namespace sict
 		os << std::right << std::setw(fieldWidth) << std::fixed
 			<< this->myProductNum
 			<< std::setw(fieldWidth) << std::setprecision(2)
-			<< this->myPrice 
+			<< this->myPrice
 			<< temp << std::endl;
+
 	}
 
 	//readRecord, reads records from incoming file object

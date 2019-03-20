@@ -12,7 +12,7 @@ namespace sict
 {
 	class Sale
 	{
-		std::deque <iProduct*> proObj;
+		std::vector <iProduct*> proObj;
 		
 	public:
 		Sale(const char* incomingFileName);

@@ -12,6 +12,7 @@ namespace sict
 {
 	class Product : public iProduct
 	{
+	protected:
 		unsigned int myProductNum{ 0 };
 		double myPrice{ 0.0f };
 	public:
@@ -30,6 +31,7 @@ namespace sict
 		};
 
 		char taxableStatus{ '\n' };
+
 	public:
 		TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus);
 		double price() const;

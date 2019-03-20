@@ -35,42 +35,86 @@ namespace sict
 			<< " " << std::endl;
 	}
 
-	//readRecord, reads records from incoming file object
-	iProduct* readRecord(std::ifstream& file)
-	{
-		std::string temp;
-		size_t proNum{ 0 };
-		double priceVar{ 0.0f };
-
-		std::getline(file, temp, '\n');
-
-		if (!temp.empty())
-		{
-			proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
-			priceVar = std::stod(temp.substr(temp.find_first_of(' '), temp.length()));
-			temp.clear();
-			return new Product(proNum, priceVar);
-		}
-		else
-		{
-			throw("end of file met!");
-		}
-	}
-
 	//ostream overload, prints iProduct object to output
 	std::ostream& operator<<(std::ostream & os, const iProduct & p)
 	{
 		p.display(os);
 		return os;
 	}
+
 	TaxableProduct::TaxableProduct(size_t incomingProductNum, double incomingPrice, char incomingTaxStatus)
 	{
+		taxableStatus = incomingTaxStatus;
+		new Product(incomingProductNum, incomingPrice);
 	}
+
 	double TaxableProduct::price() const
 	{
-		return 0.0;
+		double newPrice = this->myPrice / 100;
+
+		double addTax{ 0.0f };
+
+		if (taxableStatus == 'H')
+		{
+			addTax = newPrice * HST;
+		}
+		else if (taxableStatus == 'P')
+		{
+			addTax = newPrice * PST;
+		}		
+
+		return (this->myPrice + addTax);
 	}
+
 	void TaxableProduct::display(std::ostream & os)
 	{
+		int fieldWidth = FW;
+
+		os << this->myProductNum
+			<< std::setw(fieldWidth)
+			<< this->myPrice
+			<< std::setw(fieldWidth)
+			<< this->taxableStatus
+			<< " " << std::endl;
+	}
+
+	//readRecord, reads records from incoming file object
+	iProduct* readRecord(std::ifstream& file)
+	{
+		std::string temp;
+		size_t proNum{ 0 };
+		double priceVar{ 0.0f };
+		char taxableStatus{ '\n' };
+
+		std::getline(file, temp, '\n');
+
+		if (!temp.empty())
+		{
+			if (temp.length() >= 13)
+			{
+				int positionOfFirstSpace = temp.find_first_of(' ');
+				int positionOfLastSpace = temp.find_last_of(' ');
+				proNum = std::stoi(temp.substr(0, positionOfFirstSpace));
+				priceVar = std::stod(temp.substr(positionOfFirstSpace, 5));
+				taxableStatus = temp.at(temp.length());
+				temp.clear();
+
+				return new TaxableProduct(proNum, priceVar, taxableStatus);
+			}
+			else
+			{
+				proNum = std::stoi(temp.substr(0, temp.find_first_of(' ')));
+				priceVar = std::stod(temp.substr(temp.find_first_of(' '), temp.length()));
+				temp.clear();
+
+				return new Product(proNum, priceVar);
+			}
+
+			return new Product(proNum, priceVar);
+		}
+		else
+		{
+			throw("end of file met!");
+		}
 	}
 }

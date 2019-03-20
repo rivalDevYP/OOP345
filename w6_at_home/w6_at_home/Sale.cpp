@@ -40,6 +40,7 @@ namespace sict
 
 		os << std::right << std::setw(field) << "\nProduct No"
 			<< std::right << std::setw(field) << "  Cost"
+			<< std::right << std::setw(field) << "  Tax"
 			<< std::endl;
 
 		for (size_t index = 0; index < proObj.size(); index++)

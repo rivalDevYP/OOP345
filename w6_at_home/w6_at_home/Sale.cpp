@@ -21,7 +21,7 @@ namespace sict
 				try {
 					proObj.push_back(readRecord(fileptr));
 				}
-				catch (const char* errMsg) {
+				catch (...) {
 					break;
 				}
 			}
@@ -45,7 +45,6 @@ namespace sict
 
 		for (size_t index = 0; index < proObj.size(); index++)
 		{
-			os << std::right << std::setw(field) << std::fixed << std::setprecision(2);
 			proObj.at(index)->display(os);
 
 			totalPrice = totalPrice + proObj.at(index)->price();

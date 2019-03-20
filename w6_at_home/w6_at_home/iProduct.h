@@ -3,6 +3,7 @@
 //	date		:	March 13, 2019
 //	professor	:	Chris, Szalwinski
 
+#define _CRT_SECURE_NO_WARNINGS
 #ifndef SICT_IPRODUCT_H
 #define SICT_IPRODUCT_H
 

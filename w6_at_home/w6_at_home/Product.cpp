@@ -29,10 +29,10 @@ namespace sict
 	{
 		int fieldWidth = FW;
 		
-		os << this->myProductNum
-			<< std::setw(fieldWidth)
-			<< this->myPrice
-			<< " " << std::endl;
+		os << std::right << std::setw(fieldWidth) << std::fixed
+			<< this->myProductNum
+			<< std::setw(fieldWidth) << std::setprecision(2)
+			<< this->myPrice << std::endl;
 	}
 
 	//ostream overload, prints iProduct object to output
@@ -80,29 +80,16 @@ namespace sict
 		int fieldWidth = FW;
 		std::string temp;
 
-		if (this->taxableStatus == '\n')
-		{
-			int fieldWidth = FW;
+		if (this->taxableStatus == 'H')
+			temp = " HST";
+		if (this->taxableStatus == 'P')
+			temp = " PST";
 
-			os << this->myProductNum
-				<< std::setw(fieldWidth)
-				<< this->myPrice
-				<< " " << std::endl;
-		}
-		else
-		{
-			if (this->taxableStatus == 'H')
-				temp = "HST";
-			if (this->taxableStatus == 'P')
-				temp = "PST";
-
-			os << this->myProductNum
-				<< std::setw(fieldWidth)
-				<< this->myPrice
-				<< " "
-				<< temp
-				<< " " << std::endl;
-		}
+		os << std::right << std::setw(fieldWidth) << std::fixed
+			<< this->myProductNum
+			<< std::setw(fieldWidth) << std::setprecision(2)
+			<< this->myPrice 
+			<< temp << std::endl;
 	}
 
 	//readRecord, reads records from incoming file object
@@ -119,8 +106,8 @@ namespace sict
 		{
 			if (temp.length() >= 13)
 			{
-				int positionOfFirstSpace = temp.find_first_of(' ');
-				int positionOfLastSpace = temp.find_last_of(' ');
+				size_t positionOfFirstSpace = temp.find_first_of(' ');
+				
 				proNum = std::stoi(temp.substr(0, positionOfFirstSpace));
 				priceVar = std::stod(temp.substr(positionOfFirstSpace, 6));
 				taxableStatus = temp.at(temp.length()-1);

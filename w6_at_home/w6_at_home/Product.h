@@ -13,7 +13,7 @@ namespace sict
 	class Product : public iProduct
 	{
 	protected:
-		unsigned int myProductNum{ 0 };
+		size_t myProductNum{ 0 };
 		double myPrice{ 0.0f };
 	public:
 		Product();

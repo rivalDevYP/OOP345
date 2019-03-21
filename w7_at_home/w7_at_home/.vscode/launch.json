@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/w7",
+            "program": "${workspaceFolder}/a.out",
             "args": ["Simple.dat", "HS_College_GPA.dat"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

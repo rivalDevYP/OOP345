@@ -27,15 +27,16 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
-			double accumulatedX{ 0.0f };
-			double accumulatedY{ 0.0f };
-			double xMean{ 0.0f };
-			double yMean{ 0.0f };
-			double XstandardDeviation{ 0.0f };
-			double YstandardDeviation{ 0.0f };
-			double XYcorrelation{ 0.0f };
-			double XYslope{ 0.0f };
-			double Yintercept{ 0.0f };
+			T accumulatedX{};
+			T accumulatedY{};
+			T xMean{};
+			T yMean{};
+			T XstandardDeviation{};
+			T YstandardDeviation{};
+			T XYcorrelation{};
+			T XYslope{};
+			T Yintercept{};
+			T median{};
 
 			int numOfRecords{ 0 };
 
@@ -48,8 +49,8 @@ namespace sict
 				yValue.clear();
 				std::string temp;
 
-				double tempNum{ 0 };
-				double tempPrice{ 0.0f };
+				T tempNum{ 0 };
+				T tempPrice{ 0.0f };
 
 				if (incomingFileObject.is_open())
 				{
@@ -80,7 +81,7 @@ namespace sict
 				yMean = accumulatedY / yValue.size();
 
 				{
-					double temp{ 0.0f };
+					T temp{ 0.0f };
 					for (size_t index = 0; index < xValue.size(); index++)
 					{
 						temp += pow((xValue.at(index) - xMean), 2);
@@ -89,7 +90,7 @@ namespace sict
 				}
 
 				{
-					double temp{ 0.0f };
+					T temp{ 0.0f };
 					for (size_t index = 0; index < yValue.size(); index++)
 					{
 						temp += pow((yValue.at(index) - yMean), 2);
@@ -98,14 +99,24 @@ namespace sict
 				}
 
 				{
-					double temp{ 0.0f };
+					T temp{ 0.0f };
 					for (size_t index = 0; index < xValue.size(); index++)
 					{
 						temp += (xValue.at(index) - xMean)*(yValue.at(index) - yMean);
 					}
-					double temp2 = temp / (XstandardDeviation * YstandardDeviation);
-					double temp3 = temp2 / (xValue.size() - 1);
+					T temp2 = temp / (XstandardDeviation * YstandardDeviation);
+					T temp3 = temp2 / (xValue.size() - 1);
 					XYcorrelation = temp3;
+				}
+
+				{
+					std::deque<T> temp;
+					temp = yValue;
+					std::sort(temp.begin(), temp.end());
+					if ((temp.size() % 2) != 0)
+						median = temp.at(temp.size() / 2);
+					else
+						median = (temp.at((temp.size() / 2) - 1) + temp.at((temp.size() / 2) + 1)) / 2;
 				}
 				
 				XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
@@ -150,17 +161,6 @@ namespace sict
 			void displayStatistics(std::ostream &os) const
 			{
 				int myPrecision = ND;
-
-				T median;
-				{
-					std::deque<T> temp;
-					temp=yValue;
-					std::sort(temp.begin(), temp.end());
-					if ((temp.size() % 2) != 0)
-						median = temp.at(temp.size() / 2);
-					else
-						median = (temp.at((temp.size() / 2) - 1) + temp.at((temp.size() / 2) + 1)) / 2;
-				}
 
 				os << "\nStatistics" << "\n----------" << std::endl;
 

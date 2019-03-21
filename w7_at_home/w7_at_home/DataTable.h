@@ -112,11 +112,9 @@ namespace sict
 				{
 					std::deque<T> temp;
 					temp = yValue;
+					size_t sizeOfVector = std::size(temp);
 					std::sort(temp.begin(), temp.end());
-					if ((temp.size() % 2) != 0)
-						median = temp.at(temp.size() / 2);
-					else
-						median = (temp.at((temp.size() / 2) - 1) + temp.at((temp.size() / 2) + 1)) / 2;
+					median = temp.at(sizeOfVector / 2);
 				}
 				
 				XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
@@ -166,7 +164,7 @@ namespace sict
 
 				os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
     			os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
-    			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << median << std::endl;
+    			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
     			os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
     			os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 			}

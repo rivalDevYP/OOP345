@@ -27,7 +27,7 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
-			T accumulatedX = [&](T& incomingArr) -> T { return (std::accumulate(incomingArr.begin(), incomingArr.end(), 0.0)); };
+			//T accumulatedX = [&](T& incomingArr) -> T { return (std::accumulate(incomingArr.begin(), incomingArr.end(), 0.0)); };
 
 			//T accumulatedY = [=]() { return (std::accumulate(yValue.begin(), yValue.end(), 0.0)); };
 

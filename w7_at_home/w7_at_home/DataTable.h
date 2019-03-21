@@ -27,9 +27,9 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
-			T accumulatedX = [this]() { return (std::accumulate(xValue.begin(), xValue.end(), 0.0)); };
+			T accumulatedX = [&](T& incomingArr) -> T { return (std::accumulate(incomingArr.begin(), incomingArr.end(), 0.0)); };
 
-			T accumulatedY = [=]() { return (std::accumulate(yValue.begin(), yValue.end(), 0.0)); };
+			//T accumulatedY = [=]() { return (std::accumulate(yValue.begin(), yValue.end(), 0.0)); };
 
 			// T xMean = [=]() { return (accumulatedX / xValue.size()); };
 
@@ -153,6 +153,7 @@ namespace sict
 
 				os << "\nStatistics" << "\n----------" << std::endl;
 
+				os << accumulatedX(yValue) std::endl;
 				// os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
     			// os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
     			// os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;

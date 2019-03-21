@@ -34,7 +34,9 @@ namespace sict
 			T XstandardDeviation{};
 			T YstandardDeviation{};
 			T XYcorrelation{};
-			T XYslope{};
+
+			T XYslope = [=]() { return (XYcorrelation * (YstandardDeviation / XstandardDeviation)); };
+
 			T Yintercept{};
 			T median{};
 
@@ -117,7 +119,7 @@ namespace sict
 					median = temp.at(sizeOfVector / 2);
 				}
 				
-				XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
+				//XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
 
 				Yintercept = yMean - (XYslope*xMean);
 			}

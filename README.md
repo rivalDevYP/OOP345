@@ -5,7 +5,7 @@ This is Yathavan Parameshwaran's repository for OOP345 workshops. All files in h
 <br /><br />
 #### Background
 I created this repository (and this Github account) in order to organize and keep track of my code. I am the one and only owner of [this github](https://github.com/rivalDevYP) and I am the sole contributor to all code in this repository (OOP345). This repository is linked to my local machine, and my Visual Studio 2017, to make it easier for me to add/delete/modify anything and just push it from there.
-
+<br /><br />
 **Link to OOP345 (Winter 2019) Final Project** [OOP345 Final Project](https://lonetech.ca/OOP345_PROJECT)
 
 <br />

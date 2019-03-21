@@ -7,13 +7,16 @@
             "label": "build application",
             "type": "shell",
             "command": "g++",
-            "args":[
-                "-g", "*.cpp", "-std=c++17", "-Wall"
+            "args": [
+                "-g",
+                "*.cpp",
+                "-std=c++17",
+                "-Wall"
             ],
             "presentation": {
                 "clear": true,
-                "panel":"shared"
-           },
+                "panel": "shared"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true

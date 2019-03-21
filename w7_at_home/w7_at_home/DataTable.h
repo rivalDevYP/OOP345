@@ -27,18 +27,56 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
-			T accumulatedX{};
-			T accumulatedY{};
-			T xMean{};
-			T yMean{};
-			T XstandardDeviation{};
-			T YstandardDeviation{};
-			T XYcorrelation{};
+			T accumulatedX = [this]() { return (std::accumulate(xValue.begin(), xValue.end(), 0.0)); };
 
-			T XYslope = [=]() { return (XYcorrelation * (YstandardDeviation / XstandardDeviation)); };
+			T accumulatedY = [=]() { return (std::accumulate(yValue.begin(), yValue.end(), 0.0)); };
 
-			T Yintercept{};
-			T median{};
+			// T xMean = [=]() { return (accumulatedX / xValue.size()); };
+
+			// T yMean = [=]() { return (accumulatedY / yValue.size()); };
+
+			// T XstandardDeviation = [=]() {
+			// 	T temp{0.0f};
+			// 	for (size_t index = 0; index < xValue.size(); index++)
+			// 	{
+			// 		temp += pow((xValue.at(index) - xMean), 2);
+			// 	}
+			// 	return (std::sqrt(temp / (xValue.size() - 1)));
+			// };
+
+			// T YstandardDeviation = [=]() {
+			// 	T temp{0.0f};
+			// 	for (size_t index = 0; index < yValue.size(); index++)
+			// 	{
+			// 		temp += pow((yValue.at(index) - yMean), 2);
+			// 	}
+			// 	return (std::sqrt(temp / (yValue.size() - 1)));
+			// };
+
+			// T XYcorrelation = [=]() {
+			// 	T temp{0.0f};
+			// 	for (size_t index = 0; index < xValue.size(); index++)
+			// 	{
+			// 		temp += (xValue.at(index) - xMean) * (yValue.at(index) - yMean);
+			// 	}
+			// 	T temp2 = temp / (XstandardDeviation * YstandardDeviation);
+			// 	T temp3 = temp2 / (xValue.size() - 1);
+			// 	return (temp3);
+			// };
+
+			// T XYslope = [=]() { return (XYcorrelation * (YstandardDeviation / XstandardDeviation)); };
+
+			// T Yintercept = [=]() {
+			// 	return (yMean - (XYslope * xMean));
+			// };
+
+			// T median = [=]() {
+			// 	std::deque<T> temp;
+			// 	temp = yValue;
+			// 	size_t sizeOfVector = std::size(temp);
+			// 	std::sort(temp.begin(), temp.end());
+			// 	return (temp.at(sizeOfVector / 2));
+			// };
 
 			int numOfRecords{ 0 };
 
@@ -47,8 +85,6 @@ namespace sict
 			//single argument constructor, initializes object with values from incoming file 
 			DataTable(std::ifstream &incomingFileObject)
 			{
-				xValue.clear();
-				yValue.clear();
 				std::string temp;
 
 				T tempNum{ 0 };
@@ -75,53 +111,6 @@ namespace sict
 						numOfRecords++;
 					}
 				}
-				
-				accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
-				accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0.0);
-
-				xMean = accumulatedX / xValue.size();
-				yMean = accumulatedY / yValue.size();
-
-				{
-					T temp{ 0.0f };
-					for (size_t index = 0; index < xValue.size(); index++)
-					{
-						temp += pow((xValue.at(index) - xMean), 2);
-					}
-					XstandardDeviation = std::sqrt(temp / (xValue.size() - 1));
-				}
-
-				{
-					T temp{ 0.0f };
-					for (size_t index = 0; index < yValue.size(); index++)
-					{
-						temp += pow((yValue.at(index) - yMean), 2);
-					}
-					YstandardDeviation = std::sqrt(temp / (yValue.size() - 1));
-				}
-
-				{
-					T temp{ 0.0f };
-					for (size_t index = 0; index < xValue.size(); index++)
-					{
-						temp += (xValue.at(index) - xMean)*(yValue.at(index) - yMean);
-					}
-					T temp2 = temp / (XstandardDeviation * YstandardDeviation);
-					T temp3 = temp2 / (xValue.size() - 1);
-					XYcorrelation = temp3;
-				}
-
-				{
-					std::deque<T> temp;
-					temp = yValue;
-					size_t sizeOfVector = std::size(temp);
-					std::sort(temp.begin(), temp.end());
-					median = temp.at(sizeOfVector / 2);
-				}
-				
-				//XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
-
-				Yintercept = yMean - (XYslope*xMean);
 			}
 
 			//display query, prints contents of deque to display
@@ -160,15 +149,15 @@ namespace sict
 			//display query, displays the calculated statistics of the object's values
 			void displayStatistics(std::ostream &os) const
 			{
-				int myPrecision = ND;
+				// int myPrecision = ND;
 
 				os << "\nStatistics" << "\n----------" << std::endl;
 
-				os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
-    			os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
-    			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
-    			os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
-    			os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
+				// os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
+    			// os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
+    			// os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
+    			// os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
+    			// os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 			}
 		};
 }

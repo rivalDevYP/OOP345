@@ -27,6 +27,8 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
+			double accumulatedX{ 0.0f };
+			double accumulatedY{ 0.0f };
 			double xMean{ 0.0f };
 			double yMean{ 0.0f };
 			double XstandardDeviation{ 0.0f };
@@ -69,11 +71,10 @@ namespace sict
 
 						numOfRecords++;
 					}
-					std::sort(this->yValue.begin(), this->yValue.end());
 				}
 				
-				double accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
-				double accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0);
+				accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
+				accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0.0);
 
 				xMean = accumulatedX / xValue.size();
 				yMean = accumulatedY / yValue.size();
@@ -130,7 +131,7 @@ namespace sict
 						<< std::setw(myFieldWidth)
 						<< "x"
 						<< std::setw(myFieldWidth)
-						<< "y"
+						<< " y"
 						<< std::endl;
 
 					for (int index = 0; index < numOfRecords; index++)
@@ -148,63 +149,26 @@ namespace sict
 			//display query, displays the calculated statistics of the object's values
 			void displayStatistics(std::ostream &os) const
 			{
-				int myFieldWidth = FW;
 				int myPrecision = ND;
 
 				T median;
-
-				if ((yValue.size() % 2) != 0)
-					median = yValue.at(yValue.size() / 2);
-				else
-					median = (yValue.at((yValue.size()/2) - 1) + yValue.at((yValue.size()/2) + 1)) / 2;
-
+				{
+					std::deque<T> temp;
+					temp=yValue;
+					std::sort(temp.begin(), temp.end());
+					if ((temp.size() % 2) != 0)
+						median = temp.at(temp.size() / 2);
+					else
+						median = (temp.at((temp.size() / 2) - 1) + temp.at((temp.size() / 2) + 1)) / 2;
+				}
 
 				os << "\nStatistics" << "\n----------" << std::endl;
 
-				os << std::right << std::fixed
-					<< std::setw(myFieldWidth + 1)
-					<< "y mean "
-					<< std::setw(4)
-					<< "="
-					<< std::right << std::fixed << std::setw(myFieldWidth+1)
-					<< std::setprecision(myPrecision) << yMean
-					<< std::endl;
-
-				os << std::right << std::fixed
-					<< std::setw(myFieldWidth + 1)
-					<< "y sigma"
-					<< std::setw(4)
-					<< "="
-					<< std::right << std::fixed << std::setw(myFieldWidth+1)
-					<< std::setprecision(myPrecision) << YstandardDeviation
-					<< std::endl;
-
-				os << std::right << std::fixed
-					<< std::setw(myFieldWidth + 1)
-					<< "y median"
-					<< std::setw(4)
-					<< "="
-					<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-					<< std::setprecision(myPrecision) << median 
-					<< std::endl;
-
-				os << std::right << std::fixed
-					<< std::setw(myFieldWidth + 1)
-					<< "slope"
-					<< std::setw(4)
-					<< "="
-					<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-					<< std::setprecision(myPrecision) << XYslope
-					<< std::endl;
-
-				os << std::right << std::fixed
-					<< std::setw(myFieldWidth + 1)
-					<< "intercept"
-					<< std::setw(4)
-					<< "="
-					<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-					<< std::setprecision(myPrecision) << Yintercept
-					<< std::endl;
+				os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
+    			os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
+    			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << median << std::endl;
+    			os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
+    			os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 			}
 		};
 }

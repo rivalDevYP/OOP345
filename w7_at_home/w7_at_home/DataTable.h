@@ -29,52 +29,76 @@ namespace sict
 
 		int numOfRecords{ 0 };
 
-		//private query, used to calculate and return sample standard deviation
-		T deviatedValues() const
+		//private query, used to calculate and return deviation, mean, correlation, and the y-intercept
+		T calculateValues(std::string identifier) const
 		{
-			T mean, deviation, variableVariance;
-			std::deque<T> variation;
+			double xMean{ 0.0f };
+			double yMean{ 0.0f };
+			double XstandardDeviation{ 0.0f };
+			double YstandardDeviation{ 0.0f };
+			double XYcorrelation{ 0.0f };
+			double XYslope{ 0.0f };
+			double Yintercept{ 0.0f };
 
-			T accumulatedValues = std::accumulate(yValue.begin(), yValue.end(), 0);
-			mean = accumulatedValues / yValue.size();
+			double accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
+			double accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0);
 
-			for (long unsigned int index = 0; index < yValue.size(); index++)
+			//calculating mean
+			xMean = accumulatedX / xValue.size();
+			yMean = accumulatedY / yValue.size();
+
+			//calculating standard deviation for x
 			{
-				variation.push_back(
-					(yValue.at(index) - mean)*(yValue.at(index) - mean)
-				);
-			}
-			T accumulationOfVariances = std::accumulate(variation.begin(), variation.end(), 0);
-
-			variableVariance = accumulationOfVariances / (variation.size() - 1);
-
-			deviation = sqrt(variableVariance);
-
-			return deviation;
-		}
-
-		//private query, used to calculate and return slope
-		T slopeIntercept(int selectorKey) const
-		{
-			T Exy{};
-			for (int index = 0; index < xValue.size(); index++)
-			{
-				Exy = Exy+xValue.at(index)*yValue.at(index);
+				double temp{ 0.0f };
+				for (size_t index = 0; index < xValue.size(); index++)
+				{
+					temp += pow((xValue.at(index) - xMean), 2);
+				}
+				XstandardDeviation = std::sqrt(temp / (xValue.size() - 1));
 			}
 
-			T accumulatedXs = std::accumulate(xValue.begin(), xValue.end(), 0);
-			T accumulatedYs = std::accumulate(yValue.begin(), yValue.end(), 0);
+			//calculating standard deviation for y
+			{
+				double temp{ 0.0f };
+				for (size_t index = 0; index < yValue.size(); index++)
+				{
+					temp += pow((yValue.at(index) - yMean), 2);
+				}
+				YstandardDeviation = std::sqrt(temp / (yValue.size() - 1));
+			}
 
-			T accumulatedXsSquared = (accumulatedXs*accumulatedXs);
+			//calculating correlation
+			{
+				double temp{ 0.0f };
+				for (size_t index = 0; index < xValue.size(); index++)
+				{
+					temp += (xValue.at(index) - xMean)*(yValue.at(index) - yMean);
+				}
+				double temp2 = temp / (XstandardDeviation * YstandardDeviation);
+				double temp3 = temp2 / (xValue.size() - 1);
+				XYcorrelation = temp3;
+			}
 
-			T intercept = ((accumulatedYs*accumulatedXsSquared) - (accumulatedXs)*(Exy))/(xValue.size()*accumulatedXsSquared)-powl(accumulatedXs,2);
-			T slope = xValue.size()*(Exy)-(accumulatedXs*accumulatedYs) / ((xValue.size()*(accumulatedXsSquared)) - powl(accumulatedXs, 2));
+			//calculating slope
+			XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
 
-			if (selectorKey == 1)
-				return slope;
+			//calculating Y-intercept
+			Yintercept = yMean - (XYslope*xMean);
+
+			if (identifier == "slope")
+				return XYslope;
+			else if (identifier == "yintercept")
+				return Yintercept;
+			else if (identifier == "yssd")
+				return YstandardDeviation;
+			else if (identifier == "xssd")
+				return XstandardDeviation;
+			else if (identifier == "xmean")
+				return xMean;
+			else if (identifier == "ymean")
+				return yMean;
 			else
-				return intercept;
-
+				throw("wtf do u want!?");
 		}
 
 	public:
@@ -82,6 +106,8 @@ namespace sict
 		//single argument constructor, initializes object with values from incoming file 
 		DataTable(std::ifstream &incomingFileObject)
 		{
+			xValue.clear();
+			yValue.clear();
 			std::string temp;
 
 			int tempNum{ 0 };
@@ -100,13 +126,14 @@ namespace sict
 
 					xValue.push_back(tempPrice);
 					yValue.push_back(tempNum);
-
+					
 					temp.clear();
 					tempNum = 0;
 					tempPrice = 0.0f;
 
 					numOfRecords++;
 				}
+				std::sort(this->yValue.begin(), this->yValue.end());
 			}
 		}
 
@@ -149,12 +176,11 @@ namespace sict
 			int myFieldWidth = FW;
 			int myPrecision = ND;
 
-			T accumulatedValues = std::accumulate(yValue.begin(), yValue.end(), 0);
-
-			T intercept;
-
-			std::sort(yValue.begin(), yValue.end(),std::greater<T>());
-			T median = yValue[yValue.size() / 2];
+			T median;
+			if ((yValue.size() % 2) != 0)
+				median = yValue.at(yValue.size() / 2);
+			else
+				median = (yValue.at((yValue.size()/2) - 1) + yValue.at((yValue.size()/2) + 1)) / 2;
 
 
 			os << "\nStatistics" << "\n----------" << std::endl;
@@ -165,7 +191,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth+1)
-				<< std::setprecision(myPrecision) << accumulatedValues / yValue.size() 
+				<< std::setprecision(myPrecision) << calculateValues("ymean")
 				<< std::endl;
 
 			os << std::right << std::fixed
@@ -174,7 +200,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth+1)
-				<< std::setprecision(myPrecision) << deviatedValues() 
+				<< std::setprecision(myPrecision) << calculateValues("yssd")
 				<< std::endl;
 
 			os << std::right << std::fixed
@@ -183,7 +209,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-				<< std::setprecision(myPrecision) << median // change to calculate median
+				<< std::setprecision(myPrecision) << median 
 				<< std::endl;
 
 			os << std::right << std::fixed
@@ -192,7 +218,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-				<< std::setprecision(myPrecision) << slopeIntercept(1)
+				<< std::setprecision(myPrecision) << calculateValues("slope")
 				<< std::endl;
 
 			os << std::right << std::fixed
@@ -201,7 +227,7 @@ namespace sict
 				<< std::setw(4)
 				<< "="
 				<< std::right << std::fixed << std::setw(myFieldWidth + 1)
-				<< std::setprecision(myPrecision) << slopeIntercept(2)
+				<< std::setprecision(myPrecision) << calculateValues("yintercept")
 				<< std::endl;
 		}
 	};

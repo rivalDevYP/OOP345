@@ -36,8 +36,6 @@ namespace sict
 			T Yintercept{};
 			T median{};
 
-			T removeFromMean = [](T &incomingPro) { return (pow(incomingPro - yMean)); };
- 
 			int numOfRecords{0};
 
 		public:
@@ -76,7 +74,7 @@ namespace sict
 				xMean = (std::accumulate(xValue.begin(), xValue.end(), 0.0)) / xValue.size();
 				yMean = (std::accumulate(yValue.begin(), yValue.end(), 0)) / yValue.size();
 
-				XstandardDeviation = std::accumulate(xValue.begin(), xValue.end(), removeFromMean)/xValue.size()-1;
+				
 			}
 
 			//display query, prints contents of deque to display

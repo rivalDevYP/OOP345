@@ -27,8 +27,6 @@ namespace sict
 			std::deque<T> xValue;
 			std::deque<T> yValue;
 
-			T accumulatedX{};
-			T accumulatedY{};
 			T xMean{};
 			T yMean{};
 			T XstandardDeviation{};
@@ -38,9 +36,11 @@ namespace sict
 			T Yintercept{};
 			T median{};
 
+			T removeFromMean = [](T &incomingPro) { return (pow(incomingPro - yMean)); };
+ 
 			int numOfRecords{0};
 
-			public:
+		public:
 			//single argument constructor, initializes object with values from incoming file
 			DataTable(std::ifstream &incomingFileObject)
 			{
@@ -73,52 +73,10 @@ namespace sict
 					}
 				}
 
-				accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
-				accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0.0);
+				xMean = (std::accumulate(xValue.begin(), xValue.end(), 0.0)) / xValue.size();
+				yMean = (std::accumulate(yValue.begin(), yValue.end(), 0)) / yValue.size();
 
-				xMean = accumulatedX / xValue.size();
-				yMean = accumulatedY / yValue.size();
-
-				{
-					T temp{0.0f};
-					for (size_t index = 0; index < xValue.size(); index++)
-					{
-						temp += pow((xValue.at(index) - xMean), 2);
-					}
-					XstandardDeviation = std::sqrt(temp / (xValue.size() - 1));
-				}
-
-				{
-					T temp{0.0f};
-					for (size_t index = 0; index < yValue.size(); index++)
-					{
-						temp += pow((yValue.at(index) - yMean), 2);
-					}
-					YstandardDeviation = std::sqrt(temp / (yValue.size() - 1));
-				}
-
-				{
-					T temp{0.0f};
-					for (size_t index = 0; index < xValue.size(); index++)
-					{
-						temp += (xValue.at(index) - xMean) * (yValue.at(index) - yMean);
-					}
-					T temp2 = temp / (XstandardDeviation * YstandardDeviation);
-					T temp3 = temp2 / (xValue.size() - 1);
-					XYcorrelation = temp3;
-				}
-
-				{
-					std::deque<T> temp;
-					temp = yValue;
-					size_t sizeOfVector = std::size(temp);
-					std::sort(temp.begin(), temp.end());
-					median = temp.at(sizeOfVector / 2);
-				}
-
-				XYslope = XYcorrelation * (YstandardDeviation / XstandardDeviation);
-
-				Yintercept = yMean - (XYslope * xMean);
+				XstandardDeviation = std::accumulate(xValue.begin(), xValue.end(), removeFromMean)/xValue.size()-1;
 			}
 
 			//display query, prints contents of deque to display
@@ -163,11 +121,11 @@ namespace sict
 				os << "\nStatistics"
 					<< "\n----------" << std::endl;
 
-				os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
-				os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
-				os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
-				os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
-				os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
+				 os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
+				// os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
+				// os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
+				// os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
+				// os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 			}
 		};
 } // namespace sict

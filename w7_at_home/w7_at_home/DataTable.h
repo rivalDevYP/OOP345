@@ -79,7 +79,7 @@ namespace sict
 				accumulatedXValues = std::accumulate(xValue.begin(), yValue.end(), 0.0);
 				accumulatedYValues = std::accumulate(yValue.begin(), yValue.end(), 0.0);
 
-				XstandardDeviation = std::sqrt((accumulatedXValues * powf((std::for_each(xValue.begin(), xValue.end(), [this](T incomingVal) { return incomingVal - xMean; })), 2)) / (xValue.size() - 1));
+				XstandardDeviation = std::sqrt ( ( accumulatedXValues * ( std::for_each ( xValue.begin(), xValue.end(), [=](T incomingVal) { return ((incomingVal - xMean) * (incomingVal - xMean)); } ) ) ) /(xValue.size() - 1) );
 			}
 
 			//display query, prints contents of deque to display

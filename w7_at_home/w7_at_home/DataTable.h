@@ -151,12 +151,6 @@ for_each
 }
 
 
-accumulate
-( *,*,0,
-	[=](int sum, int x)
-	{
-		return sum+(s-Zmean)*(x-Zmean);
-	};
-);
+accumulate ( *,*,0,[=](int sum, int x){ return sum+(s-Zmean)*(x-Zmean); }; );
 
 */

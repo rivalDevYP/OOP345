@@ -3,7 +3,7 @@
 				accumulatedX = std::accumulate(xValue.begin(), xValue.end(), 0.0);
 				accumulatedY = std::accumulate(yValue.begin(), yValue.end(), 0.0);
 
-				xMean = std::accumulate(yValue.begin(), yValue.end(), 0.0) / xValue.size();
+				xMean = accumulatedX / xValue.size();
 				yMean = accumulatedY / yValue.size();
 
 				{

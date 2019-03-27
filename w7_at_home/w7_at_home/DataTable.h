@@ -36,7 +36,7 @@ namespace sict
 		T XYcorrelation{};
 		T XYslope{};
 		T Yintercept{};
-		T median{};
+		T yMedian{};
 
 		int numOfRecords{ 0 };
 
@@ -73,18 +73,29 @@ namespace sict
 				}
 			}
 
-			xMean = (std::accumulate(xValue.begin(), xValue.end(), 0.0)) / xValue.size();
-			yMean = (std::accumulate(yValue.begin(), yValue.end(), 0)) / yValue.size();
-
-			accumulatedXValues = std::accumulate(xValue.begin(), yValue.end(), 0.0);
+			accumulatedXValues = std::accumulate(xValue.begin(), xValue.end(), 0.0);
 			accumulatedYValues = std::accumulate(yValue.begin(), yValue.end(), 0.0);
 
-			XstandardDeviation = std::sqrt(
-				(accumulatedXValues * (std::for_each(
-					xValue.begin(), xValue.end(), [=](T incomingVal)
+			xMean = accumulatedXValues / xValue.size();
+			yMean = accumulatedYValues / yValue.size();
+
 			{
-				return ((incomingVal - xMean) * (incomingVal - xMean));
-			}))) / (xValue.size() - 1));
+				double step1{0.0f};
+
+				std::for_each(yValue.begin(), yValue.end(), [&](double incomingVal) { step1 += (pow((incomingVal - yMean), 2)); });
+
+				YstandardDeviation = sqrt(step1 / (yValue.size() - 1));
+			}
+
+			{
+				std::deque<T> temp;
+				temp = yValue;
+				size_t sizeOfVector = std::size(temp);
+				std::sort(temp.begin(), temp.end());
+				yMedian = temp.at(sizeOfVector / 2);
+			}
+
+			
 		}
 
 		//display query, prints contents of deque to display
@@ -130,27 +141,13 @@ namespace sict
 				<< "\n----------" << std::endl;
 
 			os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
-			// os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
-			// os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << median << std::endl;
-			// os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
-			// os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
+			os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
+			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << yMedian << std::endl;
+			//os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
+			//os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 		}
 	};
-} // namespace sict
+} 
 
 #endif //SICT_DATA_TABLE_H
 
-/*
-
-binary for_each
-sigma(i) * (Zi-ZMean)^2
-sum=0.0
-for_each
-{
-	sum+=(Zi-Zmean)*(Zi-ZMean)
-}
-
-
-accumulate ( *,*,0,[=](int sum, int x){ return sum+(s-Zmean)*(x-Zmean); }; );
-
-*/

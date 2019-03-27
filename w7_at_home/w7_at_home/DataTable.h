@@ -31,9 +31,7 @@ namespace sict
 		T accumulatedYValues{};
 		T xMean{};
 		T yMean{};
-		T XstandardDeviation{};
 		T YstandardDeviation{};
-		T XYcorrelation{};
 		T XYslope{};
 		T Yintercept{};
 		T yMedian{};
@@ -41,6 +39,7 @@ namespace sict
 		int numOfRecords{ 0 };
 
 	public:
+	
 		//single argument constructor, initializes object with values from incoming file
 		DataTable(std::ifstream &incomingFileObject)
 		{
@@ -80,9 +79,9 @@ namespace sict
 			yMean = accumulatedYValues / yValue.size();
 
 			{
-				double step1{0.0f};
+				T step1{};
 
-				std::for_each(yValue.begin(), yValue.end(), [&](double incomingVal) { step1 += (pow((incomingVal - yMean), 2)); });
+				std::for_each(yValue.begin(), yValue.end(), [&](T incomingVal) { step1 += (pow((incomingVal - yMean), 2)); });
 
 				YstandardDeviation = sqrt(step1 / (yValue.size() - 1));
 			}
@@ -93,7 +92,30 @@ namespace sict
 				size_t sizeOfVector = std::size(temp);
 				std::sort(temp.begin(), temp.end());
 				yMedian = temp.at(sizeOfVector / 2);
-			}			
+			}
+
+			{
+				T step1{};
+				for (size_t index = 0; index < xValue.size(); index++)
+				{
+					step1 += xValue.at(index) * yValue.at(index);
+				}
+				
+				T step2{};
+				step2 = accumulatedXValues * accumulatedYValues;
+
+				T step3{};
+				std::for_each(xValue.begin(), xValue.end(), [&](T incomingValue) { step3 += (incomingValue * incomingValue); });
+				
+				T step4{};
+				step4 = accumulatedXValues * accumulatedXValues;
+
+				XYslope = ((numOfRecords * step1) - (step2)) / ((numOfRecords * step3) - (step4));
+			}
+
+			{
+				Yintercept = (accumulatedYValues - XYslope * accumulatedXValues) / numOfRecords;
+			}
 		}
 
 		//display query, prints contents of deque to display
@@ -141,8 +163,8 @@ namespace sict
 			os << std::left << std::setw(12) << "  y mean" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << yMean << std::endl;
 			os << std::left << std::setw(12) << "  y sigma" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << YstandardDeviation << std::endl;
 			os << std::left << std::setw(12) << "  y median" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::fixed << std::setprecision(4) << yMedian << std::endl;
-			//os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
-			//os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
+			os << std::left << std::setw(12) << "  slope" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << XYslope << std::endl;
+			os << std::left << std::setw(12) << "  intercept" << std::left << std::setw(3) << "=" << std::right << std::setw(7) << std::setprecision(myPrecision) << Yintercept << std::endl;
 		}
 	};
 } 

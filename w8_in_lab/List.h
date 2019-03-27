@@ -43,6 +43,11 @@ namespace sict {
             for (auto& e : list)
                 e.display(os);
         }
+
+		void operator+=(T* incomingObj)
+		{
+			this->list.push_back(incomingObj);
+		}
 	};
 
     template<typename T>

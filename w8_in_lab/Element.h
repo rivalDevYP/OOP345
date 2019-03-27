@@ -87,6 +87,12 @@ namespace sict {
 			   << std::setw(FWP) << price
 			   << std::endl;
         }
+
+		void validate() const
+		{
+			if (this->price < 0.00)
+				throw("price is negative");
+		}
     };
 }
 #endif

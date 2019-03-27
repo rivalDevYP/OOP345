@@ -3,26 +3,105 @@
 Summary of Notes
 ****************
 
-    - 
-    -
-    -
-    -
-    -
+    - algorithms
+        - a few commonly used algorithms 
+                - accumulate
+                    - returns result of accumulating all values in a range
+                - copy
+                    - copies sequence of values from one container to another
+                - for_Each
+                    - executes a specified function for each element in a range
+                - sort
+                    - sorts the elements in a container according to a specified ordering
+                - swap
+                    - exchanges a sequence of values in one location with a sequence of values in another location
+                - search
+                    - looks for a sequence of values in a container that corresponds with the same sequence in another container
+                - count
+                    - counts number of of values in a sequence whos value matches the programmer specified value
 
+        - algorithms are functions that are pre-defined in the "<algorithm>" header
+        - you call them and pass in the required arguments, and the algorithm will return the calculated result as it was designed to do
+        - they ARE NOT member functions, instead they are standalone template functions
+        - ideal for use with containers
+
+        - *examples from my code*
+            - std::for_each(xValue.begin(), xValue.end(), [&](T incomingValue) { step3 += (incomingValue * incomingValue); });
+            - std::for_each(yValue.begin(), yValue.end(), [&](T incomingVal) { step1 += (pow((incomingVal - yMean), 2)); });
+
+    - iterators
+        - iterators are used for accessing values in a container (array, vector, or even pointers)
+        - the term "iterating" means to go from element to element in a container, often in a loop
+        -   for (int index = 0; index < xValues.size(); index++)
+            {
+                
+            }
+                - the "index" is the iterator in this scenario
+
+        - types of iterators
+            - forward (output)
+                - only "++" operator can be used with the iterator
+            - bidirectional (output)
+                - both "++" operator and the "--" operator can be used
+            - random (random access)
+                - like a bidirectional iterator (can use both "++" and "--" operators) and additionally it can "jump" from one location to another 
+    
+        
 Professor Specified Questions
 *****************************
 
-    -
-    -
-    -
-    -
-    -
+    - The reason for using the vector container rather than any other available in the STL.
+        - vectors are ideal for adding elements to the end of the array (vectorName.push_back(...);) and accessing them later on
+
+    - List the STL template functions that you used in your solution.
+        - I used the std::accumulate, std::for_each, and std::sort
+            - I used the std::for_each to iterate over each value in my xValue container to send it to the lambda expression, in which I subtracted the mean from it and squared it
+            - I used the std::accumulate to sum up all the values in my containers, and then I stored it in a locally declared value for easy access later on in the program
+            - std::sort was used to sort the values in my container from least to greatest in order to find the median
+
+    - Identify where you used lambda expressions.
+        - code example: std::for_each(yValue.begin(), yValue.end(), [&](T incomingVal) { step1 += (pow((incomingVal - yMean), 2)); });
+        - why I used this   
+            - instead of writing a really long equation to calculate the standard deviation, I found it easier to write a lambda that recieves a value from my container, and simply subtract the mean from it and square it. It was made even easier by using a for_each to iterate over each element in the sample set, and just passing it to the lambda
+        
+    - Comment on the ease of programming associated with the STL.
+        - instead of writing multiple loops and equations to calculate a value (or a set of values), it is much easier to call a pre-defined function, and pass it the specific values to simplify the operation
 
 Quiz Corrections
 ****************
 
-    -
-    -
-    -
-    -
-    -
+**Questions**
+
+    1 (2) Complete the following statement that allocates memory statically for a raw pointer without using auto:
+    _______________________________= “This is OOP345”; 
+    2 (1) Adding 2 to a pointer that holds the address to a double changes that address by _________ bytes:
+    3 (1) The result of subtracting address &a[3] from address &a[5] where variable a has been defined as int a[10] is ____________. 
+    4 (1) RAII is the idiom of object oriented languages that stands for ___________________________ 
+    _________________________________________________________________________________
+    5 (1) A smart pointer is a pointer that _______________ the object to which it points.
+    6 (1) Which variable has a longer lifetime – a smart pointer or the object to which it points
+    _________________________________________
+    7 (2) Replace the following code with C++ one-to-one smart pointer syntax:
+    // raw pointer syntax                  // smart pointer syntax
+    //                                     //
+    void foo(int x) {                      void foo(int x) {
+        Car* car = new Car(x);
+        car->drive();
+        delete car;
+    }                                      }
+
+    8 (1) Which C++ template is designed for many-to-one pointer-to-object relationships: 
+
+    _________________________________________
+
+**Answers**
+
+    1) char* p = “This is OOP345”; 
+    2) Adding 2 to a pointer that holds the address to a double changes that address by ____0____ bytes:
+    3) The result of subtracting address &a[3] from address &a[5] where variable a has been defined as int a[10] is ______2_____
+    4) RAII is the idiom of object oriented languages that stands for _________Resource Acquisition Is Initialization__________ 
+    5) A smart pointer is a pointer that ____knows, and manages the memory of___ the object to which it points
+    6) Which variable has a longer lifetime – a smart pointer or the object to which it points ____smart pointer____________
+    7) void foo(int x) { std::unique_ptr<Car> car(new Car(x)); }
+    8) Which C++ template is designed for many-to-one pointer-to-object relationships: _________std::shared_ptr____________
+

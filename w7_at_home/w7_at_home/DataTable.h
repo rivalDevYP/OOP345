@@ -11,7 +11,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <deque>
+#include <vector>
 #include <algorithm>
 #include <numeric>
 #include <math.h>
@@ -24,8 +24,8 @@ namespace sict
 	template <typename T>
 	class DataTable
 	{
-		std::deque<T> xValue;
-		std::deque<T> yValue;
+		std::vector<T> xValue;
+		std::vector<T> yValue;
 
 		T accumulatedXValues{};
 		T accumulatedYValues{};
@@ -39,7 +39,7 @@ namespace sict
 		int numOfRecords{ 0 };
 
 	public:
-	
+
 		//single argument constructor, initializes object with values from incoming file
 		DataTable(std::ifstream &incomingFileObject)
 		{
@@ -87,7 +87,7 @@ namespace sict
 			}
 
 			{
-				std::deque<T> temp;
+				std::vector<T> temp;
 				temp = yValue;
 				size_t sizeOfVector = std::size(temp);
 				std::sort(temp.begin(), temp.end());
@@ -118,7 +118,7 @@ namespace sict
 			}
 		}
 
-		//display query, prints contents of deque to display
+		//display query, prints contents of vector to display
 		void displayData(std::ostream &os) const
 		{
 			int myFieldWidth = FW;

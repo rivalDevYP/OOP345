@@ -93,9 +93,7 @@ namespace sict
 				size_t sizeOfVector = std::size(temp);
 				std::sort(temp.begin(), temp.end());
 				yMedian = temp.at(sizeOfVector / 2);
-			}
-
-			
+			}			
 		}
 
 		//display query, prints contents of deque to display

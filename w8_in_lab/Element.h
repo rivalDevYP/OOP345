@@ -93,6 +93,7 @@ namespace sict {
 			if (this->price < 0.00)
 				throw("price is negative");
 		}
-    };
+
+	};
 }
 #endif

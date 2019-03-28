@@ -46,7 +46,7 @@ namespace sict {
 
 		void operator+=(T* incomingObj)
 		{
-			this->list.push_back(incomingObj);
+			this->list.push_back(*incomingObj);
 		}
 	};
 

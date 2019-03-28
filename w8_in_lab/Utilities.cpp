@@ -13,16 +13,26 @@ using namespace std;
 namespace sict {
 	List<Product> mergeRaw(const List<Description>& desc, const List<Price>& price) {
 		List<Product> priceList;
-		// TODO: Add your code here to build a list of products
-		//         using raw pointers
+		Product newObj;
 
+		for (size_t index = 0; index < desc.size(); index++)
+		{
+			if (desc[index].code == price[index].code)
+			{
+				try
+				{
+					newObj.desc = desc[index].desc;
+					newObj.price = price[index].price;
+					priceList.operator+=(&newObj);
+				}
+				catch (...)
+				{
+					throw "error";
+				}
 
-
-
-
-
-
-
+				break;
+			}
+		}
 
 		return priceList;
 	}

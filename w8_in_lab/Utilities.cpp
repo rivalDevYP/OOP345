@@ -4,36 +4,40 @@
 // 2019/03/17
 
 #include <memory>
+#include <algorithm>
 #include "List.h"
 #include "Element.h"
 #include "Utilities.h"
 
 using namespace std;
 
-namespace sict {
-	List<Product> mergeRaw(const List<Description>& desc, const List<Price>& price) {
+namespace sict 
+{
+	List<Product> mergeRaw(const List<Description>& desc, const List<Price>& price) 
+	{
 		List<Product> priceList;
-		Product newObj;
-
+		std::string errorMsg = "*** Negative prices are invalid ***";
 		for (size_t index = 0; index < desc.size(); index++)
 		{
-			if (desc[index].code == price[index].code)
+			for (size_t tempNum = 0; tempNum < price.size(); tempNum++)
 			{
-				try
+				if (desc[index].code == price[tempNum].code) 
 				{
-					newObj.desc = desc[index].desc;
-					newObj.price = price[index].price;
-					priceList.operator+=(&newObj);
-				}
-				catch (...)
-				{
-					throw "error";
-				}
+					Product *newObj = new Product(desc[index].desc, price[tempNum].price);
 
-				break;
+					try
+					{
+						newObj->validate();
+						priceList.operator+=(newObj);
+						delete newObj;
+					}
+					catch (...)
+					{
+						throw(errorMsg);
+					}
+				}
 			}
 		}
-
 		return priceList;
 	}
 }

@@ -32,9 +32,11 @@ namespace sict {
 		size_t size() const { return list.size(); }
 		const T& operator[](size_t i) const { return list[i]; }
 
-		// TODO: Overload the += operator with a raw pointer
-		//       as a second operand.
-
+		
+		void operator+=(T* incomingObj)
+		{
+			this->list.push_back(*incomingObj);
+		}
 
 
 
@@ -43,11 +45,6 @@ namespace sict {
             for (auto& e : list)
                 e.display(os);
         }
-
-		void operator+=(T* incomingObj)
-		{
-			this->list.push_back(*incomingObj);
-		}
 	};
 
     template<typename T>

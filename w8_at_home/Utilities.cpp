@@ -13,8 +13,6 @@ using namespace std;
 namespace sict {
 	List<Product> mergeRaw(const List<Description>& desc, const List<Price>& price) {
 		List<Product> priceList;
-		// TODO: Add your code here to build a list of products
-		//         using raw pointers
 
 		std::string errorMsg = "*** Negative prices are invalid ***";
 		for (size_t index = 0; index < desc.size(); index++)
@@ -44,14 +42,29 @@ namespace sict {
 
 	List<Product> mergeSmart(const List<Description>& desc, const List<Price>& price) {
 		List<Product> priceList;
-		// TODO: Add your code here to build a list of products
-		//         using smart pointers
-
-
 		
+		std::string errorMsg = "*** Negative prices are invalid ***";
+		for (size_t index = 0; index < desc.size(); index++)
+		{
+			for (size_t tempNum = 0; tempNum < price.size(); tempNum++)
+			{
+				if (desc[index].code == price[tempNum].code)
+				{
+					std::unique_ptr<Product> newObj(new Product(desc[index].desc, price[tempNum].price));
 
-
-
+					try
+					{
+						newObj->validate();
+						priceList.operator+=(*newObj);						
+					}
+					catch (...)
+					{
+						throw(errorMsg);
+					}
+				}
+			}
+		}
+		
 		return priceList;
 	}
 }

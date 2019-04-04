@@ -1,0 +1,161 @@
+# OOP345 Workshop 8 Reflection
+
+
+Summary of Notes
+****************
+
+    - raw pointers
+        - how to create a raw pointer
+            - Product *newObj = new Product(desc[index].desc, price[tempNum].price); //this is an example from my workshop solution                
+        - how to recieve a raw pointer as an incoming parameter
+            -   void operator+=(T* incomingObj) //this is an example from my workshop solution
+		        {
+			        this->list.push_back(*incomingObj);
+		        }
+        - each object allocated using raw pointer is stored at a unique address
+        - raw pointer is basically a built in type that holds an address
+        - dereferencing a raw pointer accesses value that is stored at the address  
+            - to dereference a pointer, you have to prefix the pointer with the dereferencing symbol, an asterisk '*'
+        - the type of the raw pointer determines the region of memory occupied by the object 
+        - a string literal is a sequence of characters enclosed by double quotes
+        - pointers use the indirection operator (->) to access member function of its class
+        - the ampersand is used to get the address of an object
+            - the ampersand is also used to assign pointers to objects
+                int varOne = 5; // assigning 5 to varOne
+                int* pointerToVarOne = &varOne; // assigning the address of varOne to the pointer pointerToVarOne, meaning that the pointer pointerToVarOne points to the memory location of varOne...
+    - smart pointers
+        - usage of smart pointers required the inclusion of <memory> header file
+        - smart pointers are crucial to the RAII ideology
+            - RAII stands for Resource Acquisition Is Initialization
+                - this principal ensures that the resource acquisition happens that the same time as the initialization of the object
+                - by using this principal, you are pretty much initializing the object and creating the resources in one line of code
+        - smart pointers manage the memory of the object that it is pointing to
+        - a smart pointer   
+            - supports dereferencing
+            - supports indirect member selection
+            - resides on the stack
+            - manages terminal memory operations
+        - dynamic memory is allocated at the same time smart pointer is created
+        - memory deallocated by the destructor automatically when the smart pointer goes out of the scope (no need to use the 'delete' keyword)
+        - a memory leak occurs when allocated memory never gets deallocated
+            - the allocated memory can accumulate over time (because it never gets deallocated) and this can cause a computer to fully use up all of its resources (memory)
+            - a smart pointer is great for this, because it automatically deallocates all of the allocated memory when it gets destroyed (or goes out of scope)
+        - smart pointers are declared on the stack
+        - exclusive ownership
+            - the C++ STL (standard template library) includes a template for smart pointers when it needs to manage 1-1 relationships between objects and their pointers (std::unique_ptr)
+            - a "unique smart pointer"
+                - gives exception safety for memory that is allocated dynamically
+                - permits the passing of ownership (of an object) on returning from a function
+                - permits the passing of ownership (of an object) on entering a function
+                - collects the object or resource inside a container
+            - represented by the std::unique_ptr template
+                - how to declare a unique smart pointer: 
+                    - std::unique_ptr<Product> newObj(new Product(desc[index].desc, price[tempNum].price)); //this is an example from my workshop solution                        
+                - how to recieve a smart pointer as an argument
+                    -   void operator+=(const T& incomingObj) //this is an example from my workshop solution
+		                {
+			                this->list.push_back(incomingObj);
+		                }
+                - std::unique_ptr is within the std namespace
+                - defined in the <memory> header file
+                - owns and manages another object through a pointer
+                    - can manage either:
+                        - one object (allocated using the "new" keyword)
+                        - a dynamically allocated array of objects (allocated using the "new[]" keyword)
+                - disposes of the object when the unique pointer goes out of scope 
+                    - disposes of an object when:
+                        - the object is destroyed by going out of scope
+                        - the object is assigned another pointer via the operator= or reset()
+        - shared ownership
+            - represented by the std::shared_ptr template (also provided by the C++ STL)
+                - std::shared_ptr is within the std namespace
+                - also defined within the <memory> header file
+                - retains the ownership of an object through a pointer
+                - several shared_ptr may own the same object
+                    - a reference counter keeps track of the number of smart pointers pointing to the same object
+                - disposes of the object automatically when either:
+                    - the last shared_ptr owning the object is destroyed by going out of scope
+                    - the last shared_ptr owning the object is assigned another pointer, also via the operator= or reset()
+                    *** the last shared_ptr is when the reference counter is equal to 1 ***
+                - transfers ownership of its child (object) in a move constructor / assignment operator
+                - copies itself in a copy construction
+                - releases itself from its object (mother disowns child) and reattaches itself (family reunion) in a copy assign situation 
+                - better not to use a shared smart pointer whenever a unique smart pointer is available to execute the task with efficiency
+                - unique pointer is better at passing ownership from one owner to another 
+                
+
+Professor Specified Questions
+*****************************
+
+    The advantage that smart pointer syntax provides.
+
+        Using the smart pointer syntax is better and easier for the programmer because it takes care of the deallocation of an object automatically. This is especially useful when you are working with a solution that utilizes exception handling frequently. When an exception is thrown, it is thrown to the next available catch statement, and in this scenario, you are in a place where you are unable to deallocate the previously allocated memory. When this happens, the memory builds up and up until all of the system's memory is used up, causing a memory leak. 
+
+    List the difference between raw and smart pointer syntax in your solution.
+
+        creation of a unique smart pointer syntax:                                        
+                                        std::unique_ptr<Product> newObj(new Product(desc[index].desc, price[tempNum].price));
+
+                                            broken down --> std::unique<className> pointerName(new constructor(parameters));
+
+        creation of a raw pointer syntax: 
+                                        Product *newObj = new Product(desc[index].desc, price[tempNum].price); 
+            
+                                            broken down --> className *pointerName = new constructor(parameters);
+
+        recieving a smart pointer syntax:   void operator+=(const T& incomingObj)
+		                                    {
+			                                    this->list.push_back(incomingObj);
+		                                    }
+                                            
+                                            explaination: you are basically recieving a reference to a T object in the name of incomingObj, this works because in this scenario the T type is "Product" and since we are creating a smart pointer of Product type, we are able to recieve the smart pointer as a parameter
+
+        recieving a raw pointer syntax:     void operator+=(T* incomingObj) //this is an example from my workshop solution
+		                                    {
+			                                    this->list.push_back(*incomingObj);
+		                                    } 
+                                            
+                                            explaination: you are basically recieving a pointer of type T as the incoming parameter, this makes sense because in this scenario, T is the type of "Product", and because we are sending a pointer of type Product to the operator+=, we are certainly able to recieve an argument of type T*
+                    
+
+Quiz Corrections
+****************
+
+Questions
+*********
+
+1) Name the two principal aspects of the performance of a program: 
+2) Write the statement that constructs a thread to execute the function named foo, which receives 3 as its only argument: 
+3) What is the prototype for the member function that returns the unique identifier of a thread?
+4) What do a promise and a future have in common?
+5) The _______________ member function on a promise sets a value and makes it ready for a future.
+6) A future retrieves a value through its ______________________ member function.
+7) Complete the following program to execute the function foo once on the master thread and once on a spawned thread:
+
+    void foo(){ std::cout << “345\n\n”; }
+
+    int main() {
+
+
+Answers
+*******
+
+1) tasks & communications
+2) std::thread t1(foo, 3);
+3) thread::id get_id() const;
+4) a promise object creates a shared state in which it stores a value, a future object retrieves the value of the shared state once the said state is ready
+5) set_value
+6) get
+7) 
+    void foo ()
+    {
+        std::cout << "345\n\n";
+    }
+
+    int main ()
+    {
+        std::thread t1(foo);
+        foo();
+        t1.join();
+        
+    }

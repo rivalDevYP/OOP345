@@ -32,14 +32,10 @@ namespace sict {
 		size_t size() const { return list.size(); }
 		const T& operator[](size_t i) const { return list[i]; }
 
-		// TODO: Overload the += operator with a smart pointer
-		//       as a second operand.
-
-		
-
-
-		// TODO: Overload the += operator with a raw pointer
-		//       as a second operand.
+		void operator+=(const T& incomingObj)
+		{
+			this->list.push_back(incomingObj);
+		}
 
 		void operator+=(T* incomingObj)
 		{

@@ -87,7 +87,7 @@ namespace sict {
 
 	void SecureData::restore(const char* file, char key) {
 		// TODO: open binary file for reading
-
+		
 
 
 		// TODO: - allocate memory here for the file content

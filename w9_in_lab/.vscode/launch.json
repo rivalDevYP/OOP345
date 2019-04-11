@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/a.out",
-            "args": ["text.dat"],
+            "args": ["text.dat", "encoded.dat", "C"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

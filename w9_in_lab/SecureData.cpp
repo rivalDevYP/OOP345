@@ -75,27 +75,34 @@ namespace sict {
 		else
 		{
 			// TODO: open a binary file for writing
+			std::ofstream myFilePtr(file, std::ios::out|std::ios::binary|std::ios::trunc);
 
 
 
 			// TODO: write data into the binary file
 			//         and close the file
 
-
+			myFilePtr.write(text, sizeof text - 1);
+			myFilePtr.close();
 		}
 	}
 
 	void SecureData::restore(const char* file, char key) {
 		// TODO: open binary file for reading
-		
-
+ 		std::ifstream myFilePtr(file, std::ios::in|std::ios::binary);
 
 		// TODO: - allocate memory here for the file content
-
-
+		
+		char str[1025];
+		char* p = str;
 
 		// TODO: - read the content of the binary file
 
+		while(myFilePtr)
+		{
+			myFilePtr.read(p++,1);
+		}
+		*--p='\0';
 
 
 		*ofs << "\n" << nbytes << " bytes copied from binary file "

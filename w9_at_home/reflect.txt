@@ -1,0 +1,91 @@
+# OOP345 Workshop 9 Reflection
+
+binary file reading/writing
+***************************
+    - binary files are useful for reading/writing/transferring large amounts of data
+    - there is no conversion, insertion, extraction, or field operators required for reading/writing
+    - binary files are read using the std::istream class
+        - std::istream& filePointerName(fileName, std::ios::in|std::ios::binary);
+        - filePointerName.read(characterArray, 1);
+    - the istream class is the in/out hierarchy that includes methods to read binary files
+    - for writing binary files, the std::ostream class is used
+        - std::ofstream filePointerName(fileName, std::ios::out|std::ios::binary|std::ios::trunc);
+        - filePointerName.write(string, sizeof string - 1);    
+
+multi threading
+***************
+    - performance = tasks + communications;
+    - task means group of instructions that represents an algorithms
+    - a communication basically means the transfer of information from and to the processor
+    - latency is the time to complete a communications    
+    - a process is the instance of a program executed on the host platform
+    - a context is the contents of the CPU's register 
+    - a software thread is a virtual thread associated with a task
+    - the std::thread class template is defined in the <thread> header file
+    - you create a thread using the thread constructor
+    - example: 
+        - std::thread t1(converter, text, key, nbytes, Cryptor());
+            - and you MUST synchronize the task after creating it: t1.join();
+    - there are member functions in the thread class template to create, sync, detact, join, and move the thread(s)
+        - here are some examples 
+            - get_id() returns the identifier of the thread
+            - detach() detaches current object from parent object 
+            - join() returns when current object finishes its task
+            - ~thread() (destructor) destroys current thread object
+            - swap(thread& incomingObject) swaps state of current object with the incomingObject
+            - joinable() returns true is the current object is a legit thread of execution
+    - future library allows you to transfer values between taks through a "shared state"
+    - future library is inside the <future> header file
+    - you create a future using the std::future template
+    - examples of member functions
+        - future() creates a future object
+        - ~future() destroys a future object
+        - "=" operator overload gets the shared state of future f
+        - get() returns value stores in the object's state -> (it also waits if not ready)
+        - valid() returns true is the object is connected to a shared state
+        - wait() waits for the objects's (shared) state to be ready
+    - provider object is an "add-on" to a future object
+        - std::promise           \
+        - std::packaged_task      > any of these templates can create a provider object
+        - std::async()           /
+    - promise object creates a state in which it can store a future
+    - promise member functions
+        - promise() creates promise object
+        - ~promise() destroys promise object
+        - "=" operator overload moves shared state from incoming promise object to current object
+        - future<T> get_future() returns the future object that is connected to the current promise object
+        - set_value(const T& incomingThing) stores a value in the object's shared state
+        - swap(promise& incomingPromiseObject) swaps the (shared) state of the current promise object with the incoming promise object
+    - packaged_task provides a wrapper for passing the result of the tast to a future
+    - packaged_task member functions
+        - packaged_task() creates a packaged_task object
+        - ~packaged_task() destroys the packaged_task object
+        - "=" operator overload recieves and instantiates the shared state from the incoming object
+        - valid() returns true if current object is associated with a (shared) state and (stored) task 
+        - future<T> get_future() returns future object connected to current packaged_task object
+        - operator() function operator overload, forwards the recieved arguments to stored task and starts the execution
+        - swap(packaged_task& p) swaps the state of the current packaged_task with that of the incoming packaged_task
+    - async() provides simple pair that allows you to spawn a thread to executre task, while simutaneously creating a future object to retrieve the return value from the task
+        - accept address
+        - launch task
+        - revert control to caller
+        - return future object that can retrieve value returned from its task
+    - thread_local is static storage for concurrent executed threads
+    - the variable associated with the storage duration has a seperate location for each thread
+        - this variable also lasts the full lifetime of the thread
+    
+
+Quiz Corrections
+****************
+    1) Write the code for function-like macro named AA that receives a value X and replaces it in a string
+    2) How do we avoid precedence errors in function-like macros
+    3) What is the predefined macro that contains the name of the source file?
+    4) Code a definitional directive that includes a group of statements if the DEBUG_ has been defined  
+    5) What is the functional directive equivalent of the answer in question 4.
+    6) Complete the following code focusing on the deallocation of the dynamically allocated 2-d array:
+    7) Declare a ragged C-style array that holds the names of 2 students “Homer” and “Marg”
+
+
+Quiz Answers
+************
+

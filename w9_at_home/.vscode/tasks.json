@@ -9,6 +9,7 @@
             "command": "g++",
             "args": [
                 "-g",
+                "-pthread",
                 "*.cpp",
                 "-std=c++17",
                 "-Wall"

@@ -63,8 +63,12 @@ namespace sict {
 	}
 
 	void SecureData::code(char key) {
-		converter(text, key, nbytes, Cryptor());
+		//converter(text, key, nbytes, Cryptor());
+		std::thread t1(converter, text, key, nbytes, Cryptor());
+		t1.join();
 		encoded = !encoded;
+		
+		
 	}
 
 	void SecureData::backup(const char* file) {

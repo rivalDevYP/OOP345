@@ -89,3 +89,29 @@ Quiz Corrections
 Quiz Answers
 ************
 
+    1)  #define AA(X) replace(X)
+    2)  wrap each placeholder in the replacements with brackets 
+    3)  _FILE_
+    4)  #ifndef DEBUG_
+            // group of statements
+        #endif // DEBUG_
+    5)  #if defined(_DEBUG)
+            // group of statements
+        #endif
+    6)  int main(int argc, char* argv[]) {
+            int** a;
+            // memory allocation statements
+            // add coefficients
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    sum += a[i][j];
+            for (int index = 0; index < n; index++) 
+            {
+                delete[] a[index]; // deallocating every row
+            }
+            delete[] a; // deallocating pointer to all the rows
+
+        }
+
+    7)  char* namesOfStudents[] = {"Homer", "Marg"};
